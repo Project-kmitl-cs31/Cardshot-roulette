@@ -4,10 +4,11 @@ public class first {
         int n = 5;
         System.out.println(n);
 
+
         System.out.println(n);
         System.out.println(n);
         System.out.println(" YO oyy");
         int m = 1+2;
-        
+    
     }
 }
