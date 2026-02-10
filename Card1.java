@@ -1,3 +1,5 @@
+import CoreGame.Player;
+
 public abstract class Card1 {
 
     protected String id;
