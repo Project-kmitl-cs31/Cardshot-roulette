@@ -1,3 +1,6 @@
+import CoreGame.Game;
+import CoreGame.Player;
+
 public class test {
     public static void main(String[] args) {
         Game game = new Game();

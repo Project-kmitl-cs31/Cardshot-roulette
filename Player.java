@@ -1,7 +1,10 @@
+package CoreGame;
 
 
 import java.util.ArrayList;
 import java.util.List;
+
+import Item;
 
 public class Player {
     // --- Attributes ตาม UML ---
