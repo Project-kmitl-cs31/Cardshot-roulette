@@ -9,6 +9,7 @@ public class first {
         System.out.println(n);
         System.out.println(" YO oyy");
         int m = 1+2;
-    
+        
+        System.out.println("ddd");
     }
 }
