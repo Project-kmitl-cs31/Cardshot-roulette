@@ -1,4 +1,7 @@
 package Nut;
+
+import Item.Card1;
+
 public class SwapCardItem extends Item {
 
     public SwapCardItem() {

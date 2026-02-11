@@ -1,4 +1,4 @@
-package Nut;
+package Item;
 enum CardType {
     MANA,
     ATTACK

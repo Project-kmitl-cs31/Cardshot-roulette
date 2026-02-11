@@ -1,4 +1,4 @@
-import CoreGame.Player;
+package Item;
 
 public class AttackCard extends Card1{
 

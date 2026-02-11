@@ -1,7 +1,7 @@
 package Item;
 
-public abstract class Item {
+public abstract class Item extends CentralDeck {
     private String id;
 
-    public abstract void use();
+    public abstract void use(Player player);
 }

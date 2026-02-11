@@ -41,7 +41,7 @@ public class CentralDeck {
     }
 
     public void peekCurrent(){
-        currentCard = cards.pop();
+        currentCard = cards.peek();
         System.out.println(currentCard);
 
     }

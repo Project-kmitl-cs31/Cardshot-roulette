@@ -1,4 +1,4 @@
-import CoreGame.Player;
+package Item;
 
 public abstract class Card1 {
 
