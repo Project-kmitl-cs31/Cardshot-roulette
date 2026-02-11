@@ -1,7 +1,9 @@
-package Nut;
+package Item;
 import java.util.Collections;
 import java.util.Random;
 import java.util.Stack;
+
+import Nut.ManaCard;
 
 public class CentralDeck {
     private Stack<Card1> cards = new Stack<>();
@@ -39,7 +41,7 @@ public class CentralDeck {
     }
 
     public void peekCurrent(){
-        currentCard = cards.peek();
+        currentCard = cards.pop();
         System.out.println(currentCard);
 
     }

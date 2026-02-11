@@ -1,18 +1,12 @@
 package Item;
 
-import Nut.Item;
-import Nut.ItemContext;
-
 public class PeekCardItem extends Item {
+    private String id = "CutCard";
 
-    public PeekCardItem() {
-        this.manaCost = 2;
-        this.name = "Peek Card";
-    }
-
-    @Override
-    protected void applyEffect(ItemContext ctx) {
-        ctx.deck.peekCurrent();
+    public void use(){
+        System.out.println(peekCurrent());
+        ActionResult action = new ActionResult(false, null);
+        action.continueTurn()
     }
 }
 

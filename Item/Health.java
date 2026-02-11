@@ -6,6 +6,8 @@ public class Health extends Item {
     public void use(Player player){
         if(player.getHp() < 6){
             player.setHp(1);
+            ActionResult action = new ActionResult(false, null);
+            action.continueTurn()
         }
     }
 }
