@@ -1,7 +1,10 @@
+<<<<<<< HEAD:ManaCard.java
+=======
 package Nut;
 import java.util.Random;
+>>>>>>> a4dde4300e94ccc352159d3e73ee4965417dfa11:Nut/ManaCard.java
 
-import CoreGame.Player;
+import java.util.Random;
 
 public class ManaCard extends Card1{
     private int amount; // 1 - 4

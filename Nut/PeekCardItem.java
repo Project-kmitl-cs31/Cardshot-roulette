@@ -1,4 +1,8 @@
+<<<<<<< HEAD:PeekCardItem.java
+
+=======
 package Nut;
+>>>>>>> a4dde4300e94ccc352159d3e73ee4965417dfa11:Nut/PeekCardItem.java
 public class PeekCardItem extends Item {
 
     public PeekCardItem() {
