@@ -1,5 +1,7 @@
 package Item;
 
+import Nut.Player;
+
 public class LockTurnItem extends Item {
     private String id = "LockTurnItem";
 

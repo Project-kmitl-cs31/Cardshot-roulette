@@ -1,11 +1,15 @@
 package Nut;
-
-import Item.Player;
-
 public class Game {
     private int round;
     private int currentTurnIndex;
     private int state;
+    private Player p;
+    private Player enemy;
+    
+    public Game(){
+        this.p = new Player(6);
+        this.enemy = new Player(6);
+    }
 
     public void startNewgame(Player p1,Player p2){
         // สุ่ม item ทัั้งหมด
@@ -28,4 +32,10 @@ public class Game {
     // private Player checkWinRound(){
     //     return p;
     // }
+    public Player getPlayer(){
+        return this.p;
+    }
+    public Player getEnemy(){
+        return this.enemy;
+    }
 }

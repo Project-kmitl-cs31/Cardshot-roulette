@@ -12,7 +12,7 @@ public class UIManager {
 
     public UIManager(){
         window = new JFrame("Game");
-        window.setSize(1500,850);
+        window.setExtendedState(JFrame.MAXIMIZED_BOTH);
         window.setResizable(false);
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         window.setLayout(null);
@@ -28,8 +28,9 @@ public class UIManager {
         screen.render(game);
         window.revalidate();
         window.setVisible(true);
-        
-    } 
+    
+    }
+     
     public void openItemSelect(){
 
     }

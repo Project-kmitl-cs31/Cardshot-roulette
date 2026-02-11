@@ -1,11 +1,8 @@
-package Item;
+package Nut;
 
 
 import java.util.ArrayList;
 import java.util.List;
-
-import Nut.Item;
-import Nut.ItemContext;
 
 public class Player {
     // --- Attributes ตาม UML ---
@@ -20,7 +17,9 @@ public class Player {
     // private ItemContext ctx;
     private static final int MAX_ITEMS = 8;
 
-   
+    public Player(int maxhp){
+        this.hp = maxhp;
+    }
     public Player(String id, String name, int maxHp, int initialMana) {
         this.id = id;
         this.name = name;

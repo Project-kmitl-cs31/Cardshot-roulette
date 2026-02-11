@@ -1,4 +1,6 @@
-package Item;
+package Nut;
+
+import Item.Item;
 
 public class Health extends Item {
     private String id = "HealthItem";

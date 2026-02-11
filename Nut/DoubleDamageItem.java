@@ -1,5 +1,5 @@
-package Item;
-import Nut.CentralDeck;
+package Nut;
+import Item.Item;
 
 public class DoubleDamageItem extends Item {
     private String id = "DoubleDamageItem";
