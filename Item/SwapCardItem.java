@@ -1,6 +1,6 @@
 package Item;
 
-public class CutCardItem extends Item {
+public class SwapCardItem extends Item {
     private String id = "CutCard";
 
     public void use(Player player){

@@ -27,7 +27,7 @@ public class UIManager {
         window.setContentPane(screen);
         screen.render(game);
         window.revalidate();
-        window.setVisible(true);
+        window.setVisible(true);  
         
     } 
     public void openItemSelect(){

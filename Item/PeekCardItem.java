@@ -1,4 +1,8 @@
-package Nut;
+package Item;
+
+import Nut.Item;
+import Nut.ItemContext;
+
 public class PeekCardItem extends Item {
 
     public PeekCardItem() {
