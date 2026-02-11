@@ -49,7 +49,7 @@ public class Player {
         return items.get(0);
     }
 
-    public void UseItem(ItemContext ctx,Object o){
+    public void UseItem(Object o){
         if(items.isEmpty()) return;
         this.curItem = null;
         for(Item item01 : items){
@@ -144,5 +144,13 @@ public class Player {
     }
     public String getName(){
         return name;
+    }
+
+    public int getHp(){
+        return hp;
+    }
+
+    public void setHp(int hp){
+        this.hp += hp;
     }
 }
