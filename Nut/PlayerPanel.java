@@ -19,5 +19,5 @@ public class PlayerPanel extends JPanel {
     }
     public void refreshFromGame(int hp) {
         hpLabel.setText("HP: " + hp);
-    }
+    }  
 }

@@ -43,7 +43,7 @@ public class GameScreen extends UIScreen {
     public void render(Game state) {
        Player mp = state.getPlayer();
        if (mp != null) {
-        blueZone.refreshFromGame(mp.getHp()); 
+        blueZone.refreshFromGame(mp.getHp());
     }
     }
 }
