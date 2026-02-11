@@ -1,3 +1,4 @@
+package Nut;
 import CoreGame.Player;
 
 public abstract class Item {

@@ -1,3 +1,4 @@
+package Nut;
 import java.util.Collections;
 import java.util.Random;
 import java.util.Stack;

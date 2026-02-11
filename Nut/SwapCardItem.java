@@ -1,5 +1,4 @@
-
-
+package Nut;
 public class SwapCardItem extends Item {
 
     public SwapCardItem() {

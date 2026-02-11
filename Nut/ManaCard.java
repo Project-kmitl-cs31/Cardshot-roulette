@@ -1,3 +1,4 @@
+package Nut;
 import java.util.Random;
 
 import CoreGame.Player;

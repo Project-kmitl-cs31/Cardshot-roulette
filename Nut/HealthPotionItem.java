@@ -1,4 +1,4 @@
-
+package Nut;
 
 public class HealthPotionItem extends Item {
 

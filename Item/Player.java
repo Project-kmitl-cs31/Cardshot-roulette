@@ -4,8 +4,8 @@ package Item;
 import java.util.ArrayList;
 import java.util.List;
 
-import Item;
-import ItemContext;
+import Nut.Item;
+import Nut.ItemContext;
 
 public class Player {
     // --- Attributes ตาม UML ---
@@ -152,5 +152,9 @@ public class Player {
 
     public void setHp(int hp){
         this.hp += hp;
+    }
+
+    public int getDamageMultiplier(){
+        return damageMultiplier;
     }
 }
