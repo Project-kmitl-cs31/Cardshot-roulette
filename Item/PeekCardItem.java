@@ -6,7 +6,7 @@ public class PeekCardItem extends Item {
     public void use(Player player){
         peekCurrent(); 
         ActionResult action = new ActionResult(false, null);
-        action.continueTurn()
+        action.continueTurn();
     }
 }
 
