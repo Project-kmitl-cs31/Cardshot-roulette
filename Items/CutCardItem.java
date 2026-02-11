@@ -1,4 +1,4 @@
-package Item;
+package Items;
 
 public class CutCardItem extends Item {
     private String id = "CutCard";

@@ -4,6 +4,7 @@ enum TurnNext {
     SAME_PLAYER,
     OTHER_PLAYER
 }
+
 class ActionResult {
     private boolean turnEnds;
     private TurnNext nextTurnPlayer;
@@ -26,4 +27,5 @@ class ActionResult {
         return new ActionResult(true, TurnNext.SAME_PLAYER, msg);
     }
 }
+
 

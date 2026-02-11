@@ -1,7 +1,10 @@
+<<<<<<< HEAD:test.java
+=======
 package Nut;
 import CoreGame.Game;
 import CoreGame.Player;
 
+>>>>>>> a4dde4300e94ccc352159d3e73ee4965417dfa11:Nut/test.java
 public class test {
     public static void main(String[] args) {
         Game game = new Game();
