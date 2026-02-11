@@ -10,4 +10,4 @@ public abstract class UIScreen extends JPanel {
     public abstract void show();
     public abstract void hide();
     public abstract void render(Game state);
-}
+}  

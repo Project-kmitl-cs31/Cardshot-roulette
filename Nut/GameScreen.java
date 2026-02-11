@@ -13,7 +13,7 @@ public class GameScreen extends UIScreen {
         super(ui);
         this.setLayout(null); 
 
-        int setWidth = 1600;
+        int setWidth = 1600;  
         int setHeight = 900;
 
         JLayeredPane lp = new JLayeredPane();

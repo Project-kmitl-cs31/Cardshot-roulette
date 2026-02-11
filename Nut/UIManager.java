@@ -29,7 +29,7 @@ public class UIManager {
         window.revalidate();
         window.setVisible(true);
         
-    }
+    } 
     public void openItemSelect(){
 
     }
