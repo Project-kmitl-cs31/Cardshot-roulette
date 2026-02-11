@@ -1,10 +1,11 @@
-package CoreGame;
 import HealthPotionItem;
-
+import javax.swing.UIManager;
+import CoreGame.Player;
 public class Game {
     private int round;
     private int currentTurnIndex;
     private int state;
+    private Player p;
 
     public void startNewgame(Player p1,Player p2){
         // สุ่ม item ทัั้งหมด
@@ -27,4 +28,8 @@ public class Game {
     // private Player checkWinRound(){
     //     return p;
     // }
+
+    public Player getPlayer() {
+        return this.p;
+    }
 }
