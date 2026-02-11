@@ -1,11 +1,6 @@
-package CoreGame;
 import java.util.Collections;
 import java.util.Random;
 import java.util.Stack;
-
-import AttackCard;
-import Card1;
-import ManaCard;
 
 public class CentralDeck {
     private Stack<Card1> cards = new Stack<>();
