@@ -1,10 +1,11 @@
-package CoreGame;
+package Item;
 
 
 import java.util.ArrayList;
 import java.util.List;
 
 import Item;
+import ItemContext;
 
 public class Player {
     // --- Attributes ตาม UML ---
@@ -48,7 +49,7 @@ public class Player {
         return items.get(0);
     }
 
-    public void UseItem(ItemContext ctx,Object o){
+    public void UseItem(Object o){
         if(items.isEmpty()) return;
         this.curItem = null;
         for(Item item01 : items){
@@ -144,7 +145,17 @@ public class Player {
     public String getName(){
         return name;
     }
+<<<<<<< HEAD:Player.java
      public int getHp(){
         return this.hp;
+=======
+
+    public int getHp(){
+        return hp;
+    }
+
+    public void setHp(int hp){
+        this.hp += hp;
+>>>>>>> 0864e4408e6a30c718de1b549aab0cc7fff672f0:Item/Player.java
     }
 }

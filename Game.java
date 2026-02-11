@@ -1,6 +1,12 @@
+<<<<<<< HEAD
 import HealthPotionItem;
 import javax.swing.UIManager;
 import CoreGame.Player;
+=======
+
+import Item.Player;
+
+>>>>>>> 0864e4408e6a30c718de1b549aab0cc7fff672f0
 public class Game {
     private int round;
     private int currentTurnIndex;
