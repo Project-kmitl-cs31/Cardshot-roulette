@@ -1,11 +1,13 @@
 package Item;
-import CentralDeck;
+import Nut.CentralDeck;
 
 public class DoubleDamageItem extends Item {
     private String id = "DoubleDamageItem";
-    private int multiplier = 2;
 
     public void use(Player player,Player opp,CentralDeck Deck) {
-
+        if(Deck.drawCurrent()==){
+    }
+    else{
+        player
     }
 }

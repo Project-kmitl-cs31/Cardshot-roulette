@@ -1,4 +1,4 @@
-package CoreGame;
+package Nut;
 
 
 import java.util.List;

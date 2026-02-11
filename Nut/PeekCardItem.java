@@ -1,5 +1,4 @@
-
-
+package Nut;
 public class PeekCardItem extends Item {
 
     public PeekCardItem() {

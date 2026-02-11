@@ -1,3 +1,4 @@
+package Nut;
 
 enum TurnNext {
     SAME_PLAYER,

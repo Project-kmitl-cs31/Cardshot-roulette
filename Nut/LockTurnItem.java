@@ -1,5 +1,4 @@
-
-
+package Nut;
 public class LockTurnItem extends Item {
 
     private int lockTurns = 1;
