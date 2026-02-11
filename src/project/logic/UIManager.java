@@ -1,4 +1,9 @@
+<<<<<<< HEAD:src/project/logic/UIManager.java
 package logic;
+=======
+package Nut;
+
+>>>>>>> 0530cb408d9d43ce7cbe2b08683a39ad0aabac42:Nut/UIManager.java
 import javax.swing.JFrame;
 public class UIManager {
     private Game game;
@@ -8,7 +13,7 @@ public class UIManager {
 
     public UIManager(){
         window = new JFrame("Game");
-        window.setSize(1500,850);
+        window.setExtendedState(JFrame.MAXIMIZED_BOTH);
         window.setResizable(false);
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         window.setLayout(null);
@@ -20,17 +25,28 @@ public class UIManager {
     }
     public void openGameScreen(){
         GameScreen screen = new GameScreen(this);
+        this.activeScreen = screen;
         window.setContentPane(screen);
         screen.render(game);
         window.revalidate();
         window.setVisible(true);
-        
-    } 
+    
+    }
+     
     public void openItemSelect(){
 
     }
     public void showRoundTransition(int roundNo){
 
     }
-    
+    public void onDeckClicked(){
+        if(game == null)
+            return;
+        
+        game.PlayerdrawCard();
+        
+        if(activeScreen != null){
+            activeScreen.render(game);
+        }
+    }
 }

@@ -67,11 +67,28 @@ public class CentralDeck {
     public boolean isEmpty(){
         return cards.isEmpty();
     }
+<<<<<<< HEAD:src/project/logic/CentralDeck.java
     public void AttackCard(Player curplayer , Player target){
 
     }
 
     public Stack<Card1> getCards() {
         return cards;
+=======
+    public Card1 drawTop(){
+        if(cards.isEmpty())
+        return null;
+        Card1 drawCard = cards.pop();
+
+        if(!cards.isEmpty()){
+         currentCard = cards.peek();
+        }else{
+            currentCard = null;
+        }
+        return drawCard;
+    }
+    public int getCardCount(){
+        return cards.size();
+>>>>>>> 0530cb408d9d43ce7cbe2b08683a39ad0aabac42:Nut/CentralDeck.java
     }
 }

@@ -1,25 +1,34 @@
+<<<<<<< HEAD:src/project/logic/Player.java
 package logic;
+=======
+package Nut;
+>>>>>>> 0530cb408d9d43ce7cbe2b08683a39ad0aabac42:Nut/Player.java
 
 
 import Items.Item;
 import java.util.ArrayList;
 import java.util.List;
 
+<<<<<<< HEAD:src/project/logic/Player.java
 
+=======
+>>>>>>> 0530cb408d9d43ce7cbe2b08683a39ad0aabac42:Nut/Player.java
 public class Player {
     // --- Attributes ตาม UML ---
     private String id;
     private String name;
-    private int hp;
+    int hp;
     private int mana;
     private List<Item> items;
     private int lockedTurns;
     private int damageMultiplier = 1;
-    private Item curItem;
+    //private Item curItem;
     // private ItemContext ctx;
     private static final int MAX_ITEMS = 8;
 
-   
+    public Player(int maxhp){
+        this.hp = maxhp;
+    }
     public Player(String id, String name, int maxHp, int initialMana) {
         this.id = id;
         this.name = name;
@@ -48,6 +57,7 @@ public class Player {
         return items.get(0);
     }
 
+<<<<<<< HEAD:src/project/logic/Player.java
     public void UseItem(Object o){
         if(items.isEmpty()) return;
         this.curItem = null;
@@ -65,8 +75,26 @@ public class Player {
             // this.curItem.applyEffect();
             this.curItem = null;
         }
+=======
+    // public void UseItem(Object o){
+    //     if(items.isEmpty()) return;
+    //     this.curItem = null;
+    //     for(Item item01 : items){
+    //         System.out.println(o);
+    //         System.out.println(item01);
+    //         if(item01.equals(o)){
+    //             System.out.println("333");
+    //             this.curItem = item01;
+    //             break;
+    //         }
+    //     }
+    //     if(this.curItem != null){
+    //         this.curItem.applyEffect(ctx);
+    //         this.curItem = null;
+    //     }
+>>>>>>> 0530cb408d9d43ce7cbe2b08683a39ad0aabac42:Nut/Player.java
         
-    }
+    // }
 
     public void endTurn() {
         System.out.println(name + " ends turn.");
@@ -156,5 +184,13 @@ public class Player {
 
     public int getDamageMultiplier(){
         return damageMultiplier;
+<<<<<<< HEAD:src/project/logic/Player.java
       }
+=======
+    }
+    public void resetDamageMultiplier() {
+        this.damageMultiplier = 1;
+        System.out.println(name + " damage multiplier reset to 1");
+}
+>>>>>>> 0530cb408d9d43ce7cbe2b08683a39ad0aabac42:Nut/Player.java
 }
