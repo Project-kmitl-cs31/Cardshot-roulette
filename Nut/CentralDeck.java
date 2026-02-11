@@ -3,6 +3,8 @@ import java.util.Collections;
 import java.util.Random;
 import java.util.Stack;
 
+import Items.Player;
+
 public class CentralDeck {
     private Stack<Card1> cards = new Stack<>();
     private Card1 currentCard;
@@ -40,7 +42,9 @@ public class CentralDeck {
 
     public void peekCurrent(){
         currentCard = cards.peek();
+       
         System.out.println(currentCard);
+        
 
     }
     public void swapCard(){
@@ -54,9 +58,13 @@ public class CentralDeck {
     public Card1 drawCurrent(){
         Card1 card = currentCard;
         currentCard = null;
-        return card;
+        cards.pop();
+        return card; 
     }
     public boolean isEmpty(){
         return cards.isEmpty();
+    }
+    public void AttackCard(Player curplayer , Player target){
+
     }
 }

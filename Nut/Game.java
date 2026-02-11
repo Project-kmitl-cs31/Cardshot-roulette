@@ -1,20 +1,24 @@
 package Nut;
 
-import Item.Player;
+
+import Items.Player;
 
 public class Game {
     private int round;
     private int currentTurnIndex;
     private int state;
 
-    public void startNewgame(Player p1,Player p2){
-        // สุ่ม item ทัั้งหมด
-        HealthPotionItem heal = new HealthPotionItem();
-        p1.addItem(heal);
-        p2.addItem(heal);
-    }
+    private void startRound(Player p1,Player p2){
+    
+        CentralDeck deck = new CentralDeck();
+        deck.generate();
 
-    private void startRound(){
+        ItemFactory itemfactory = new ItemFactory();
+        System.out.println("Item inv player : ");
+        p1.grantItems(itemfactory.grantRoundItems());
+        p2.grantItems(itemfactory.grantRoundItems());
+
+    
 
     }
 

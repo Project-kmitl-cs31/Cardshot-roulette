@@ -1,9 +1,3 @@
-<<<<<<< HEAD:Item.java
-=======
-package Nut;
-import CoreGame.Player;
-
->>>>>>> a4dde4300e94ccc352159d3e73ee4965417dfa11:Nut/Item.java
 public abstract class Item {
 
     protected String id;

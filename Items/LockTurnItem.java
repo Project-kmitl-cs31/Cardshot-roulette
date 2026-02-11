@@ -1,4 +1,4 @@
-package Item;
+package Items;
 
 public class LockTurnItem extends Item {
     private String id = "LockTurnItem";
