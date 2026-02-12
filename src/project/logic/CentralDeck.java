@@ -68,6 +68,7 @@ public class CentralDeck {
         return cards.isEmpty();
     }
 <<<<<<< HEAD:src/project/logic/CentralDeck.java
+<<<<<<< HEAD:src/project/logic/CentralDeck.java
     public void AttackCard(Player curplayer , Player target){
 
     }
@@ -75,6 +76,8 @@ public class CentralDeck {
     public Stack<Card1> getCards() {
         return cards;
 =======
+=======
+>>>>>>> 4ee7dfe (dent):Nut/CentralDeck.java
     public Card1 drawTop(){
         if(cards.isEmpty())
         return null;
@@ -89,6 +92,9 @@ public class CentralDeck {
     }
     public int getCardCount(){
         return cards.size();
+<<<<<<< HEAD:src/project/logic/CentralDeck.java
 >>>>>>> 0530cb408d9d43ce7cbe2b08683a39ad0aabac42:Nut/CentralDeck.java
+=======
+>>>>>>> 4ee7dfe (dent):Nut/CentralDeck.java
     }
 }

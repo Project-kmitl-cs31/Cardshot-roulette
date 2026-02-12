@@ -192,5 +192,8 @@ public class Player {
         this.damageMultiplier = 1;
         System.out.println(name + " damage multiplier reset to 1");
 }
+<<<<<<< HEAD:src/project/logic/Player.java
 >>>>>>> 0530cb408d9d43ce7cbe2b08683a39ad0aabac42:Nut/Player.java
+=======
+>>>>>>> 4ee7dfe (dent):Nut/Player.java
 }

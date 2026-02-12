@@ -1,8 +1,13 @@
 <<<<<<< HEAD:src/project/logic/Card1.java
+<<<<<<< HEAD:src/project/logic/Card1.java
 package logic;
 =======
 package Nut;
 >>>>>>> 0530cb408d9d43ce7cbe2b08683a39ad0aabac42:Nut/Card1.java
+=======
+package Nut;
+import CoreGame.Player;
+>>>>>>> 4ee7dfe (dent):Nut/Card1.java
 
 public abstract class Card1 {
 
