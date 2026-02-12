@@ -1,9 +1,5 @@
-package Nut;
-
-import CoreGame.Game;
-import CoreGame.Player;
+package logic;
 import javax.swing.JFrame;
-
 public class UIManager {
     private Game game;
     private UIScreen activeScreen;

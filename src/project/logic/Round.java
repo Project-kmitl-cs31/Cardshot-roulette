@@ -1,9 +1,6 @@
-package Nut;
-
+package logic;
 
 import java.util.List;
-
-import Item.Player;
 
 public class Round {
     private int number;

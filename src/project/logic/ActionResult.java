@@ -1,9 +1,4 @@
-package Nut;
-
-enum TurnNext {
-    SAME_PLAYER,
-    OTHER_PLAYER
-}
+package logic;
 
 class ActionResult {
     private boolean turnEnds;

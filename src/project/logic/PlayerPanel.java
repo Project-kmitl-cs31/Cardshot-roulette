@@ -1,4 +1,4 @@
-package Nut;
+package logic;
 
 import java.awt.*;
 import javax.swing.*;

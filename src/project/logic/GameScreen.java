@@ -1,9 +1,7 @@
-package Nut;
+package logic;
 
 import javax.swing.*;
 import java.awt.*;
-import CoreGame.Game;
-import CoreGame.Player;
 public class GameScreen extends UIScreen {
     private PlayerPanel blueZone; 
     private PlayerPanel redZone;  

@@ -1,11 +1,10 @@
-package Items;
+package logic;
 
 
+import Items.Item;
 import java.util.ArrayList;
 import java.util.List;
 
-import item;
-import itemContext;
 
 public class Player {
     // --- Attributes ตาม UML ---
@@ -26,15 +25,15 @@ public class Player {
         this.name = name;
         this.hp = maxHp;
         this.mana = initialMana;
-        this.items = new ArrayList<>();
+        this.items = new ArrayList<Item>();
         this.lockedTurns = 0;
         this.damageMultiplier = 1;
     }
 
-    public boolean canAct() {
-        // สามารถเล่นได้ถ้าไม่ติด LockedTurn และยังมีชีวิตอยู่
-        return lockedTurns <= 0 && hp > 0;
-    }
+    // public boolean canAct() {
+    //     // สามารถเล่นได้ถ้าไม่ติด LockedTurn และยังมีชีวิตอยู่
+    //     return lockedTurns <= 0 && hp > 0;
+    // }
 
     public void beginTurn() {
         if (lockedTurns > 0) {
@@ -62,7 +61,8 @@ public class Player {
             }
         }
         if(this.curItem != null){
-            this.curItem.applyEffect(ctx);
+            // import something
+            // this.curItem.applyEffect();
             this.curItem = null;
         }
         
@@ -96,9 +96,9 @@ public class Player {
         for (Item item : newItems) {
             if (this.items.size() < MAX_ITEMS) {
                 this.items.add(item);
-                System.out.println(name + " got item: " + item.getName());
+                System.out.println(name + " got item: " + item.toString());
             } else {
-                System.out.println("Inventory Full! Cannot add: " + item.getName());
+                System.out.println("Inventory Full! Cannot add: " + item.toString());
             }
         }
     }
@@ -124,13 +124,12 @@ public class Player {
     // สำหรับ LockTurnItem
     public int getLockedTurns() { return lockedTurns; }
     public void setLockedTurns(int lockedTurns) { this.lockedTurns = lockedTurns; }
-    
-    // Helper สำหรับ StealItem (เพื่อให้ขโมยของได้จริง)
-    public Item removeRandomItem(Item item) {
+
+    public Item removeRandomItem(Item item1) {
         if (items.isEmpty()) return null;
-        for(int i =0;i<items.size();i++){
-            if(items.get(i).getId().equals(item.getId())){
-                items.remove(i);
+        for(Item item : items){
+            if(item.getId().equals(item1.getId())){
+                items.remove(item);
                 return item;
             }
         }
@@ -142,6 +141,7 @@ public class Player {
             this.items.add(item);
         }
     }
+    
     public String getName(){
         return name;
     }

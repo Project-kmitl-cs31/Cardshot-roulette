@@ -1,14 +1,19 @@
-package Nut;
+package logic;
 
+import Items.Item;
+import Items.PeekCardItem;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
+import src.project.Items.Health;
+import src.project.Items.PeekCardItem;
+
 public class ItemFactory {
 
     private Random rng;
-    private List<Item> allitem;
+
     public ItemFactory() {
         this.rng = new Random();
     }
@@ -22,19 +27,24 @@ public class ItemFactory {
     //     }
     //     return initialItems;
     // }
-
     public List<Item> grantRoundItems() {
         List<Item> roundItems = new ArrayList<>();
-            for (int i = 0; i < 3; i++) {
-                roundItems.add(createRandomItem());
-            }
+        for (int i = 0; i < 3; i++) {
+            roundItems.add(createRandomItem());
+        }
         return roundItems;
     }
 
     // add items
-    private Item createRandomItem() {
-        allitem = new ArrayList<>(Arrays.asList(new HealthPotionItem(),new PeekCardItem()));
-        int index = rng.nextInt(allitem.size());
-        return allitem.get(index); 
-    }
+   private Item createRandomItem() {
+
+    List<Object> allitem = Arrays.asList(
+        new Items.Health(),
+        new Items.PeekCardItem()
+    );
+
+    int index = rng.nextInt(allitem.size());
+    return (Item) allitem.get(index);
+}
+
 }

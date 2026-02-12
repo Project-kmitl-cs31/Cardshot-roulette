@@ -1,6 +1,4 @@
-package Nut;
-
-
+package logic;
 
 import java.awt.Color;
 import java.awt.event.ActionEvent;

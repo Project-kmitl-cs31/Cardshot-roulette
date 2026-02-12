@@ -1,14 +1,11 @@
-package Nut;
-
-
-import Items.Player;
+package logic;
 
 public class Game {
     private int round;
     private int currentTurnIndex;
     private int state;
 
-    private void startRound(Player p1,Player p2){
+    void startRound(Player p1,Player p2){
     
         CentralDeck deck = new CentralDeck();
         deck.generate();
