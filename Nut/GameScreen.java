@@ -4,6 +4,8 @@ import javax.swing.*;
 import java.awt.*;
 import CoreGame.Game;
 import CoreGame.Player;
+import java.awt.event.MouseAdapter; 
+import java.awt.event.MouseEvent;
 
 public class GameScreen extends UIScreen {
     private PlayerPanel blueZone; 
@@ -33,6 +35,17 @@ public class GameScreen extends UIScreen {
         
         this.add(lp);  
         this.setBounds(0, 0, setWidth, setHeight);
+
+        centerZone.addMouseListener(new MouseAdapter(){
+            @Override
+            public void mouseClicked(MouseEvent e){
+                if(SwingUtilities.isLeftMouseButton(e)){
+                    System.out.println("Deck Clicked!");
+                    ui.onDeckClicked();
+                }
+            }
+        });
+
     }
 
     @Override
@@ -56,6 +69,16 @@ public class GameScreen extends UIScreen {
         Player p2 = state.getEnemy();
         if(p2 != null){
             redZone.refreshFromGame(p2.getHp());
+        }
+        if(state.getDeck() != null){
+            int count = state.getDeck().getCardCount();
+            String turnText = state.isP1Turn() ? "P1 Turn" : "P2 Turn";
+            centerZone.setText("<html><center>" + turnText + "<br>Cards: " + count + "</center></html>");centerZone.setText("Cards : "+ count);
+            if(state.isP1Turn()){
+                centerZone.setBackground(Color.CYAN);
+            }else{
+                centerZone.setBackground(Color.pink);
+            }
         }
     }
 }

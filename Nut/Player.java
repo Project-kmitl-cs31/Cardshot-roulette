@@ -8,7 +8,7 @@ public class Player {
     // --- Attributes ตาม UML ---
     private String id;
     private String name;
-    private int hp;
+    int hp;
     private int mana;
     private List<Item> items;
     private int lockedTurns;
@@ -156,4 +156,8 @@ public class Player {
     public int getDamageMultiplier(){
         return damageMultiplier;
     }
+    public void resetDamageMultiplier() {
+        this.damageMultiplier = 1;
+        System.out.println(name + " damage multiplier reset to 1");
+}
 }

@@ -10,7 +10,9 @@ public class ManaCard extends Card1{
         super(id, "Mana Card", CardType.MANA);
         this.amount = rollMana();
     }
-
+    public void skip(){
+        System.out.println("this card is noting");
+    }
     private int rollMana() {
         return new Random().nextInt(4) + 1;
     }

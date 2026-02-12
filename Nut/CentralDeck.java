@@ -59,4 +59,19 @@ public class CentralDeck {
     public boolean isEmpty(){
         return cards.isEmpty();
     }
+    public Card1 drawTop(){
+        if(cards.isEmpty())
+        return null;
+        Card1 drawCard = cards.pop();
+
+        if(!cards.isEmpty()){
+         currentCard = cards.peek();
+        }else{
+            currentCard = null;
+        }
+        return drawCard;
+    }
+    public int getCardCount(){
+        return cards.size();
+    }
 }

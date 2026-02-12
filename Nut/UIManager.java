@@ -24,6 +24,7 @@ public class UIManager {
     }
     public void openGameScreen(){
         GameScreen screen = new GameScreen(this);
+        this.activeScreen = screen;
         window.setContentPane(screen);
         screen.render(game);
         window.revalidate();
@@ -37,5 +38,14 @@ public class UIManager {
     public void showRoundTransition(int roundNo){
 
     }
-    
+    public void onDeckClicked(){
+        if(game == null)
+            return;
+        
+        game.PlayerdrawCard();
+        
+        if(activeScreen != null){
+            activeScreen.render(game);
+        }
+    }
 }
