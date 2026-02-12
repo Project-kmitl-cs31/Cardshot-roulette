@@ -1,7 +1,10 @@
+<<<<<<< HEAD
 package Nut;
 import CoreGame.Player;
 import Item.Card1;
 
+=======
+>>>>>>> origin/main
 public abstract class Item {
 
     protected String id;

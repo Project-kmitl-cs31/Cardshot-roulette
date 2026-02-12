@@ -1,4 +1,4 @@
-package Item;
+package Items;
 
 public class Health extends Item {
     private String id = "HealthItem";

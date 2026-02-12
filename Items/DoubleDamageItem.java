@@ -1,4 +1,11 @@
+<<<<<<< HEAD:Item/DoubleDamageItem.java
 package Item;
+=======
+package Items;
+import CentralDeck;
+
+
+>>>>>>> origin/main:Items/DoubleDamageItem.java
 
 public class DoubleDamageItem extends Item {
     private String id = "DoubleDamageItem";

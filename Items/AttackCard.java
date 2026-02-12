@@ -1,5 +1,8 @@
+<<<<<<< HEAD:Item/AttackCard.java
 package Item;
 
+=======
+>>>>>>> origin/main:Nut/AttackCard.java
 public class AttackCard extends Card1{
 
     private int baseDamage = 1;

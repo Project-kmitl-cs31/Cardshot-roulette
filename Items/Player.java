@@ -1,11 +1,11 @@
-package Item;
+package Items;
 
 
 import java.util.ArrayList;
 import java.util.List;
 
-import Nut.Item;
-import Nut.ItemContext;
+import item;
+import itemContext;
 
 public class Player {
     // --- Attributes ตาม UML ---
@@ -156,7 +156,11 @@ public class Player {
 
     public int getDamageMultiplier(){
         return damageMultiplier;
+<<<<<<< HEAD:Item/Player.java
     }
 
     public 
+=======
+      }
+>>>>>>> origin/main:Items/Player.java
 }

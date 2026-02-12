@@ -1,4 +1,8 @@
+<<<<<<< HEAD:Item/Card1.java
 package Item;
+=======
+
+>>>>>>> origin/main:Nut/Card1.java
 
 public abstract class Card1 {
 

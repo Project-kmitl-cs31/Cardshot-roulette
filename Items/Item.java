@@ -1,4 +1,4 @@
-package Item;
+package Items;
 
 public abstract class Item extends CentralDeck {
     private String id;
