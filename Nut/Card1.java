@@ -1,5 +1,4 @@
 package Nut;
-import CoreGame.Player;
 
 public abstract class Card1 {
 

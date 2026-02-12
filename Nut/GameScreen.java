@@ -2,8 +2,6 @@ package Nut;
 
 import javax.swing.*;
 import java.awt.*;
-import CoreGame.Game;
-import CoreGame.Player;
 import java.awt.event.MouseAdapter; 
 import java.awt.event.MouseEvent;
 

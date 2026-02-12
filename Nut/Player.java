@@ -13,7 +13,7 @@ public class Player {
     private List<Item> items;
     private int lockedTurns;
     private int damageMultiplier = 1;
-    private Item curItem;
+    //private Item curItem;
     // private ItemContext ctx;
     private static final int MAX_ITEMS = 8;
 
@@ -48,24 +48,24 @@ public class Player {
         return items.get(0);
     }
 
-    public void UseItem(Object o){
-        if(items.isEmpty()) return;
-        this.curItem = null;
-        for(Item item01 : items){
-            System.out.println(o);
-            System.out.println(item01);
-            if(item01.equals(o)){
-                System.out.println("333");
-                this.curItem = item01;
-                break;
-            }
-        }
-        if(this.curItem != null){
-            this.curItem.applyEffect(ctx);
-            this.curItem = null;
-        }
+    // public void UseItem(Object o){
+    //     if(items.isEmpty()) return;
+    //     this.curItem = null;
+    //     for(Item item01 : items){
+    //         System.out.println(o);
+    //         System.out.println(item01);
+    //         if(item01.equals(o)){
+    //             System.out.println("333");
+    //             this.curItem = item01;
+    //             break;
+    //         }
+    //     }
+    //     if(this.curItem != null){
+    //         this.curItem.applyEffect(ctx);
+    //         this.curItem = null;
+    //     }
         
-    }
+    // }
 
     public void endTurn() {
         System.out.println(name + " ends turn.");

@@ -1,11 +1,11 @@
-package Item;
+// package Item;
 
-import Nut.Player;
+// import Nut.Player;
 
-public class LockTurnItem extends Item {
-    private String id = "LockTurnItem";
+// public class LockTurnItem extends Item {
+//     private String id = "LockTurnItem";
 
-    public void use(Player oop){
-        oop.lockTurns(lockTurns);
-    }
-}
+//     public void use(Player oop){
+//         oop.lockTurns(lockTurns);
+//     }
+// }

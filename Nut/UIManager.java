@@ -1,7 +1,5 @@
 package Nut;
 
-import CoreGame.Game;
-import CoreGame.Player;
 import javax.swing.JFrame;
 
 public class UIManager {

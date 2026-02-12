@@ -1,14 +1,14 @@
-package Nut;
+// package Nut;
 
-public class CutCardItem extends Item {
+// public class CutCardItem extends Item {
 
-    public CutCardItem() {
-        this.manaCost = 2;
-        this.name = "Cut Card";
-    }
+//     public CutCardItem() {
+//         this.manaCost = 2;
+//         this.name = "Cut Card";
+//     }
 
-    @Override
-    protected void applyEffect(ItemContext ctx) {
-        ctx.getUser().cutTop();
-    }
-}
+//     @Override
+//     protected void applyEffect(ItemContext ctx) {
+//         ctx.getUser().cutTop();
+//     }
+// }

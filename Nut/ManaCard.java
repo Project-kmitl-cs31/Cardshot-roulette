@@ -1,7 +1,6 @@
 package Nut;
 import java.util.Random;
 
-import CoreGame.Player;
 
 public class ManaCard extends Card1{
     private int amount; // 1 - 4

@@ -1,13 +1,13 @@
-package Nut;
+// package Nut;
 
-import Item.Item;
+// import Item.Item;
 
-public class Health extends Item {
-    private String id = "HealthItem";
+// public class Health extends Item {
+//     private String id = "HealthItem";
 
-    public void use(Player player){
-        if(player.getHp() < 6){
-            player.setHp(1);
-        }
-    }
-}
+//     public void use(Player player){
+//         if(player.getHp() < 6){
+//             player.setHp(1);
+//         }
+//     }
+// }

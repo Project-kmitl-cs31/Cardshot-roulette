@@ -1,11 +1,11 @@
-package Item;
+// package Item;
 
-import Nut.Player;
+// import Nut.Player;
 
-public class CutCardItem extends Item {
-    private String id = "CutCard";
+// public class CutCardItem extends Item {
+//     private String id = "CutCard";
 
-    public void use(Player player){
+//     public void use(Player player){
         
-    }
-}
+//     }
+// }
