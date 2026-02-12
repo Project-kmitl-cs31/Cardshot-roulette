@@ -4,11 +4,14 @@ import javax.swing.*;
 import java.awt.*;
 <<<<<<< HEAD:src/project/logic/GameScreen.java
 <<<<<<< HEAD:src/project/logic/GameScreen.java
+<<<<<<< HEAD:src/project/logic/GameScreen.java
 =======
 =======
 import CoreGame.Game;
 import CoreGame.Player;
 >>>>>>> 4ee7dfe (dent):Nut/GameScreen.java
+=======
+>>>>>>> 0581481 (asd):Nut/GameScreen.java
 import java.awt.event.MouseAdapter; 
 import java.awt.event.MouseEvent;
 

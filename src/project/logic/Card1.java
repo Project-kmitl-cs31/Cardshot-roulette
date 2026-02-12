@@ -6,8 +6,11 @@ package Nut;
 >>>>>>> 0530cb408d9d43ce7cbe2b08683a39ad0aabac42:Nut/Card1.java
 =======
 package Nut;
+<<<<<<< HEAD:src/project/logic/Card1.java
 import CoreGame.Player;
 >>>>>>> 4ee7dfe (dent):Nut/Card1.java
+=======
+>>>>>>> 0581481 (asd):Nut/Card1.java
 
 public abstract class Card1 {
 

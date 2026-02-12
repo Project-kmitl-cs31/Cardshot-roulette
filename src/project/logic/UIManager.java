@@ -3,7 +3,10 @@ package logic;
 =======
 package Nut;
 
+<<<<<<< HEAD:src/project/logic/UIManager.java
 >>>>>>> 0530cb408d9d43ce7cbe2b08683a39ad0aabac42:Nut/UIManager.java
+=======
+>>>>>>> 0581481 (asd):Nut/UIManager.java
 import javax.swing.JFrame;
 public class UIManager {
     private Game game;

@@ -58,6 +58,7 @@ public class Player {
     }
 
 <<<<<<< HEAD:src/project/logic/Player.java
+<<<<<<< HEAD:src/project/logic/Player.java
     public void UseItem(Object o){
         if(items.isEmpty()) return;
         this.curItem = null;
@@ -76,6 +77,8 @@ public class Player {
             this.curItem = null;
         }
 =======
+=======
+>>>>>>> 0581481 (asd):Nut/Player.java
     // public void UseItem(Object o){
     //     if(items.isEmpty()) return;
     //     this.curItem = null;
@@ -92,7 +95,10 @@ public class Player {
     //         this.curItem.applyEffect(ctx);
     //         this.curItem = null;
     //     }
+<<<<<<< HEAD:src/project/logic/Player.java
 >>>>>>> 0530cb408d9d43ce7cbe2b08683a39ad0aabac42:Nut/Player.java
+=======
+>>>>>>> 0581481 (asd):Nut/Player.java
         
     // }
 

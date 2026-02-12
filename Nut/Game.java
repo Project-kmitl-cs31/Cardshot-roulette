@@ -51,15 +51,21 @@ public class Game {
         }
         Player currentPlayer = isP1Turn ? p : enemy;
 <<<<<<< HEAD
+<<<<<<< HEAD
         Player opponentPlayer = isP1Turn ? enemy : p;
         System.out.println(currentPlayer.getName()+ "'s Turn"+ " is drawing...");
 =======
         System.out.println((isP1Turn ? "P1" : "P2") + " is drawing...");
 >>>>>>> 4ee7dfe (dent)
+=======
+        Player opponentPlayer = isP1Turn ? enemy : p;
+        System.out.println(currentPlayer.getName()+ "'s Turn"+ " is drawing...");
+>>>>>>> 0581481 (asd)
         Card1 card = deck.drawTop();
         if (card == null) 
         return;
         if(card instanceof AttackCard){
+<<<<<<< HEAD
 <<<<<<< HEAD
             ((AttackCard) card).resolveTargeted(currentPlayer,opponentPlayer);
 =======
@@ -67,14 +73,21 @@ public class Game {
             currentPlayer.takeDamage(dmg);
             currentPlayer.resetDamageMultiplier();
 >>>>>>> 4ee7dfe (dent)
+=======
+            ((AttackCard) card).resolveTargeted(currentPlayer,opponentPlayer);
+>>>>>>> 0581481 (asd)
             switchTurn();
         }
         else if(card instanceof ManaCard){
             System.out.println("this card is noting");
 <<<<<<< HEAD
+<<<<<<< HEAD
             switchTurn();
 =======
 >>>>>>> 4ee7dfe (dent)
+=======
+            switchTurn();
+>>>>>>> 0581481 (asd)
         }
 
         if(deck.isEmpty()){
@@ -86,6 +99,7 @@ public class Game {
     private void switchTurn(){
         isP1Turn =! isP1Turn;
 <<<<<<< HEAD
+<<<<<<< HEAD
         System.out.println("Now it is " + (isP1Turn ? p.getName() : enemy.getName()) + "'s Turn");
     }
     public void setPlayer(Player p1 , Player enemy){
@@ -94,6 +108,11 @@ public class Game {
     }
     public void setPlayer(Player p1 , Player p2){
 >>>>>>> 4ee7dfe (dent)
+=======
+        System.out.println("Now it is " + (isP1Turn ? p.getName() : enemy.getName()) + "'s Turn");
+    }
+    public void setPlayer(Player p1 , Player enemy){
+>>>>>>> 0581481 (asd)
         this.p = p1;
         this.enemy = enemy;
     }
