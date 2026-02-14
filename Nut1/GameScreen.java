@@ -61,12 +61,12 @@ public class GameScreen extends UIScreen {
         
         Player p1 = state.getPlayer();
         if(p1 != null){
-            blueZone.refreshFromGame(p1.getHp());
+            blueZone.refreshFromGame(p1.getHp(),p1.getName());
         }
         
         Player p2 = state.getEnemy();
         if(p2 != null){
-            redZone.refreshFromGame(p2.getHp());
+            redZone.refreshFromGame(p2.getHp(),p2.getName());
         }
         if(state.getDeck() != null){
             int count = state.getDeck().getCardCount();
