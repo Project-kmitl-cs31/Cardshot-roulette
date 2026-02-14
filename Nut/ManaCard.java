@@ -26,6 +26,6 @@ public class ManaCard extends Card1{
         defender.addMana(amount);
     }
      public String toString(){
-        return "AttackCard "+ id;
+        return " AttackCard "+ id;
         }
    }
