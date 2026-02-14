@@ -1,7 +1,7 @@
 package Nut1;
 
 
-public abstract class Item {
+public abstract class ItemMana {
 
     protected String id;
     protected String name;
