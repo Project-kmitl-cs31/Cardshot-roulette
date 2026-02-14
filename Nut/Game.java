@@ -120,7 +120,11 @@ public class Game {
         return isP1Turn;
     }
 <<<<<<< HEAD
+<<<<<<< HEAD
     
 =======
 >>>>>>> 4ee7dfe (dent)
+=======
+    
+>>>>>>> 0530cb4 (New)
 }
