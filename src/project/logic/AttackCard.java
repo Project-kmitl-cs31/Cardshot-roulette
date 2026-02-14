@@ -1,30 +1,34 @@
-package logic;
+package Nut; 
 
-public class AttackCard extends Card1{
+
+public class AttackCard extends Card1 {
 
     private int baseDamage = 1;
 
     public AttackCard(String id) {
-        super(id, "Attack Card", CardType.ATTACK);
+        super(id, "Live Round", CardType.ATTACK); 
     }
-
-
-    public void multiplyDamage(int multiplier) {
-        baseDamage *= multiplier;
-    }
-
-
     @Override
     public void resolveKept(Player player) {
-        player.takeDamage(baseDamage);
+        int totalDamage = baseDamage * player.getDamageMultiplier();
+        
+        System.out.println("DEBUG: Self shot with damage: " + totalDamage);
+        player.takeDamage(totalDamage);
+        player.resetDamageMultiplier(); 
     }
 
     @Override
     public void resolveTargeted(Player attacker, Player defender) {
-        defender.takeDamage(baseDamage);
+        int totalDamage =  baseDamage*attacker.getDamageMultiplier();
+        
+
+        System.out.println("DEBUG: Attacking with damage: " + totalDamage);
+        defender.takeDamage(totalDamage);
+        attacker.resetDamageMultiplier();
     }
-    public String toString(){
-        return "AttackCard "+ id;
+
+    @Override
+    public String toString() {
+        return "AttackCard " + id + " (Dmg:" + baseDamage + ")";
     }
 }
-
