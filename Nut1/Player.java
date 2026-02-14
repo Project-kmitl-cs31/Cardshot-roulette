@@ -1,27 +1,23 @@
 package Nut1;
-
+import NutItem.Item;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class Player {
-    // --- Attributes ตาม UML ---
-    private String id;
     private String name;
     int hp;
     private int mana;
     private List<Item> items;
     private int lockedTurns;
     private int damageMultiplier = 1;
-    //private Item curItem;
-    // private ItemContext ctx;
+
     private static final int MAX_ITEMS = 8;
 
     public Player(int maxhp){
         this.hp = maxhp;
     }
-    public Player(String id, String name, int maxHp, int initialMana) {
-        this.id = id;
+    public Player(String name, int maxHp, int initialMana) {
         this.name = name;
         this.hp = maxHp;
         this.mana = initialMana;
@@ -159,5 +155,8 @@ public class Player {
     public void resetDamageMultiplier() {
         this.damageMultiplier = 1;
         System.out.println(name + " damage multiplier reset to 1");
-}
+    }
+    public void setDamageMultiplier(int newDamage)   {
+        this.damageMultiplier = newDamage;
+    }
   }
