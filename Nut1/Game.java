@@ -61,6 +61,7 @@ public class Game {
         }
         else if(card instanceof ManaCard){
             System.out.println("this card is noting");
+            currentPlayer.resetDamageMultiplier();
             switchTurn();
         }
 
