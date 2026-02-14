@@ -16,6 +16,8 @@ public class PlayerPanel extends JPanel {
         hpLabel.setFont(new Font("Arial", Font.BOLD, 24));
         hpLabel.setBounds(10, 10, 200, 50);
         this.add(hpLabel);
+
+        
     }
     public void refreshFromGame(int hp) {
         hpLabel.setText("HP: " + hp);

@@ -1,8 +1,5 @@
 package Nut; 
 
-import CoreGame.Player;
-import CoreGame.Game;
-
 public class AttackCard extends Card1 {
 
     private int baseDamage = 1;
