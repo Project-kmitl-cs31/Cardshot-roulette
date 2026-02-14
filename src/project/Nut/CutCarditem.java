@@ -1,9 +1,9 @@
 package src.project.Nut;
 // package Nut;
 
-// public class CutCarditem extends Item {
+// public class CutCardItem extends Item {
 
-//     public CutCarditem() {
+//     public CutCardItem() {
 //         this.manaCost = 2;
 //         this.name = "Cut Card";
 //     }

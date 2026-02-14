@@ -1,4 +1,8 @@
+<<<<<<< HEAD:src/project/Nut/Card1.java
 package src.project.Nut;
+=======
+
+>>>>>>> origin/main:src/project/logic/Card1.java
 public abstract class Card1 {
 
     protected String id;

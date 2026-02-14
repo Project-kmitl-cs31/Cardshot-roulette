@@ -1,21 +1,24 @@
+<<<<<<< HEAD
 package Items;
 
 import logic.Player;
 import src.project.Nut.Item;
+=======
+package Item;
+// package Item;
+>>>>>>> origin/main
 
 public class CutCardItem extends Item {
-
-
     private String id = "CutCard";
+// import Nut.Player;
 
-    @Override
-    public void use() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'use'");
+    public void use(Player player){
+// public class CutCardItem extends Item {
+//     private String id = "CutCard";
+
+//     public void use(Player player){
+
     }
-
-      public void use(Player player){
-        
-    }
-
 }
+//     }
+// }
