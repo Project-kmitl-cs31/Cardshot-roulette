@@ -74,4 +74,8 @@ public class CentralDeck {
     public int getCardCount(){
         return cards.size();
     }
+<<<<<<< HEAD:src/project/Nut/CentralDeck.java
 }
+=======
+}
+>>>>>>> origin/Yaya2:Nut/CentralDeck.java

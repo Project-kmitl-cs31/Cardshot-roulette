@@ -55,6 +55,6 @@ public class panel implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        throw new UnsupportedOperationException(" Not supported yet. ") ;
     }
 }

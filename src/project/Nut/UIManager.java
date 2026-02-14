@@ -1,4 +1,9 @@
+<<<<<<< HEAD:src/project/Nut/UIManager.java
 package src.project.Nut;
+=======
+package Nut;
+
+>>>>>>> origin/Yaya2:Nut/UIManager.java
 import javax.swing.JFrame;
 
 public class UIManager {
@@ -45,4 +50,8 @@ public class UIManager {
             activeScreen.render(game);
         }
     }
+<<<<<<< HEAD:src/project/Nut/UIManager.java
 }
+=======
+}
+>>>>>>> origin/Yaya2:Nut/UIManager.java

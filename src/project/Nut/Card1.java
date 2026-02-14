@@ -1,6 +1,10 @@
 <<<<<<< HEAD:src/project/Nut/Card1.java
+<<<<<<< HEAD:src/project/Nut/Card1.java
 package src.project.Nut;
 =======
+=======
+package Nut;
+>>>>>>> origin/Yaya2:Nut/Card1.java
 
 >>>>>>> origin/main:src/project/logic/Card1.java
 public abstract class Card1 {
@@ -38,6 +42,10 @@ public abstract class Card1 {
     @Override
     public String toString() {
         return "[" + id + "] " + name + " (" + type + ")";
+<<<<<<< HEAD:src/project/Nut/Card1.java
     }
+=======
+     }
+>>>>>>> origin/Yaya2:Nut/Card1.java
 
 }

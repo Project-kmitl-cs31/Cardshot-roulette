@@ -1,4 +1,10 @@
+<<<<<<< HEAD:src/project/Nut/Player.java
 package src.project.Nut;
+=======
+package Nut;
+
+
+>>>>>>> origin/Yaya2:Nut/Player.java
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,7 +17,7 @@ public class Player {
     private List<Item> items;
     private int lockedTurns;
     private int damageMultiplier = 1;
-    private Item curItem;
+    //private Item curItem;
     // private ItemContext ctx;
     private static final int MAX_ITEMS = 8;
 
@@ -157,4 +163,9 @@ public class Player {
     public void resetDamageMultiplier() {
         this.damageMultiplier = 1;
         System.out.println(name + " damage multiplier reset to 1");
+<<<<<<< HEAD:src/project/Nut/Player.java
 }}
+=======
+}
+  }
+>>>>>>> origin/Yaya2:Nut/Player.java
