@@ -1,4 +1,4 @@
-package Nut;
+package Nut1;
 
 
 import java.awt.Color;
