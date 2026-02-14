@@ -3,7 +3,7 @@ import java.util.Random;
 
 
 public class ManaCard extends Card1{
-    private int amount; // 1 - 4
+    private int amount;       
 
     public ManaCard(String id) {
         super(id, "Mana Card", CardType.MANA);
@@ -27,5 +27,5 @@ public class ManaCard extends Card1{
     }
      public String toString(){
         return "AttackCard "+ id;
-    }
-}
+        }
+   }

@@ -160,4 +160,4 @@ public class Player {
         this.damageMultiplier = 1;
         System.out.println(name + " damage multiplier reset to 1");
 }
-}
+  }
