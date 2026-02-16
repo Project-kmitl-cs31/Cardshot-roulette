@@ -1,4 +1,4 @@
-package NutItem;
+package NutITem;
 import Nut1.Player;
 public abstract class Item {
     protected String id;

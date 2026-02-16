@@ -1,14 +1,14 @@
 package Nut1;
 
-import javax.swing.*;
 import java.awt.*;
-import java.awt.event.MouseAdapter; 
-import java.awt.event.MouseEvent;
+import javax.swing.*;
 
 public class GameScreen extends UIScreen {
     private PlayerPanel blueZone; 
     private PlayerPanel redZone;  
     private JLabel centerZone;   
+    private JButton selfbutton;
+    private JButton enemyButton;
 
     public GameScreen(UIManager ui) {
         super(ui);
@@ -27,22 +27,33 @@ public class GameScreen extends UIScreen {
         centerZone.setOpaque(true);
         centerZone.setBounds((setWidth / 2) - 150, (setHeight / 2) - 150, 300, 300);
 
-        lp.add(blueZone, Integer.valueOf(0));
-        lp.add(redZone, Integer.valueOf(0)); 
-        lp.add(centerZone, Integer.valueOf(1));
-        
-        this.add(lp);  
-        this.setBounds(0, 0, setWidth, setHeight);
 
-        centerZone.addMouseListener(new MouseAdapter(){
-            @Override
-            public void mouseClicked(MouseEvent e){
+        selfbutton = new JButton("Choose self");
+        selfbutton.setBackground(Color.white);
+
+        enemyButton = new JButton("Choose Enemy");
+        enemyButton.setBackground(Color.BLACK);
+        enemyButton.setForeground(Color.WHITE);
+
+        selfbutton.addActionListener(e -> ui.onTargetSelected(true));
+        enemyButton.addActionListener(e -> ui.onTargetSelected(false));
+        
+        centerZone.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent e) {
                 if(SwingUtilities.isLeftMouseButton(e)){
-                    System.out.println("Deck Clicked!");
-                    ui.onDeckClicked();
+                    ui.onDeckClicked(); 
                 }
             }
         });
+
+        lp.add(blueZone, Integer.valueOf(0));
+        lp.add(redZone, Integer.valueOf(0)); 
+        lp.add(centerZone, Integer.valueOf(1));
+        lp.add(selfbutton, Integer.valueOf(2));
+        lp.add(enemyButton, Integer.valueOf(2));
+        
+        this.add(lp);  
+        this.setBounds(0, 0, setWidth, setHeight);
 
     }
 
@@ -68,15 +79,39 @@ public class GameScreen extends UIScreen {
         if(p2 != null){
             redZone.refreshFromGame(p2.getHp(),p2.getName());
         }
+        if(state.isTargetSelf()){
+            selfbutton.setBackground(Color.green);
+            enemyButton.setBackground(Color.black);
+        }else{
+            selfbutton.setBackground(Color.black);
+            enemyButton.setBackground(Color.red);
+        }
         if(state.getDeck() != null){
             int count = state.getDeck().getCardCount();
             String turnText = state.isP1Turn() ? "P1 Turn" : "P2 Turn";
-            centerZone.setText("<html><center>" + turnText + "<br>Cards: " + count + "</center></html>");centerZone.setText("Cards : "+ count);
+            centerZone.setText("<html><center>" + turnText + "<br>Cards: " + count + "</center></html>");
+            Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+            int w = screenSize.width;
+            int h = screenSize.height;
+            int buttonY = (h / 2) + 160;
+            int leftX = (w / 2) - 300;
+            int rightX = (w / 2) + 160;
             if(state.isP1Turn()){
+                selfbutton.setBounds(leftX, buttonY, 130, 50);
+                selfbutton.setText("Self (P1)");
+
+                enemyButton.setBounds(rightX, buttonY, 130 , 50);
+                enemyButton.setText("Enemy (P2)");
                 centerZone.setBackground(Color.CYAN);
             }else{
+                selfbutton.setBounds(rightX, buttonY, 130, 50);
+                selfbutton.setText("Self (P2)");
+
+                enemyButton.setBounds(leftX, buttonY, 130, 50);
+                enemyButton.setText("Enemy (P1)");  
                 centerZone.setBackground(Color.pink);
             }
         }
+       
     }
 }

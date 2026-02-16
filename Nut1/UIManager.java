@@ -36,14 +36,19 @@ public class UIManager {
     public void showRoundTransition(int roundNo){
 
     }
-    public void onDeckClicked(){
-        if(game == null)
-            return;
-        
-        game.PlayerdrawCard();
-        
-        if(activeScreen != null){
+    public void onTargetSelected(boolean isSelf){
+        if(game != null){
+            game.setTargetSelf(isSelf);
             activeScreen.render(game);
         }
     }
+    public void onDeckClicked(){
+        if(game != null){
+            game.PlayerdrawCard();
+            activeScreen.render(game);
+        }
+    }
+    
+ 
+    
 }

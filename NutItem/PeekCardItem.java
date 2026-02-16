@@ -1,4 +1,5 @@
-package NutItem;
+package NutITem;
+
 import Nut1.CentralDeck;
 import Nut1.Player;
 
