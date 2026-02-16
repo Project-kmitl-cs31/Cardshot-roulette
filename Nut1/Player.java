@@ -2,7 +2,7 @@ package Nut1;
 import java.util.ArrayList;
 import java.util.List;
 
-import NutITem.Item;
+import NutItem.*;
 
 public class Player {
     private String name;

@@ -1,4 +1,4 @@
-package NutITem;
+package NutItem;
 import Nut1.Player;
 
 public class DoubleDamageItem extends Item {

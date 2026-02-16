@@ -1,5 +1,5 @@
 package Nut1;
-import NutITem.*;
+import NutItem.*;
 
 public class HealthPotionItem extends Item {
     public void use(Player player){
