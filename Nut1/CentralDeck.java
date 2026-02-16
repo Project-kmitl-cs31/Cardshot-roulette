@@ -44,7 +44,16 @@ public class CentralDeck {
 
     }
     public void swapCard(){
-
+        AttackCard atkcard = new AttackCard("A01");
+        ManaCard manacard = new ManaCard("M01");
+        if(cards.peek() instanceof AttackCard){
+            cards.pop();
+            cards.push(manacard);
+        }
+        if(cards.peek() instanceof ManaCard){
+            cards.pop();
+            cards.push(atkcard);
+        }
     }
     public void cutTop(){
         System.out.println(cards.pop());
