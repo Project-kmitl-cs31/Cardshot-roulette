@@ -1,10 +1,10 @@
-package Nut1;
+package src.Nut1;
 
 enum TurnNext {
     SAME_PLAYER,
     OTHER_PLAYER
 }
-class ActionResult {
+public class ActionResult {
     private boolean turnEnds;
     private TurnNext nextTurnPlayer;
     private String message ;
@@ -25,5 +25,8 @@ class ActionResult {
     public static ActionResult endTurnKeepTurn(String msg) {
         return new ActionResult(true, TurnNext.SAME_PLAYER, msg);
     }
+    public boolean isTurnEnd(){ return turnEnds;}
+    public TurnNext getNextTurnPlayer(){ return nextTurnPlayer;}
+    public String getMessage(){ return message;}
 }
 

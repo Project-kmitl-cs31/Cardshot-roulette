@@ -1,4 +1,4 @@
-package Nut1;
+package src.Nut1;
 
 import java.awt.*;
 import javax.swing.*;

@@ -1,6 +1,8 @@
-package Nut1;
+package src.Nut1;
 // import CoreGame.Game;
 // import CoreGame.Player;
+
+import src.NutItem.HealthPotionItem;
 
 public class test {
     public static void main(String[] args) {
@@ -11,7 +13,7 @@ public class test {
         HealthPotionItem health = new HealthPotionItem();
         UIManager uiManager = new UIManager();
         uiManager.bindGame(game);
-        uiManager.openGameScreen();
+        uiManager.openMainMenu();
 
         // CentralDeck cn = new CentralDeck();
         // cn.generate(5-1);

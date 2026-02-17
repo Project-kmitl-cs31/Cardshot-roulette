@@ -1,4 +1,4 @@
-package Nut1;
+package src.Nut1;
 
 public abstract class Card1 {
 

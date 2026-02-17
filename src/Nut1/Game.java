@@ -1,4 +1,5 @@
-package Nut1;
+package src.Nut1;
+import src.NutItem.*;
 public class Game {
     // private int round;
     // private int currentTurnIndex;

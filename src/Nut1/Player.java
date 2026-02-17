@@ -1,8 +1,8 @@
-package Nut1;
+package src.Nut1;
 import java.util.ArrayList;
 import java.util.List;
 
-import NutItem.*;
+import src.NutItem.*;
 
 public class Player {
     private String name;
