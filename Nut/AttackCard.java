@@ -18,8 +18,8 @@ public class AttackCard extends Card1 {
 
     @Override
     public void resolveTargeted(Player attacker, Player defender) {
-        int currentMult = attacker.getDamageMultiplier();
-        int totalDamage = baseDamage * currentMult;
+        int totalDamage =  baseDamage*attacker.getDamageMultiplier();
+        
 
         System.out.println("DEBUG: Attacking with damage: " + totalDamage);
         defender.takeDamage(totalDamage);

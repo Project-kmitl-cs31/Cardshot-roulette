@@ -5,6 +5,7 @@ import javax.swing.*;
 
 public class PlayerPanel extends JPanel {
     private JLabel hpLabel;
+     private JLabel hpLabel1;
 
     public PlayerPanel(int x, int y, int w, int h, Color bg) {
         this.setBounds(x, y, w, h);

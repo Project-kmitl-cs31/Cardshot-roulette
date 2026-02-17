@@ -1,5 +1,4 @@
 package Nut;
-import CoreGame.Player;
 
 public abstract class Card1 {
 
@@ -36,6 +35,6 @@ public abstract class Card1 {
     @Override
     public String toString() {
         return "[" + id + "] " + name + " (" + type + ")";
-    }
+     }
 
 }

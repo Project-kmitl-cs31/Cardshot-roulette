@@ -7,6 +7,7 @@ public class Game {
     private Player enemy;
     private CentralDeck deck;
     private boolean isP1Turn = true ;
+    private boolean targetSelf = true;
      
     public Game(){
         this.p = new Player(6); 
@@ -45,21 +46,25 @@ public class Game {
     public CentralDeck getDeck(){
         return this.deck;
     }
-    public void PlayerdrawCard(boolean targetSelf){
+    public void setTargetSelf(boolean isSelf){
+        this.targetSelf = isSelf;
+    }
+    public boolean isTargetSelf(){
+        return targetSelf;
+    }
+    public void PlayerdrawCard(){
         if(deck.isEmpty()){
             deck.generate(6);
         }
         Player currentPlayer = isP1Turn ? p : enemy;
         Player opponentPlayer = isP1Turn ? enemy : p;
-
-        Player targer = targetSelf ? currentPlayer : opponentPlayer;
-
+        Player TargertPlayer = this.targetSelf ? currentPlayer : opponentPlayer;
         System.out.println(currentPlayer.getName()+ "'s Turn"+ " is drawing...");
         Card1 card = deck.drawTop();
         if (card == null) 
         return;
         if(card instanceof AttackCard){
-            ((AttackCard) card).resolveTargeted(currentPlayer,opponentPlayer);
+            ((AttackCard) card).resolveTargeted(currentPlayer,TargertPlayer);
             switchTurn();
         }
         else if(card instanceof ManaCard){
@@ -67,7 +72,7 @@ public class Game {
             if(!targetSelf){
                 switchTurn();
             }else{
-                System.out.println("nothing");
+                System.out.println("continue playing");
             }
         }
 
