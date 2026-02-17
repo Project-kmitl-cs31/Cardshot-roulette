@@ -1,4 +1,4 @@
-package Nut1;
+package src.Nut1;
 
 import javax.swing.JFrame;
 
@@ -47,6 +47,15 @@ public class UIManager {
             game.PlayerdrawCard();
             activeScreen.render(game);
         }
+    }
+    public void openMainMenu() {
+        MainmenuScreen menu = new MainmenuScreen(this);
+        this.activeScreen = menu;
+
+        window.setContentPane(menu);
+        window.revalidate();
+        window.repaint();
+        window.setVisible(true);
     }
     
  

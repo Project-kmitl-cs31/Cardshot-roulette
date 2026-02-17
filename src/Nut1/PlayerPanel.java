@@ -1,4 +1,4 @@
-package Nut1;
+package src.Nut1;
 
 import java.awt.*;
 import javax.swing.*;
@@ -15,20 +15,20 @@ public class PlayerPanel extends JPanel {
         hpLabel = new JLabel("HP: ???");
         hpLabel.setForeground(Color.WHITE);
         hpLabel.setFont(new Font("Arial", Font.BOLD, 24));
-        hpLabel.setBounds(850, 10, 200, 50);
+        hpLabel.setBounds(400, 10, 200, 50);
         this.add(hpLabel);
         
-        namLabel = new JLabel("Name: ");
-        namLabel.setForeground(Color.WHITE);
-        namLabel.setFont(new Font("Arial", Font.BOLD, 24));
-        namLabel.setBounds(10, 10, 200, 50);
-        this.add(namLabel);
+        // namLabel = new JLabel("Name: ");
+        // namLabel.setForeground(Color.WHITE);
+        // namLabel.setFont(new Font("Arial", Font.BOLD, 24));
+        // namLabel.setBounds(10, 10, 200, 50);
+        // this.add(namLabel);
     }
     public void refreshFromGame(int hp , String name) {
         hpLabel.setText("HP: " + hp);
         this.repaint();
 
-        namLabel.setText("Name:" + name);
-        this.repaint();
+        // namLabel.setText("Name:" + name);
+        // this.repaint();
     }  
 }  

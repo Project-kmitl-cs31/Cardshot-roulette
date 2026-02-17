@@ -1,4 +1,4 @@
-package Nut1;
+package src.Nut1;
 import javax.swing.JPanel;
 
 public abstract class UIScreen extends JPanel {

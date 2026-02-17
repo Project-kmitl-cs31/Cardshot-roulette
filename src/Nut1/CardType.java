@@ -1,4 +1,4 @@
-package Nut1;
+package src.Nut1;
 enum CardType {
     MANA,
     ATTACK

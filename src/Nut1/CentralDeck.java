@@ -1,4 +1,4 @@
-package Nut1;
+package src.Nut1;
 import java.util.Collections;
 import java.util.Random;
 import java.util.Stack;
@@ -47,8 +47,7 @@ public class CentralDeck {
 
     }
     public void cutTop(){
-        System.out.println(cards.pop());
-        System.out.println(cards);
+        cards.pop();    
         
     }
     public Card1 drawCurrent(){

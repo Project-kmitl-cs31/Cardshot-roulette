@@ -1,10 +1,10 @@
-package NutItem;
-import Nut1.Player;
+package src.NutItem;
+import src.Nut1.*;
 public abstract class Item {
     protected String id;
     protected String name;
 
-    public abstract void use(Player player);
+    public void use(Player player){}
 
     public String getId() {
         return id;
@@ -13,4 +13,7 @@ public abstract class Item {
     public String getName() {
         return name;
     }
+    public ActionResult use1(Player player) {
+        return ActionResult.endTurnKeepTurn("Nothing happened");
+}
 }
