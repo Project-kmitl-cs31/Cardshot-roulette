@@ -1,7 +1,6 @@
 package src.Nut1;
 import java.util.ArrayList;
 import java.util.List;
-
 import src.NutItem.*;
 
 public class Player {
@@ -11,6 +10,8 @@ public class Player {
     private List<Item> items;
     private int lockedTurns;
     private int damageMultiplier = 1;
+    private ArrayList<Item> inventory = new ArrayList<>();
+    private boolean isLockedNextTurn = false;
 
     private static final int MAX_ITEMS = 8;
 
@@ -25,7 +26,8 @@ public class Player {
         this.lockedTurns = 0;
         this.damageMultiplier = 1;
     }
-
+  
+    
     public boolean canAct() {
         // สามารถเล่นได้ถ้าไม่ติด LockedTurn และยังมีชีวิตอยู่
         return lockedTurns <= 0 && hp > 0;
@@ -121,24 +123,39 @@ public class Player {
     public void setLockedTurns(int lockedTurns) { this.lockedTurns = lockedTurns; }
     
     // Helper สำหรับ StealItem (เพื่อให้ขโมยของได้จริง)
-    public Item removeRandomItem(Item item) {
-        if (items.isEmpty()) return null;
-        for(int i =0;i<items.size();i++){
-            if(items.get(i).getId().equals(item.getId())){
-                items.remove(i);
-                return item;
-            }
-        }
-        return null;
-    }
+  //  public Item removeRandomItem(Item item) {
+    //    if (items.isEmpty()) return null;
+      //  for(int i =0;i<items.size();i++){
+        //    if(items.get(i).getId().equals(item.getId())){
+          //      items.remove(i);
+            //    return item;
+           // }
+       // }
+        //return null;
+   // }
     
     public void addItem(Item item) {
-        if (this.items.size() < MAX_ITEMS) {
-            this.items.add(item);
+        if (inventory.size() < 2) {
+            inventory.add(item);
         }
     }
+    public int getItemCount() {
+        return inventory.size();
+    }
+    public Item getItem(int index){
+        if(index >= 0 && index < inventory.size())
+        return inventory.get(index);
+        return null;
+    }
+    public void removeItem(int index){
+        if(index >= 0 && index < inventory.size())
+        inventory.remove(index);
+    }
+    public void setName(String name){
+        this.name = name;
+    }
     public String getName(){
-        return name;
+        return this.name;
     }
 
     public int getHp(){
@@ -158,5 +175,15 @@ public class Player {
     }
     public void setDamageMultiplier(int newDamage)   {
         this.damageMultiplier = newDamage;
+    }
+    public void lockTurn() {
+        this.isLockedNextTurn = true; 
+    }
+    public boolean checkAndClearLock() {
+        if (this.isLockedNextTurn) {
+            this.isLockedNextTurn = false; 
+            return true;
+        }
+        return false; 
     }
   }

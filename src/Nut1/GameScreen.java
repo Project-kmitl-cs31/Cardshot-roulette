@@ -2,6 +2,7 @@ package src.Nut1;
 
 import java.awt.*;
 import javax.swing.*;
+import src.NutItem.Item;
 
 public class GameScreen extends UIScreen {
     private PlayerPanel blueZone; 
@@ -9,6 +10,8 @@ public class GameScreen extends UIScreen {
     private JLabel centerZone;   
     private JButton selfbutton;
     private JButton enemyButton;
+    private JButton p1Item1 , p1Item2;
+    private JButton p2Item1 , p2Item2;
 
     public GameScreen(UIManager ui) {
         super(ui);
@@ -17,6 +20,20 @@ public class GameScreen extends UIScreen {
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         int setWidth = screenSize.width;
         int setHeight = screenSize.height;
+
+        p1Item1 = new JButton("Empty");
+        p1Item1.setBounds(50 , setHeight - 150 , 120 , 50);
+        p1Item1.addActionListener(e -> ui.onItemClicked(0));
+        p1Item2 = new JButton("Empty");
+        p1Item2.setBounds(180 , setHeight - 150 , 120 , 50);
+        p1Item2.addActionListener(e -> ui.onItemClicked(1));
+
+        p2Item1 = new JButton("Empty");
+        p2Item1.setBounds(setWidth - 300 , setHeight -150 , 120 ,50);
+        p2Item1.addActionListener(e -> ui.onItemClicked(0));
+        p2Item2 = new JButton("Empty");
+        p2Item2.setBounds(setWidth - 170 , setHeight - 150 , 120 , 50);
+        p2Item2.addActionListener(e -> ui.onItemClicked(1));
 
         JLayeredPane lp = new JLayeredPane();
         lp.setBounds(0, 0, setWidth, setHeight);
@@ -51,6 +68,11 @@ public class GameScreen extends UIScreen {
         lp.add(centerZone, Integer.valueOf(1));
         lp.add(selfbutton, Integer.valueOf(2));
         lp.add(enemyButton, Integer.valueOf(2));
+        lp.add(p1Item1, Integer.valueOf(2));
+        lp.add(p1Item2, Integer.valueOf(2));
+        lp.add(p2Item1, Integer.valueOf(2));
+        lp.add(p2Item2, Integer.valueOf(2));
+
         
         this.add(lp);  
         this.setBounds(0, 0, setWidth, setHeight);
@@ -86,6 +108,13 @@ public class GameScreen extends UIScreen {
             selfbutton.setBackground(Color.black);
             enemyButton.setBackground(Color.red);
         }
+        if(state.isTargetSelf()){
+            selfbutton.setBackground(Color.green);
+            enemyButton.setBackground(Color.black);
+        }else{
+            selfbutton.setBackground(Color.black);
+            enemyButton.setBackground(Color.red);
+        }
         if(state.getDeck() != null){
             int count = state.getDeck().getCardCount();
             String turnText = state.isP1Turn() ? "P1 Turn" : "P2 Turn";
@@ -112,6 +141,36 @@ public class GameScreen extends UIScreen {
                 centerZone.setBackground(Color.pink);
             }
         }
+        Player p = state.getPlayer();
+        Player enemy = state.getEnemy();
+        
+        updateItemButton(p1Item1, p, 0);
+        updateItemButton(p1Item2, p, 1);
+        updateItemButton(p2Item1, enemy, 0);
+        updateItemButton(p2Item2, enemy, 1);
        
+        if(state.isP1Turn()){
+            p1Item1.setEnabled(true);
+            p1Item2.setEnabled(true);
+            p2Item1.setEnabled(false);
+            p2Item2.setEnabled(false);
+        }else{
+            p1Item1.setEnabled(false);
+            p1Item2.setEnabled(false);
+            p2Item1.setEnabled(true);
+            p2Item2.setEnabled(true);
+        }
+    }
+    private void updateItemButton(JButton btn , Player p , int index){
+        if(p != null){
+            Item item = p.getItem(index);
+            if(item != null){
+                btn.setText(item.getName());
+                btn.setVisible(true);
+            }else{
+                btn.setText("Empty");
+                btn.setVisible(false);
+            }
+        }
     }
 }

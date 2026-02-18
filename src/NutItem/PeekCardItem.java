@@ -1,14 +1,23 @@
 package src.NutItem;
 
-import src.Nut1.CentralDeck;
+import src.Nut1.Card1;
+import src.Nut1.Game;
+
 
 
 public class PeekCardItem extends Item {
-    public void use(CentralDeck card){
-      card.peekCurrent();
+    public PeekCardItem(){
+        super("PeekCard");
+    }
+    @Override
+    public void use(Game game){
+        if(game.getDeck() != null && !game.getDeck().isEmpty()) {
+            Card1 c = game.getDeck().peekTop();
+            System.out.println(c.getClass().getSimpleName());
+        }
+        }
     }
 
-    
 
-}
+
 

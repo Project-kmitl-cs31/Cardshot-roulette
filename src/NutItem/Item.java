@@ -1,19 +1,21 @@
 package src.NutItem;
-import src.Nut1.*;
+import src.Nut1.Game;
+
+
 public abstract class Item {
     protected String id;
     protected String name;
 
-    public void use(Player player){}
+    public void use(Game game){}
 
-    public String getId() {
-        return id;
+    public Item(){}
+    public Item(String name) {
+        this.name = name;
     }
 
     public String getName() {
         return name;
     }
-    public ActionResult use1(Player player) {
-        return ActionResult.endTurnKeepTurn("Nothing happened");
-}
+   
+
 }
