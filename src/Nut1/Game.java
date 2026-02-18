@@ -14,7 +14,8 @@ public class Game {
         this.p = new Player(6); 
         this.enemy = new Player(6);
         this.deck = new CentralDeck();
-        this.deck.generate(6);
+        this.deck.generate();
+        
     }
 
     public void startNewgame(Player p1,Player p2){
@@ -55,7 +56,7 @@ public class Game {
     }
     public void PlayerdrawCard(){
         if(deck.isEmpty()){
-            deck.generate(6);
+            deck.generate();
         }
         Player currentPlayer = isP1Turn ? p : enemy;
         Player opponentPlayer = isP1Turn ? enemy : p;
@@ -79,7 +80,7 @@ public class Game {
 
         if(deck.isEmpty()){
             System.out.println("สุ่มใหม่");
-            deck.generate(6);
+            deck.generate();
         }
     
     }
