@@ -7,25 +7,27 @@ public class CentralDeck {
     private Stack<Card1> cards = new Stack<>();
     private Card1 currentCard;
     private Random rng = new Random();
-    public void generate(int roundNumber){
-        AttackCard atkcard = new AttackCard("A01");
-        ManaCard manacard = new ManaCard("M01");
+    public void generate(){
+
+        AttackCard atkcard = new AttackCard("A-1");
+        ManaCard manacard = new ManaCard("M-1");
 
         int basecase = 2;
 
-        int n = rng.nextInt(roundNumber)+basecase;
-        System.out.println("Deck table : " + (n));
+        int n = rng.nextInt(6)+1;
+        System.out.println("Deck table : " + (n+basecase));
+
         cards.push(atkcard);
         cards.push(manacard);
         
        
-        for (int i =basecase;i<n;i++){
+        for (int i =0;i<n;i++){
             int rand = rng.nextInt(2);
             if (rand %2==0){
-                AttackCard atkcard1 = new AttackCard(""+i);
+                AttackCard atkcard1 = new AttackCard("A-"+(i+1));
                 cards.push(atkcard1);
             }else{
-                ManaCard manacard1 = new ManaCard(""+i);
+                ManaCard manacard1 = new ManaCard("M-"+(i+1));
                 cards.push(manacard1);
             }
             
