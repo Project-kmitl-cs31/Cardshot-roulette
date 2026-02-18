@@ -46,10 +46,21 @@ public class CentralDeck {
 
     }
     public void swapCard(){
+        Card1 card = peekTop();
+        AttackCard atkcard = new AttackCard("A01");
+        ManaCard manacard = new ManaCard("M01");
+        if(card instanceof AttackCard){
+            cutTop();
+            cards.push(manacard);
+        }
+        if(card instanceof ManaCard){;
+            cutTop();
+            cards.push(atkcard);
+        }
 
     }
-    public void cutTop(){
-        cards.pop();    
+    public Card1 cutTop(){
+       return  cards.pop();
         
     }
     public Card1 drawCurrent(){
@@ -74,5 +85,9 @@ public class CentralDeck {
     }
     public int getCardCount(){
         return cards.size();
+    }
+     public Card1 peekTop() {
+        if (cards.isEmpty()) return null;
+        return cards.get(cards.size() - 1);
     }
 }

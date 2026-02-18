@@ -48,16 +48,35 @@ public class UIManager {
             activeScreen.render(game);
         }
     }
-    public void openMainMenu() {
+    public void openMainMenu(){
         MainmenuScreen menu = new MainmenuScreen(this);
         this.activeScreen = menu;
-
         window.setContentPane(menu);
         window.revalidate();
         window.repaint();
         window.setVisible(true);
     }
-    
+    public void openGameOverSceen(String winner){
+        GameOverScreen screen = new GameOverScreen(this, winner);
+        this.activeScreen = screen;
+
+        window.setContentPane(screen);
+        window.revalidate();
+        window.repaint();
+        window.setVisible(true);
+    }
+    public void restartGame(){
+        Game newGame = new Game();
+        this.bindGame(newGame);
+        newGame.setUIManager(this);
+        this.openGameScreen();
+    }
+    public void onItemClicked(int index){
+        if(game != null){
+            game.PlayItem(index);
+            activeScreen.render(game);
+        }
+    }
  
     
 }
