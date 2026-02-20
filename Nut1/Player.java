@@ -1,0 +1,182 @@
+package Nut1;
+import java.util.ArrayList;
+import java.util.List;
+
+public class Player {
+    private String name;
+    int hp;
+    private int mana;
+    private List<Item> items;
+    private int lockedTurns;
+    private int damageMultiplier = 1;
+    private ArrayList<Item> inventory = new ArrayList<>();
+    private boolean isLockedNextTurn = false;
+
+    private static final int MAX_ITEMS = 8;
+
+    public Player(int maxhp){
+        this.hp = maxhp;
+    }
+    public Player(String name, int maxHp, int initialMana) {
+        this.name = name;
+        this.hp = maxHp;
+        this.mana = initialMana;
+        this.items = new ArrayList<>();
+        this.lockedTurns = 0;
+        this.damageMultiplier = 1;
+        this.lockedTurns = 0;
+    }
+  
+    
+    public boolean canAct() {
+        // สามารถเล่นได้ถ้าไม่ติด LockedTurn และยังมีชีวิตอยู่
+        return lockedTurns <= 0 && hp > 0;
+    }
+
+    public void beginTurn() {
+        if (lockedTurns > 0) {
+            lockedTurns--;
+            System.out.println(name + " is locked! Turns remaining: " + lockedTurns);
+        }
+      
+    }
+
+
+    public Item firstItem(){
+        return items.get(0);
+    }
+
+    // public void UseItem(Object o){
+    //     if(items.isEmpty()) return;
+    //     this.curItem = null;
+    //     for(Item item01 : items){
+    //         System.out.println(o);
+    //         System.out.println(item01);
+    //         if(item01.equals(o)){
+    //             System.out.println("333");
+    //             this.curItem = item01;
+    //             break;
+    //         }
+    //     }
+    //     if(this.curItem != null){
+    //         this.curItem.applyEffect(ctx);
+    //         this.curItem = null;
+    //     }
+        
+    // }
+       public void lockTurn() {
+        this.isLockedNextTurn = true; 
+    }
+
+    public void endTurn() {
+        System.out.println(name + " ends turn.");
+    }
+
+    public void addMana(int amount) {
+        this.mana += amount;
+    }
+
+    public void takeDamage(int amount) {
+        if (amount < 0) return;
+        this.hp -= amount;
+        if (this.hp < 0) this.hp = 0;
+        System.out.println(name + " took " + amount + " damage. HP: " + hp);
+    }
+
+    protected void heal(int amount,int manaCost) {
+        if (amount <= 0) return;
+        if(this.mana < manaCost) return;
+        this.hp += amount;
+        this.mana -= manaCost;
+        System.out.println(name + " healed " + amount + " HP. Current HP: " + hp);
+        System.out.println("my mana :"+this.mana);
+    }
+
+    public void grantItems(List<Item> newItems) {
+        for (Item item : newItems) {
+            if (this.items.size() < MAX_ITEMS) {
+                this.items.add(item);
+                System.out.println(name + " got item: " + item.getName());
+            } else {
+                System.out.println("Inventory Full! Cannot add: " + item.getName());
+            }
+        }
+    }
+
+    public boolean useMana(int cost) {
+        if (this.mana >= cost) {
+            this.mana -= cost;
+            return true;
+        }
+        System.out.println("Not enough mana!");
+        return false;
+    }
+
+    public void addDamageMultiplier(int mult, boolean forNextCard) {
+        this.damageMultiplier *= mult;
+        System.out.println(name + " damage multiplier is now x" + this.damageMultiplier);
+    }
+
+    // --- Getters / Setters เพิ่มเติมเพื่อให้ Item Class อื่นๆ ทำงานได้ ---
+    
+    public int getMana() { return mana; }
+    
+    // สำหรับ LockTurnItem
+    public int getLockedTurns() { return lockedTurns; }
+    public void setLockedTurns(int lockedTurns) { this.lockedTurns = lockedTurns; }
+    
+    // Helper สำหรับ StealItem (เพื่อให้ขโมยของได้จริง)
+  //  public Item removeRandomItem(Item item) {
+    //    if (items.isEmpty()) return null;
+      //  for(int i =0;i<items.size();i++){
+        //    if(items.get(i).getId().equals(item.getId())){
+          //      items.remove(i);
+            //    return item;
+           // }
+       // }
+        //return null;
+   // }
+    
+    public void addItem(Item item) {
+        if (inventory.size() < 2) {
+            inventory.add(item);
+        }
+    }
+    public int getItemCount() {
+        return inventory.size();
+    }
+    public Item getItem(int index){
+        if(index >= 0 && index < inventory.size())
+        return inventory.get(index);
+        return null;
+    }
+    public void removeItem(int index){
+        if(index >= 0 && index < inventory.size())
+        inventory.remove(index);
+    }
+    public void setName(String name){
+        this.name = name;
+    }
+    public String getName(){
+        return this.name;
+    }
+
+    public int getHp(){
+        return hp;
+    }
+
+    public void setHp(int hp){
+        this.hp += hp;
+    }
+
+    public int getDamageMultiplier(){
+        return damageMultiplier;
+    }
+    public void resetDamageMultiplier() {
+        this.damageMultiplier = 1;
+        System.out.println(name + " damage multiplier reset to 1");
+    }
+    public void setDamageMultiplier(int newDamage)   {
+        this.damageMultiplier = newDamage;
+    }
+  }

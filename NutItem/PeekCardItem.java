@@ -1,0 +1,23 @@
+package NutItem;
+
+import Nut1.Card1;
+import Nut1.Game;
+import Nut1.Item;
+
+
+public class PeekCardItem extends Item {
+    public PeekCardItem(){
+        super("PeekCard");
+    }
+    @Override
+    public void use(Game game){
+        if(game.getDeck() != null && !game.getDeck().isEmpty()) {
+            Card1 c = game.getDeck().peekTop();
+            System.out.println(c.getClass().getSimpleName());
+        }
+        }
+    }
+
+
+
+
