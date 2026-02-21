@@ -212,8 +212,7 @@ public class GameScreen extends UIScreen {
              if ( count > lastCardCount) {
                 ShowCardindeck(state.getDeck());
             }
-            
-lastCardCount
+            lastCardCount = count;
             
             String turnText = state.isP1Turn() ? "P1 Turn" : "P2 Turn";
             centerZone.setText("<html><center>" + turnText + "<br>Cards: " + count + "</center></html>");
