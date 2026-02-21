@@ -44,7 +44,7 @@ public class UIManager {
     }
     public void onTargetSelected(boolean isSelf){
         if(game != null){
-
+            
             game.setTargetSelf(isSelf);
             activeScreen.render(game);
         }

@@ -5,6 +5,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import javax.swing.*;
+
+import org.w3c.dom.events.MouseEvent;
+
 import src.NutItem.Item;
 
 public class GameScreen extends UIScreen {
@@ -12,15 +15,14 @@ public class GameScreen extends UIScreen {
     private PlayerPanel redZone; 
     private ImageIcon pleft;
     private ImageIcon pright;
-    private ImageIcon damageleft;
-    private ImageIcon damageright;
+    private ImageIcon selectleft;
+    private ImageIcon selectright;
     private JLabel centerZone;   
     private JLabel labelItem = new JLabel("", SwingConstants.CENTER);
     private JLabel selectCardtext = new JLabel("", SwingConstants.CENTER);
     private String msgItem= "";
-    private JButton selfbutton;
-    
-    private JButton enemyButton;
+    private JLabel selfbutton;
+    private JLabel enemyButton;
     private JButton[] p1Item = new JButton[6];
     private JButton[] p2Item = new JButton[6];
 
@@ -53,6 +55,7 @@ public class GameScreen extends UIScreen {
     public GameScreen(UIManager ui) {
         super(ui);
         this.setLayout(null); 
+        this.setBackground(Color.BLACK);
         this.setPreferredSize(new Dimension(setWidth, setHeight));
 
         Imagemanager bgPanel = new Imagemanager(); 
@@ -68,8 +71,8 @@ public class GameScreen extends UIScreen {
         pleft = new ImageIcon(getClass().getResource("/image/pLeft.png"));
         pright = new ImageIcon(getClass().getResource("/image/pRight.png"));
 
-        damageleft = new  ImageIcon(getClass().getResource("/image/pLeftD.png"));
-        damageright = new  ImageIcon(getClass().getResource("/image/pRightD.png"));
+        selectleft = new  ImageIcon(getClass().getResource("/image/selectpLeft.png"));
+        selectright = new  ImageIcon(getClass().getResource("/image/selectpRight.png"));
         
         lp.setBounds(0, 0, setWidth, setHeight);
         blueZone = new PlayerPanel(0, 0, setWidth / 2, setHeight);
@@ -96,19 +99,34 @@ public class GameScreen extends UIScreen {
         cutscene.addMouseListener(btnEmpty);
         cutscene.addMouseMotionListener(btnEmpty);
 
-        selfbutton = new JButton(pleft);
-        btnTransparent(selfbutton);
-    
-        enemyButton = new JButton(pright);
-        btnTransparent(enemyButton);
+        selfbutton = new JLabel(); 
+        btnTransparent(selfbutton, "pLeft"); 
 
-        selfbutton.addActionListener(e -> ui.onTargetSelected(true));
-        enemyButton.addActionListener(e -> ui.onTargetSelected(false));
-        
-    
-            centerZone.addMouseListener(new java.awt.event.MouseAdapter() {
+        enemyButton = new JLabel();
+        btnTransparent(enemyButton, "pRight");
+
+        selfbutton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent e) {
                 if(SwingUtilities.isLeftMouseButton(e)){
+                   ui.onTargetSelected(true);
+                 
+                }
+            }
+        });
+
+        enemyButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent e) {
+                if(SwingUtilities.isLeftMouseButton(e)){
+                   ui.onTargetSelected(false);
+                }
+            }
+        });
+        
+    
+        centerZone.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent e) {
+                if(SwingUtilities.isLeftMouseButton(e)){
+                    
                     ui.onDeckClicked();
                     showBgblack();
               
@@ -161,14 +179,14 @@ public class GameScreen extends UIScreen {
             redZone.refreshFromGame(p2.getHp(),p2.getName());
         }
         if(state.isTargetSelf()){
-            // selfbutton.setBackground(Color.green);
-            // enemyButton.setBackground(Color.black);
+            selfbutton.setBackground(Color.green);
+            enemyButton.setBackground(Color.black);
         }else{
             selfbutton.setIcon(pleft);
-            enemyButton.setIcon(damageright);
+            enemyButton.setIcon(selectright);
         }
         if(state.isTargetSelf()){
-            selfbutton.setIcon(damageleft);
+            selfbutton.setIcon(selectleft);
             enemyButton.setIcon(pright);
             
         }else{
@@ -193,19 +211,20 @@ public class GameScreen extends UIScreen {
             int baseY = (h / 2) -100;
             int leftX = (w / 2) - 750;
             int rightX = (w / 2) + 500;
+
             if(state.isP1Turn()){
                 selfbutton.setBounds(leftX, baseY, 250, 400);
-                selfbutton.setText("Self (P1)");
+                // selfbutton.setText("Self (P1)");
 
                 enemyButton.setBounds(rightX, baseY, 250 , 400);
-                enemyButton.setText("Enemy (P2)");
+                // enemyButton.setText("Enemy (P2)");
                 centerZone.setBackground(Color.CYAN);
             }else{
                 selfbutton.setBounds(leftX, baseY, 250, 400);
-                selfbutton.setText("Self (P2)");
+                // selfbutton.setText("Self (P2)");
 
                 enemyButton.setBounds(rightX, baseY, 250, 400);
-                enemyButton.setText("Enemy (P1)");  
+                // enemyButton.setText("Enemy (P1)");  
                 centerZone.setBackground(Color.pink);
             }
         }
@@ -255,20 +274,22 @@ public class GameScreen extends UIScreen {
         }
     }
 
+   
     public void setMsgItem(String text,int duration){
-        // if (msgTimer != null && msgTimer.isRunning()) msgTimer.stop();
-        // if (animTimer != null && animTimer.isRunning()) animTimer.stop();
+        if(msgTimer != null && msgTimer.isRunning()){
+            msgTimer.stop();
+        }
+
         this.msgItem = text;
         labelItem.setText(msgItem);
-        labelItem.repaint();
-        lp.repaint();
+
         msgTimer = new Timer(1000*duration, e -> {
             labelItem.setText(""); 
-        
         });
         msgTimer.setRepeats(false);
         msgTimer.start();
     }
+
 
     public void animtext(String text){
         // if (animTimer != null && animTimer.isRunning()) animTimer.stop();
@@ -317,14 +338,13 @@ public class GameScreen extends UIScreen {
         timer.start();
     }
 
-    private void btnTransparent(JButton btn) {
-        btn.setOpaque(false);
-        btn.setContentAreaFilled(false);
-        btn.setBorderPainted(false);
-        btn.setMargin(new java.awt.Insets(0, 0, 0, 0));
-        btn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+  private void btnTransparent(JLabel btn, String defaultIconPath) {
+
+
+    ImageIcon defaultIcon = new ImageIcon(getClass().getResource("/image/" + defaultIconPath + ".png"));
+    btn.setIcon(defaultIcon);
+
 }
-  
 }
 
 
