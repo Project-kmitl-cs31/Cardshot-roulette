@@ -12,10 +12,8 @@ public abstract class Card1 {
         this.type = type;
     }
 
-    // ใช้กับตัวเอง (เช่น เก็บไว้ / เปิดใช้) , RulesEngine rules
     public abstract void resolveKept(Player player);
 
-    // ใช้กับเป้าหมาย (เช่น โจมตี) RulesEngine rules
     public abstract void resolveTargeted(
             Player attacker,
             Player defender

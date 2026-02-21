@@ -24,6 +24,7 @@ public class MainmenuScreen extends UIScreen{
         btnStart.setBounds((w/2) - 100 , (h/2) + 50 , 200 , 60);
         btnStart.setFont(new Font("Arial", Font.BOLD,24));
         btnStart.setBackground(Color.GREEN);
+        
         btnStart.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e){

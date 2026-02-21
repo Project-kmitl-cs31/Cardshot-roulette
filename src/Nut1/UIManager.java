@@ -1,6 +1,7 @@
 package src.Nut1;
 
 import javax.swing.JFrame;
+import javax.swing.Timer;
 
 public class UIManager {
     private Game game;
@@ -14,6 +15,7 @@ public class UIManager {
         window.setResizable(false);
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         window.setLayout(null);
+        window.setVisible(true);
         window.setLocationRelativeTo(null);
     }
 
@@ -29,25 +31,37 @@ public class UIManager {
         window.setVisible(true);
     
     }
-     
-    public void openItemSelect(){
-
+    
+    public GameScreen getGameScreen() {
+    if (activeScreen instanceof GameScreen) {
+        return (GameScreen) activeScreen;
     }
+    return null;
+}
+     
     public void showRoundTransition(int roundNo){
 
     }
     public void onTargetSelected(boolean isSelf){
         if(game != null){
+
             game.setTargetSelf(isSelf);
             activeScreen.render(game);
         }
     }
     public void onDeckClicked(){
         if(game != null){
+        
+        Timer timer = new Timer(1200, e -> {
             game.PlayerdrawCard();
             activeScreen.render(game);
+        });
+        
+        timer.setRepeats(false);
+        timer.start();
         }
     }
+    
     public void openMainMenu(){
         MainmenuScreen menu = new MainmenuScreen(this);
         this.activeScreen = menu;
@@ -65,18 +79,20 @@ public class UIManager {
         window.repaint();
         window.setVisible(true);
     }
+
     public void restartGame(){
         Game newGame = new Game();
         this.bindGame(newGame);
         newGame.setUIManager(this);
         this.openGameScreen();
     }
+
     public void onItemClicked(int index){
         if(game != null){
             game.PlayItem(index);
             activeScreen.render(game);
         }
     }
- 
+
     
 }

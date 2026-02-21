@@ -1,4 +1,5 @@
 package src.Nut1;
+
 import src.NutItem.*; 
 
 public class Game {
@@ -30,17 +31,20 @@ public class Game {
         Player opponentPlayer = isP1Turn ? enemy : p;
         Player targetPlayer = this.targetSelf ? currentPlayer : opponentPlayer;
 
-        System.out.println(currentPlayer.getName()+ "'s Turn is drawing...");
+        // System.out.println(currentPlayer.getName()+ "'s Turn is drawing...");
         
         Card1 card = deck.drawTop();
-        if (card == null) return;
+        if (card == null) return;   
+        
+        ui.getGameScreen().animtext("This card is... "+card.getName());
 
-        if(card instanceof AttackCard){
+            if(card instanceof AttackCard){
             ((AttackCard) card).resolveTargeted(currentPlayer, targetPlayer);
-            
+             
+   
             if(targetPlayer.getHp() <= 0){
                 String winner = (targetPlayer == p) ? enemy.getName() : p.getName();
-                System.out.println("GAME OVER! Winner is " + winner);
+                // System.out.println("GAME OVER! Winner is " + winner);
                 if(ui != null){
                     ui.openGameOverSceen(winner); 
                 }
@@ -48,26 +52,29 @@ public class Game {
             }
             switchTurn();
         }
-        else if(card instanceof ManaCard){
-            System.out.println("Mana Card Used");
+        else if(card instanceof BlankCard){
+
             if(!targetSelf){
                 switchTurn();
-            } else {
-                System.out.println("Continue playing (Self Target)");
             }
+
         }
         if(deck.isEmpty()){
+            
             deck.generate();
             refillItem(p);
             refillItem(enemy);
-            
         }
+
+ 
+       
+        
     }
  
     private void switchTurn(){
         isP1Turn = !isP1Turn;
         Player currentPlayer = isP1Turn ? p : enemy;
-        System.out.println("Now it is " + (isP1Turn ? p.getName() : enemy.getName()) + "'s Turn");
+    //    ui.getGameScreen().animtext("Now it is " + (isP1Turn ? p.getName() : enemy.getName()) + "'s Turn");
         if (currentPlayer.checkAndClearLock()) {
             System.out.println("!!! " + currentPlayer.getName() + " is LOCKED! Skip turn !!!");
             switchTurn(); 
@@ -81,22 +88,42 @@ public class Game {
         refillItem(this.enemy);
     }
 
-    public Player getPlayer(){ return this.p; }
-    public Player getEnemy(){ return this.enemy; }
-    public CentralDeck getDeck(){ return this.deck; }
+    public Player getPlayer(){ 
+        return this.p; 
+    }
+
+    public Player getOpposingP(){ 
+        return this.enemy; 
+    }
+    public CentralDeck getDeck(){ 
+        return this.deck; 
+    }
     
-    public void setTargetSelf(boolean isSelf){ this.targetSelf = isSelf; }
-    public boolean isTargetSelf(){ return targetSelf; }
+    public void setTargetSelf(boolean isSelf){ 
+        this.targetSelf = isSelf; 
+    }
+    public boolean isTargetSelf(){ 
+        return targetSelf; 
+    }
     
-    public void setUIManager(UIManager ui){ this.ui = ui; }
-    public boolean isP1Turn(){ return isP1Turn; }
+    public void setUIManager(UIManager ui){ 
+        this.ui = ui; 
+    }
+    public UIManager getUIManager(){ 
+        return this.ui;
+    }
+
+    public boolean isP1Turn(){ 
+        return isP1Turn; 
+    }
     
     public Player getCurrentPlayer(){
         return isP1Turn ? p : enemy;
     }
+    
 
     private Item getRandomItem(){
-        int rand = (int)(Math.random() * 6); 
+        int rand = (int)(Math.random() * 7); 
         switch (rand){
             case 0: return new DoubleDamageItem(); 
             case 1: return new HealthPotionItem();
@@ -104,14 +131,14 @@ public class Game {
             case 3: return new CutCardItem(); 
             case 4: return new LockTurnItem();
             case 5: return new SwapCardItem();
+            case 6: return new StealItemRng();
             default: return new HealthPotionItem();
 
         }
     }
 
     public void refillItem(Player targetPlayer){
-        System.out.println("Refilling items for " + targetPlayer.getName());
-        while(targetPlayer.getItemCount() < 2){
+        for(int i=0;i<2;i++){
             Item newItem = getRandomItem();
             targetPlayer.addItem(newItem);
             System.out.println(" - Got: " + newItem.getName());
@@ -128,4 +155,5 @@ public class Game {
             currentPlayer.removeItem(index);
         }
     }
+
 }

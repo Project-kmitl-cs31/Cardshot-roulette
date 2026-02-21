@@ -29,7 +29,7 @@ public class Player {
   
     
     public boolean canAct() {
-        // สามารถเล่นได้ถ้าไม่ติด LockedTurn และยังมีชีวิตอยู่
+
         return lockedTurns <= 0 && hp > 0;
     }
 
@@ -46,32 +46,14 @@ public class Player {
         return items.get(0);
     }
 
-    // public void UseItem(Object o){
-    //     if(items.isEmpty()) return;
-    //     this.curItem = null;
-    //     for(Item item01 : items){
-    //         System.out.println(o);
-    //         System.out.println(item01);
-    //         if(item01.equals(o)){
-    //             System.out.println("333");
-    //             this.curItem = item01;
-    //             break;
-    //         }
-    //     }
-    //     if(this.curItem != null){
-    //         this.curItem.applyEffect(ctx);
-    //         this.curItem = null;
-    //     }
-        
-    // }
 
     public void endTurn() {
         System.out.println(name + " ends turn.");
     }
 
-    public void addMana(int amount) {
-        this.mana += amount;
-    }
+    // public void addMana(int amount) {
+    //     this.mana += amount;
+    // }
 
     public void takeDamage(int amount) {
         if (amount < 0) return;
@@ -100,60 +82,65 @@ public class Player {
         }
     }
 
-    public boolean useMana(int cost) {
-        if (this.mana >= cost) {
-            this.mana -= cost;
-            return true;
-        }
-        System.out.println("Not enough mana!");
-        return false;
-    }
+    // public boolean useMana(int cost) {
+    //     if (this.mana >= cost) {
+    //         this.mana -= cost;
+    //         return true;
+    //     }
+    //     System.out.println("Not enough mana!");
+    //     return false;
+    // }
 
     public void addDamageMultiplier(int mult, boolean forNextCard) {
         this.damageMultiplier *= mult;
         System.out.println(name + " damage multiplier is now x" + this.damageMultiplier);
     }
 
-    // --- Getters / Setters เพิ่มเติมเพื่อให้ Item Class อื่นๆ ทำงานได้ ---
     
-    public int getMana() { return mana; }
+    // public int getMana() { return mana; }
+
+    public int getLockedTurns() {
+         return lockedTurns; 
+        }
+
+    public void setLockedTurns(int lockedTurns) { 
+        this.lockedTurns = lockedTurns; 
+    }
     
-    // สำหรับ LockTurnItem
-    public int getLockedTurns() { return lockedTurns; }
-    public void setLockedTurns(int lockedTurns) { this.lockedTurns = lockedTurns; }
-    
-    // Helper สำหรับ StealItem (เพื่อให้ขโมยของได้จริง)
-  //  public Item removeRandomItem(Item item) {
-    //    if (items.isEmpty()) return null;
-      //  for(int i =0;i<items.size();i++){
-        //    if(items.get(i).getId().equals(item.getId())){
-          //      items.remove(i);
-            //    return item;
-           // }
-       // }
-        //return null;
-   // }
-    
+
+
     public void addItem(Item item) {
-        if (inventory.size() < 2) {
+        if (inventory.size() < 7 ) {
             inventory.add(item);
+            System.out.println("My Items1 : "+inventory);            
+        }else{
+            System.out.println("Cant add Item");
         }
     }
+
     public int getItemCount() {
         return inventory.size();
     }
+
     public Item getItem(int index){
-        if(index >= 0 && index < inventory.size())
-        return inventory.get(index);
+        if(index >= 0 && index < inventory.size()){
+             return inventory.get(index);
+        }
         return null;
     }
+
     public void removeItem(int index){
-        if(index >= 0 && index < inventory.size())
-        inventory.remove(index);
+        if(index >= 0 && index < inventory.size()){
+            inventory.remove(index);
+            System.out.println("My Items2 : "+inventory);
+        }
+     
     }
+
     public void setName(String name){
         this.name = name;
     }
+
     public String getName(){
         return this.name;
     }
@@ -176,9 +163,11 @@ public class Player {
     public void setDamageMultiplier(int newDamage)   {
         this.damageMultiplier = newDamage;
     }
+
     public void lockTurn() {
         this.isLockedNextTurn = true; 
     }
+
     public boolean checkAndClearLock() {
         if (this.isLockedNextTurn) {
             this.isLockedNextTurn = false; 

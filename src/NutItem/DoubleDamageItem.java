@@ -1,6 +1,5 @@
 package src.NutItem;
 import src.Nut1.Game;
-
 import src.Nut1.Player;
 
 public class DoubleDamageItem extends Item {

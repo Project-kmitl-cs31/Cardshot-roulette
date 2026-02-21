@@ -8,8 +8,5 @@ public class test {
         game.setUIManager(uiManager);
         uiManager.openMainMenu();
 
-        // CentralDeck cn = new CentralDeck();
-        // cn.generate(5-1);
-        // cn.cutTop();
     }
 }

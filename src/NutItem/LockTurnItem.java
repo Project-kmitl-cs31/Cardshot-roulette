@@ -9,7 +9,7 @@ public class LockTurnItem extends Item {
 
     @Override
     public void use(Game game) {
-        Player opponent = game.isP1Turn() ? game.getEnemy() : game.getPlayer();
+        Player opponent = game.isP1Turn() ? game.getOpposingP() : game.getPlayer();
 
         opponent.lockTurn(); 
         
