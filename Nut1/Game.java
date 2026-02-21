@@ -1,5 +1,6 @@
 package Nut1;
 import NutItem.*;
+
 public class Game {
     private Player p;
     private Player enemy;
@@ -7,6 +8,7 @@ public class Game {
     private boolean isP1Turn = true ;
     private boolean targetSelf = true;
     private UIManager ui;
+    private String actionMessage = "Game Started! Choose your action.";
      
     public Game(){
         this.p = new Player(6); 
@@ -18,7 +20,26 @@ public class Game {
         refillItem(this.p);
         refillItem(this.enemy);
     }
+    public String getActionMessage(){
+        return this.actionMessage;
+    }
 
+    private boolean checkGameOver() {
+        if (p.getHp() <= 0) {
+            System.out.println("GAME OVER! Winner is " + enemy.getName());
+            if (ui != null) {
+                ui.openGameOverSceen(enemy.getName()); 
+            }
+            return true; 
+        } else if (enemy.getHp() <= 0) {
+            System.out.println("GAME OVER! Winner is " + p.getName());
+            if (ui != null) {
+                ui.openGameOverSceen(p.getName()); 
+            }
+            return true; 
+        }
+        return false; 
+    }
     
     public void PlayerdrawCard(){
         if(deck.isEmpty()){
@@ -35,20 +56,17 @@ public class Game {
         if (card == null) return;
 
         if(card instanceof AttackCard){
+            this.actionMessage = currentPlayer.getName() + " played an ATTACK Card!";
             ((AttackCard) card).resolveTargeted(currentPlayer, targetPlayer);
             
-            if(targetPlayer.getHp() <= 0){
-                String winner = (targetPlayer == p) ? enemy.getName() : p.getName();
-                System.out.println("GAME OVER! Winner is " + winner);
-                if(ui != null){
-                    ui.openGameOverSceen(winner); 
-                }
-                return;
+            if (checkGameOver()) {
+                return; 
             }
+            
             switchTurn();
         }
         else if(card instanceof ManaCard){
-            System.out.println("Mana Card Used");
+            this.actionMessage = currentPlayer.getName() + " played an BLANK Card";
             if(!targetSelf){
                 switchTurn();
             } else {
@@ -75,15 +93,28 @@ public class Game {
         refillItem(this.enemy);
     }
 
-    public Player getPlayer(){ return this.p; }
-    public Player getEnemy(){ return this.enemy; }
-    public CentralDeck getDeck(){ return this.deck; }
+    public Player getPlayer(){
+         return this.p; 
+    }
+    public Player getEnemy(){ 
+        return this.enemy; 
+    }
+    public CentralDeck getDeck(){ 
+        return this.deck; 
+    }
     
-    public void setTargetSelf(boolean isSelf){ this.targetSelf = isSelf; }
-    public boolean isTargetSelf(){ return targetSelf; }
-    
-    public void setUIManager(UIManager ui){ this.ui = ui; }
-    public boolean isP1Turn(){ return isP1Turn; }
+    public void setTargetSelf(boolean isSelf){ 
+        this.targetSelf = isSelf; 
+    }
+    public boolean isTargetSelf(){
+         return targetSelf; 
+    }
+    public void setUIManager(UIManager ui){
+         this.ui = ui;
+    }
+    public boolean isP1Turn(){ 
+        return isP1Turn; 
+    }
     
     public Player getCurrentPlayer(){
         return isP1Turn ? p : enemy;
@@ -116,9 +147,13 @@ public class Game {
         Item item = currentPlayer.getItem(index);
 
         if(item != null){
-            System.out.println(currentPlayer.getName() + " uses " + item.getName());
+            this.actionMessage = currentPlayer.getName() + " uses "+ item.getName();
             item.use(this);
             currentPlayer.removeItem(index);
+            
+            if (checkGameOver()) {
+                return; 
+            }
         }
     }
 }

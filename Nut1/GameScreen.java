@@ -14,6 +14,7 @@ public class GameScreen extends UIScreen {
     private JButton p2Item1, p2Item2;
     private JLabel bgImage;
     private JButton btnDrawCard; 
+    private JLabel lblAciton;
 
     public GameScreen(UIManager ui) {
         super(ui);
@@ -25,7 +26,7 @@ public class GameScreen extends UIScreen {
 
        
         centerZone = new JLabel("", SwingConstants.CENTER);
-        centerZone.setFont(new Font("Arial", Font.BOLD, 24));
+        centerZone.setFont(new Font("Monospaced", Font.BOLD, 24));
         centerZone.setForeground(Color.WHITE);
         centerZone.setBounds((setWidth/2) - 150, (setHeight/2) - 250, 300, 100);
 
@@ -95,8 +96,16 @@ public class GameScreen extends UIScreen {
         lp.add(blueZone, Integer.valueOf(2));
         lp.add(redZone, Integer.valueOf(2));
 
+        lblAciton = new JLabel("Game Started!", SwingConstants.CENTER);
+        lblAciton.setFont(new Font("Monospaced", Font.BOLD, 40));
+        lblAciton.setForeground(Color.green);
+        lblAciton.setBounds(0 , 100 ,setWidth , 50);
+        lp.add(lblAciton , Integer.valueOf(3));
+
         this.add(lp);
         this.setBounds(0, 0, setWidth, setHeight);
+
+        
     }
 
     @Override
@@ -128,6 +137,9 @@ public class GameScreen extends UIScreen {
                 selfbutton.setBounds((sz.width/2) + 120, buttonY, 130, 50);
                 enemyButton.setBounds((sz.width/2) - 250, buttonY, 130, 50);
             }
+        }
+        if(state != null){
+            lblAciton.setText(state.getActionMessage());
         }
 
         updateItemButton(p1Item1, state.getPlayer(), 0);

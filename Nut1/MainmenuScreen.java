@@ -22,8 +22,7 @@ public class MainmenuScreen extends UIScreen{
         lp.setBounds(0,0,w,h);
         btnStart = new JButton("START GAME");
         btnStart.setBounds((w/2) - 100 , (h/2) + 50 , 200 , 60);
-        btnStart.setFont(new Font("Arial", Font.BOLD,24));
-        btnStart.setBackground(Color.GREEN);
+        styleButton(btnStart);
         btnStart.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e){
@@ -32,9 +31,7 @@ public class MainmenuScreen extends UIScreen{
         });
         btnExit = new JButton("EXIT");
         btnExit.setBounds((w/2)- 100, (h/2) + 130 , 200, 60);
-        btnExit.setFont(new Font("Arial", Font.BOLD, 24));
-        btnExit.setBackground(Color.RED);
-        btnExit.setForeground(Color.WHITE);
+        styleButton(btnExit);
         btnExit.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e){
@@ -66,5 +63,19 @@ public class MainmenuScreen extends UIScreen{
     @Override
     public void render(Game state) {
        
+    }
+    private void styleButton(JButton btn){
+        btn.setFocusPainted(false);
+        btn.setContentAreaFilled(false);
+        btn.setOpaque(true);
+
+        btn.setBackground(new Color(30,30,30));
+        btn.setForeground(new Color(255 , 215 , 0));
+        btn.setFont(new Font("DialogInput", Font.BOLD , 24));
+        btn.setBorder(BorderFactory.createCompoundBorder(
+            BorderFactory.createLineBorder(new Color(218 , 165 , 32), 3),
+            BorderFactory.createEmptyBorder(10, 20 , 10 ,20)
+        ));
+        btn.setCursor(new Cursor(Cursor.HAND_CURSOR));
     }
 }

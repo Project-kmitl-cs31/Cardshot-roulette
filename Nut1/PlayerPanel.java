@@ -14,7 +14,7 @@ public class PlayerPanel extends JPanel {
 
         hpLabel = new JLabel("HP: ???");
         hpLabel.setForeground(Color.WHITE);
-        hpLabel.setFont(new Font("Arial", Font.BOLD, 24));
+        hpLabel.setFont(new Font("Monospaced", Font.BOLD, 24));
         hpLabel.setBounds(400, 10, 200, 50);
         this.add(hpLabel);
         
