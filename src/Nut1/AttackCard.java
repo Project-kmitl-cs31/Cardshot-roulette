@@ -22,7 +22,7 @@ public class AttackCard extends Card1 {
         int totalDamage =  baseDamage*attacker.getDamageMultiplier();
         
 
-        System.out.println("DEBUG: Attacking with damage: " + totalDamage);
+        // System.out.println("DEBUG: Attacking with damage: " + totalDamage);
         defender.takeDamage(totalDamage);
         attacker.resetDamageMultiplier();
     }

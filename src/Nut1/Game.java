@@ -22,7 +22,7 @@ public class Game {
     }
 
     
-    public void PlayerdrawCard(){
+      public void PlayerdrawCard(){
         if(deck.isEmpty()){
             deck.generate();
         }
@@ -31,17 +31,16 @@ public class Game {
         Player opponentPlayer = isP1Turn ? enemy : p;
         Player targetPlayer = this.targetSelf ? currentPlayer : opponentPlayer;
 
-        // System.out.println(currentPlayer.getName()+ "'s Turn is drawing...");
+        
         
         Card1 card = deck.drawTop();
-        if (card == null) return;   
-        
         ui.getGameScreen().animtext("This card is... "+card.getName());
+    
+        if (card == null) return;
 
-            if(card instanceof AttackCard){
+        if(card instanceof AttackCard){
             ((AttackCard) card).resolveTargeted(currentPlayer, targetPlayer);
-             
-   
+            
             if(targetPlayer.getHp() <= 0){
                 String winner = (targetPlayer == p) ? enemy.getName() : p.getName();
                 // System.out.println("GAME OVER! Winner is " + winner);
@@ -53,28 +52,25 @@ public class Game {
             switchTurn();
         }
         else if(card instanceof BlankCard){
-
+    
             if(!targetSelf){
                 switchTurn();
+            } else{
+                ui.getGameScreen().setMsgItem(targetPlayer.getName()+" turn continues.", 3);
             }
-
         }
         if(deck.isEmpty()){
-            
             deck.generate();
             refillItem(p);
             refillItem(enemy);
+            
         }
-
- 
-       
-        
     }
- 
+
     private void switchTurn(){
         isP1Turn = !isP1Turn;
         Player currentPlayer = isP1Turn ? p : enemy;
-    //    ui.getGameScreen().animtext("Now it is " + (isP1Turn ? p.getName() : enemy.getName()) + "'s Turn");
+        System.out.println("Now it is " + (isP1Turn ? p.getName() : enemy.getName()) + "'s Turn");
         if (currentPlayer.checkAndClearLock()) {
             System.out.println("!!! " + currentPlayer.getName() + " is LOCKED! Skip turn !!!");
             switchTurn(); 
