@@ -10,9 +10,10 @@ import src.NutItem.Item;
 public class GameScreen extends UIScreen {
     private PlayerPanel blueZone; 
     private PlayerPanel redZone; 
-    private ImageIcon iconblue;
-    private ImageIcon iconred;
-    private ImageIcon teste;
+    private ImageIcon pleft;
+    private ImageIcon pright;
+    private ImageIcon damageleft;
+    private ImageIcon damageright;
     private JLabel centerZone;   
     private JLabel labelItem = new JLabel("", SwingConstants.CENTER);
     private JLabel selectCardtext = new JLabel("", SwingConstants.CENTER);
@@ -64,9 +65,11 @@ public class GameScreen extends UIScreen {
         setUpPlayerItem(p2Item,1);
 
 
-        iconblue = new ImageIcon(getClass().getResource("/image/player.png"));
-        iconred = new ImageIcon(getClass().getResource("/image/player.png"));
-        teste = new  ImageIcon(getClass().getResource("/image/healthitem.png"));
+        pleft = new ImageIcon(getClass().getResource("/image/pLeft.png"));
+        pright = new ImageIcon(getClass().getResource("/image/pRight.png"));
+
+        damageleft = new  ImageIcon(getClass().getResource("/image/pLeftD.png"));
+        damageright = new  ImageIcon(getClass().getResource("/image/pRightD.png"));
         
         lp.setBounds(0, 0, setWidth, setHeight);
         blueZone = new PlayerPanel(0, 0, setWidth / 2, setHeight);
@@ -93,10 +96,10 @@ public class GameScreen extends UIScreen {
         cutscene.addMouseListener(btnEmpty);
         cutscene.addMouseMotionListener(btnEmpty);
 
-        selfbutton = new JButton(iconblue);
+        selfbutton = new JButton(pleft);
         btnTransparent(selfbutton);
     
-        enemyButton = new JButton(iconred);
+        enemyButton = new JButton(pright);
         btnTransparent(enemyButton);
 
         selfbutton.addActionListener(e -> ui.onTargetSelected(true));
@@ -161,12 +164,12 @@ public class GameScreen extends UIScreen {
             // selfbutton.setBackground(Color.green);
             // enemyButton.setBackground(Color.black);
         }else{
-            selfbutton.setIcon(iconblue);
-            enemyButton.setIcon(teste);
+            selfbutton.setIcon(pleft);
+            enemyButton.setIcon(damageright);
         }
         if(state.isTargetSelf()){
-            selfbutton.setIcon(teste);
-            enemyButton.setIcon(iconred);
+            selfbutton.setIcon(damageleft);
+            enemyButton.setIcon(pright);
             
         }else{
             // selfbutton.setBackground(Color.black);
@@ -306,7 +309,6 @@ public class GameScreen extends UIScreen {
     public void showBgblack(){
         lp.add(cutscene,Integer.valueOf(3));
         lp.repaint(); 
-    
         Timer timer = new Timer(3200, e -> {
             lp.remove(cutscene); 
             lp.repaint();     
