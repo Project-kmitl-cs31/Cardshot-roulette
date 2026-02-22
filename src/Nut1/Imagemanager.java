@@ -26,7 +26,7 @@ public class Imagemanager extends JPanel{
     
 
 
-        backgroundImage = new ImageIcon(getClass().getResource("/image/bg.png"));
+        backgroundImage = new ImageIcon(getClass().getResource("/image/bg.jpg"));
 
         java.awt.Image bgImage = backgroundImage.getImage();
         java.awt.Image fixedscaleBg = bgImage.getScaledInstance(setWidth, setHeight, java.awt.Image.SCALE_SMOOTH);
@@ -39,11 +39,11 @@ public class Imagemanager extends JPanel{
         Table = new ImageIcon(getClass().getResource("/image/table.png"));
         
         Image tableImage = Table.getImage();
-        Image fixedscaletable = tableImage.getScaledInstance(setWidth-500, setHeight+100, Image.SCALE_SMOOTH);
+        Image fixedscaletable = tableImage.getScaledInstance(setWidth-550, setHeight-300, Image.SCALE_SMOOTH);
 
         ImageIcon scaledIcon = new ImageIcon(fixedscaletable);
         tableImg = new JLabel(scaledIcon);
-        tableImg.setBounds(0, (setHeight / 2) -350, setWidth, setHeight);
+        tableImg.setBounds(0, (setHeight / 2) -250, setWidth, setHeight-200);
         System.out.print(setWidth);
         System.out.print(setHeight);
         bgImg.add(tableImg);

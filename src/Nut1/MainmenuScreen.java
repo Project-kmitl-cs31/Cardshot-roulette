@@ -42,7 +42,7 @@ public class MainmenuScreen extends UIScreen{
                 System.exit(0);
             }
         });
-        ImageIcon icon = new ImageIcon("War.png");
+        ImageIcon icon = new ImageIcon("image/War.png");
         Image img = icon.getImage().getScaledInstance(w, h, Image.SCALE_SMOOTH);
         icon = new ImageIcon(img);
         bgImage = new JLabel(icon);

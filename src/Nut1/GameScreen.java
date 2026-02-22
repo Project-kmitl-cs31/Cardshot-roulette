@@ -5,7 +5,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import javax.swing.*;
-
 import src.NutItem.Item;
 
 public class GameScreen extends UIScreen {
@@ -77,7 +76,7 @@ public class GameScreen extends UIScreen {
         centerZone = new JLabel("CENTER", SwingConstants.CENTER);
         centerZone.setBackground(Color.GREEN);
         centerZone.setOpaque(true);
-        centerZone.setBounds((setWidth / 2) - 150, (setHeight / 2) - 150, 300, 300);
+        centerZone.setBounds((setWidth / 2) - 150, (setHeight / 2)-70, 300, 300);
 
         labelItem.setBounds((setWidth / 2) - 200, (setHeight / 2) - 450, 400, 300);
         labelItem.setForeground(Color.YELLOW);
@@ -163,12 +162,12 @@ public class GameScreen extends UIScreen {
 
         Player p1 = state.getPlayer();
         if (p1 != null) {
-            blueZone.refreshFromGame(p1.getHp(), p1.getName());
+            blueZone.refreshFromGame(p1.getHp(), p1.getName(),"l");
         }
 
         Player p2 = state.getOpposingP();
         if (p2 != null) {
-            redZone.refreshFromGame(p2.getHp(), p2.getName());
+            redZone.refreshFromGame(p2.getHp(), p2.getName(),"r");
 
         }
         int baseY = (setHeight / 2) - 100;
@@ -188,14 +187,9 @@ public class GameScreen extends UIScreen {
                 enemyButton.setIcon(selectright);   
             }
             centerZone.setBackground(Color.CYAN);
-
         } else {
- 
-   
             selfbutton.setBounds(rightX, baseY, 250, 400);
             enemyButton.setBounds(leftX, baseY, 250, 400);
-
-       
             if (isTargetSelf) {
                 selfbutton.setIcon(selectright);    
                 enemyButton.setIcon(pleft);        
@@ -266,10 +260,10 @@ public class GameScreen extends UIScreen {
             int index = j;
 
             int setNewX = pos != 1 ? 450 : 1100;
-            int setNewY = baseY + (index * 60);
+            int setNewY = baseY + (index * 150);
             if (index % 2 == 0) {
                 setNewX = setNewX - 110;
-                setNewY = baseY + (60 * (index + 1) - 1);
+                setNewY = baseY + (150 * (index + 1) - 1);
             }
 
             btn[index] = new JButton("Empty");
