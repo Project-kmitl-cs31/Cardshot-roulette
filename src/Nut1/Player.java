@@ -59,7 +59,7 @@ public class Player {
         if (amount < 0) return;
         this.hp -= amount;
         if (this.hp < 0) this.hp = 0;
-        System.out.println(name + " took " + amount + " damage. HP: " + hp);
+        // System.out.println(name + " took " + amount + " damage. HP: " + hp);
     }
 
     protected void heal(int amount,int manaCost) {
@@ -67,17 +67,16 @@ public class Player {
         if(this.mana < manaCost) return;
         this.hp += amount;
         this.mana -= manaCost;
-        System.out.println(name + " healed " + amount + " HP. Current HP: " + hp);
-        System.out.println("my mana :"+this.mana);
+        // System.out.println(name + " healed " + amount + " HP. Current HP: " + hp);
     }
 
     public void grantItems(List<Item> newItems) {
         for (Item item : newItems) {
             if (this.items.size() < MAX_ITEMS) {
                 this.items.add(item);
-                System.out.println(name + " got item: " + item.getName());
+                // System.out.println(name + " got item: " + item.getName());
             } else {
-                System.out.println("Inventory Full! Cannot add: " + item.getName());
+                // System.out.println("Inventory Full! Cannot add: " + item.getName());
             }
         }
     }
@@ -112,9 +111,9 @@ public class Player {
     public void addItem(Item item) {
         if (inventory.size() < 7 ) {
             inventory.add(item);
-            System.out.println("My Items1 : "+inventory);            
+            // System.out.println("My Items1 : "+inventory);            
         }else{
-            System.out.println("Cant add Item");
+            // System.out.println("Cant add Item");
         }
     }
 

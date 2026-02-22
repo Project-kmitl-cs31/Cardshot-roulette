@@ -9,18 +9,19 @@ public class CentralDeck {
     private Stack<Card1> cards = new Stack<>();
     private Card1 currentCard;
     private Random rng = new Random();
+    AttackCard atkcard = new AttackCard("A-1");
+    BlankCard blankCard = new BlankCard("M-1");
+
     public void generate(){
         
-        AttackCard atkcard = new AttackCard("A-1");
-        BlankCard manacard = new BlankCard("M-1");
-
+   
         int basecase = 2;
 
         int n = rng.nextInt(6)+1;
     
 
         cards.push(atkcard);
-        cards.push(manacard);
+        cards.push(blankCard);
         
        
         for (int i =0;i<n;i++){
@@ -90,7 +91,11 @@ public class CentralDeck {
     public int getCardCount(){
         return cards.size();
     }
-     public Card1 peekTop() {
+    public String[] getAllSource(){
+        String[] newarr = new String[] {atkcard.getsourceImg(),blankCard.getsourceImg()};
+        return newarr;
+    }
+    public Card1 peekTop() {
         if (cards.isEmpty()) return null;
         return cards.get(cards.size() - 1);
     }

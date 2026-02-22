@@ -18,17 +18,28 @@ public class GameScreen extends UIScreen {
     private JLabel centerZone;
     private JLabel labelItem = new JLabel("", SwingConstants.CENTER);
     private JLabel selectCardtext = new JLabel("", SwingConstants.CENTER);
+
     private String msgItem = "";
     private JLabel selfbutton;
     private JLabel enemyButton;
-    // private JButton selfbutton = new JButton();
-    // private JButton enemyButton= new JButton();
+
+    float alpha = 1f;
+
     private JButton[] p1Item = new JButton[6];
     private JButton[] p2Item = new JButton[6];
 
     private Timer animTimer;
     private Timer msgTimer;
     private Timer cooldown;
+
+    private JPanel fadeScreen;
+    private Timer fadeTimer;
+
+    JPanel msgPanel = new JPanel();
+    Image atkcard;
+    Image blkcard;
+
+    private Imagemanager bgPanel = new Imagemanager();
 
     private JPanel cutscene = new JPanel() {
         @Override
@@ -54,7 +65,7 @@ public class GameScreen extends UIScreen {
         this.setBackground(Color.BLACK);
         this.setPreferredSize(new Dimension(setWidth, setHeight));
 
-        Imagemanager bgPanel = new Imagemanager();
+
         bgPanel.setBounds(0, 0, setWidth, setHeight);
 
         // Player 1 slot
@@ -76,15 +87,29 @@ public class GameScreen extends UIScreen {
         centerZone = new JLabel("CENTER", SwingConstants.CENTER);
         centerZone.setBackground(Color.GREEN);
         centerZone.setOpaque(true);
-        centerZone.setBounds((setWidth / 2) - 150, (setHeight / 2)-70, 300, 300);
+        centerZone.setBounds((setWidth / 2) - 150, (setHeight / 2)-20, 300, 300);
 
-        labelItem.setBounds((setWidth / 2) - 200, (setHeight / 2) - 450, 400, 300);
+        labelItem.setBounds((setWidth / 2) - 200, (setHeight / 2) - 320, 400, 300);
         labelItem.setForeground(Color.YELLOW);
         labelItem.setFont(new Font("Tahoma", Font.BOLD, 25));
 
-        selectCardtext.setBounds((setWidth / 2) - 200, (setHeight / 2) - 400, 400, 300);
+        selectCardtext.setBounds((setWidth / 2) - 200, (setHeight / 2) - 350, 400, 300);
         selectCardtext.setForeground(Color.YELLOW);
         selectCardtext.setFont(new Font("Tahoma", Font.BOLD, 25));
+
+
+        msgPanel.setLayout(null); 
+        msgPanel.setOpaque(false); 
+        msgPanel.setBounds((setWidth / 2) - 200, (setHeight / 2) - 400, setWidth, setHeight);
+
+        // labelCard.setBounds((setWidth / 2) - 200, (setHeight / 2) - 400, 400, 400);
+        // labelCard.setForeground(Color.YELLOW);
+        // labelCard.setFont(new Font("Tahoma", Font.BOLD, 25));
+
+
+
+
+
 
         MouseAdapter btnEmpty = new MouseAdapter() {
         };
@@ -99,10 +124,12 @@ public class GameScreen extends UIScreen {
         enemyButton = new JLabel();
         btnTransparent(enemyButton, "pRight");
 
+
         selfbutton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent e) {
                 if (SwingUtilities.isLeftMouseButton(e)) {
                     ui.onTargetSelected(true);
+            
 
                 }
             }
@@ -116,18 +143,20 @@ public class GameScreen extends UIScreen {
             }
         });
 
-        // selfbutton.addActionListener(e -> ui.onTargetSelected(true));
-        // enemyButton.addActionListener(e -> ui.onTargetSelected(false));
         centerZone.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent e) {
                 if (SwingUtilities.isLeftMouseButton(e)) {
 
                     ui.onDeckClicked();
+                    bgPanel.playanim();
                     showBgblack();
 
                 }
             }
         });
+
+        
+        
 
         lp.add(bgPanel, Integer.valueOf(-1));
         lp.add(blueZone, Integer.valueOf(0));
@@ -137,10 +166,36 @@ public class GameScreen extends UIScreen {
         lp.add(enemyButton, Integer.valueOf(2));
         lp.add(labelItem, Integer.valueOf(3));
         lp.add(selectCardtext, Integer.valueOf(3));
+        lp.add(msgPanel, Integer.valueOf(3));
 
+
+        fadeScreen = new JPanel() {
+        @Override
+        protected void paintComponent(Graphics g) {
+            super.paintComponent(g);
+            Graphics2D g2d = (Graphics2D) g;
+            g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, alpha));
+            g2d.setColor(Color.BLACK);
+            g2d.fillRect(0, 0, getWidth(), getHeight());
+        }
+    };
+        fadeScreen.setBounds(0, 0, setWidth, setHeight);
+        fadeScreen.setOpaque(false); 
+    
+
+        MouseAdapter blockClick = new MouseAdapter() {};
+        fadeScreen.addMouseListener(blockClick);
+        fadeScreen.addMouseMotionListener(blockClick);
+
+
+        lp.add(fadeScreen, Integer.valueOf(10));
         this.add(lp);
 
         this.setBounds(0, 0, setWidth, setHeight);
+
+        this.revalidate(); 
+        this.repaint();
+        startGame();
 
     }
 
@@ -171,11 +226,11 @@ public class GameScreen extends UIScreen {
 
         }
         int baseY = (setHeight / 2) - 100;
-        int leftX = (setWidth / 2) - 750;
+        int leftX = (setWidth / 2) - 700;
         int rightX = (setWidth / 2) + 500;
         boolean isP1Turn = state.isP1Turn();
         boolean isTargetSelf = state.isTargetSelf();
-
+        
         if (isP1Turn) {
             selfbutton.setBounds(leftX, baseY, 250, 400);
             enemyButton.setBounds(rightX, baseY, 250, 400);
@@ -200,34 +255,30 @@ public class GameScreen extends UIScreen {
             centerZone.setBackground(Color.PINK);
         }
 
-        if (state.getDeck() != null) {
+            if (state.getDeck() != null) {
             int count = state.getDeck().getCardCount();
 
              if ( count > lastCardCount) {
-                ShowCardindeck(state.getDeck());
+                ShowCardindeck(state.getDeck(),3);
             }
             lastCardCount = count;
             
             String turnText = state.isP1Turn() ? "P1 Turn" : "P2 Turn";
             centerZone.setText("<html><center>" + turnText + "<br>Cards: " + count + "</center></html>");
-            Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
             if (state.isP1Turn()) {
+                bgPanel.swapTurnColor("blue");
                 selfbutton.setBounds(leftX, baseY, 250, 400);
-                selfbutton.setText("Self (P1)");
-
                 enemyButton.setBounds(rightX, baseY, 250, 400);
-                enemyButton.setText("Enemy (P2)");
                 centerZone.setBackground(Color.CYAN);
             } else {
+                 bgPanel.swapTurnColor("red");
                 selfbutton.setBounds(rightX, baseY, 250, 400);
-                selfbutton.setText("Self (P2)");
-
                 enemyButton.setBounds(leftX, baseY, 250, 400);
-                enemyButton.setText("Enemy (P1)");
                 centerZone.setBackground(Color.pink);
             }
+    
         }
-
+      
         Player p_1 = state.getPlayer();
         Player p_2 = state.getOpposingP();
 
@@ -254,16 +305,40 @@ public class GameScreen extends UIScreen {
         }
     }
 
+  public void startGame() {
+    alpha = 1.0f;
+    fadeScreen.setVisible(true);
+    repaint();
+    Timer delayTimer = new Timer(700, e1 -> {
+        fadeTimer = new Timer(30, e2 -> {
+            alpha -= 0.05f; 
+            if (alpha <= 0) {
+                alpha = 0f;
+                fadeTimer.stop();
+                lp.remove(fadeScreen); 
+                lp.repaint();
+            }
+            fadeScreen.repaint(); 
+        });
+        fadeTimer.start(); 
+    });
+    
+    delayTimer.setRepeats(false);
+    delayTimer.start(); 
+}
+
     private void setUpPlayerItem(JButton[] btn, int pos) {
-        int baseY = 220;
+
+        int baseY = 350;
+        
         for (int j = 0; j < btn.length; j++) {
             int index = j;
 
             int setNewX = pos != 1 ? 450 : 1100;
-            int setNewY = baseY + (index * 150);
+            int setNewY = baseY + (index * 60);
             if (index % 2 == 0) {
                 setNewX = setNewX - 110;
-                setNewY = baseY + (150 * (index + 1) - 1);
+                setNewY = baseY + (60 * (index + 1) - 1);
             }
 
             btn[index] = new JButton("Empty");
@@ -275,9 +350,6 @@ public class GameScreen extends UIScreen {
     }
 
     public void setMsgItem(String text, int duration) {
-        if (msgTimer != null && msgTimer.isRunning()) {
-            msgTimer.stop();
-        }
 
         this.msgItem = text;
         labelItem.setText(msgItem);
@@ -285,9 +357,60 @@ public class GameScreen extends UIScreen {
         msgTimer = new Timer(1000 * duration, e -> {
             labelItem.setText("");
         });
+
         msgTimer.setRepeats(false);
         msgTimer.start();
     }
+
+    public void setMsgCard(CentralDeck deck, String text, int duration) {
+        this.revalidate();
+        this.repaint();
+
+        String[] cardImg = deck.getAllSource();
+        Image atkcard1 = new ImageIcon(getClass().getResource(cardImg[0])).getImage();
+        atkcard = atkcard1.getScaledInstance(setWidth , setHeight, Image.SCALE_SMOOTH);
+
+        Image blkcard1 = new ImageIcon(getClass().getResource(cardImg[1])).getImage();
+        blkcard = blkcard1.getScaledInstance(setWidth, setHeight, Image.SCALE_SMOOTH);
+
+        ImageIcon finalBLKIcon = new ImageIcon(blkcard);
+        ImageIcon finalATKIcon = new ImageIcon(atkcard);
+
+        JLabel leftCardLabel = new JLabel(finalBLKIcon);
+        JLabel rightCardLabel = new JLabel(finalATKIcon);
+
+        JLabel countatk = new JLabel(String.valueOf(text.charAt(12)));
+        JLabel countblk = new JLabel(String.valueOf(text.charAt(text.length() - 1)));
+
+        countatk.setForeground(Color.WHITE); 
+        countatk.setFont(new Font("Arial", Font.BOLD, 40)); 
+
+        countblk.setForeground(Color.WHITE);
+        countblk.setFont(new Font("Arial", Font.BOLD, 40));
+
+        countatk.setBounds(140, 100, 60, 100);
+        countblk.setBounds(240, 100, 60, 100);
+
+        leftCardLabel.setBounds(0, 70, 120, 160);
+        rightCardLabel.setBounds(280, 70, 120, 160);
+
+        msgPanel.add(leftCardLabel);
+        msgPanel.add(rightCardLabel);
+        msgPanel.add(countatk);
+        msgPanel.add(countblk);
+        
+    msgTimer = new Timer(1000 * duration, e -> {
+        Container p = msgPanel.getParent();
+        if (p != null) {
+            p.remove(msgPanel);
+            p.revalidate();
+            p.repaint();
+        }
+    });
+
+    msgTimer.setRepeats(false);
+    msgTimer.start();
+}
 
     public void animtext(String text) {
         if (animTimer != null && animTimer.isRunning()) {
@@ -309,6 +432,7 @@ public class GameScreen extends UIScreen {
                 } else {
                     clearTextCooldown(selectCardtext);
                     selectCardtext.repaint();
+                    bgPanel.stopanim();
                     ((Timer) e.getSource()).stop();
                 }
             }
@@ -326,10 +450,10 @@ public class GameScreen extends UIScreen {
     }
 
 
-    public void ShowCardindeck(CentralDeck deck) {
-        setMsgItem(deck.categoryDeck(), 2);
+    public void ShowCardindeck(CentralDeck deck,int duration) {
+        setMsgCard(deck,deck.categoryDeck(), duration);
+       
     }
-
 
     public void showBgblack() {
         lp.add(cutscene, Integer.valueOf(3));
@@ -348,4 +472,7 @@ public class GameScreen extends UIScreen {
         btn.setIcon(defaultIcon);
 
     }
+
+
+
 }

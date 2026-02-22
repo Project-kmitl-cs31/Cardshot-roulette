@@ -13,15 +13,7 @@ public class PlayerPanel extends JPanel {
         this.setBounds(x, y, w, h);
         this.setBackground(new Color(0, 0, 0, 50));
         this.setLayout(null);
-
-        
-        // hpLabel = new JLabel("-");
-
-        // hpLabel.setBounds(400, 50, 200, 100);
-
-        // this.add(hpLabel);
     }
-
     public void refreshFromGame(int hp, String name,String pos) {
         this.removeAll();
         int xOffset = pos.equals("r") ? 300 : 0;
