@@ -16,6 +16,7 @@ public class GameScreen extends UIScreen {
     private ImageIcon selectleft;
     private ImageIcon selectright;
     private JLabel centerZone;
+    private ImageIcon deckIcon; // เพิ่มตัวแปรสำหรับเก็บรูปกองไพ่
     private JLabel labelItem = new JLabel("", SwingConstants.CENTER);
     private JLabel selectCardtext = new JLabel("", SwingConstants.CENTER);
 
@@ -48,7 +49,6 @@ public class GameScreen extends UIScreen {
             g.fillRect(0, 0, getWidth(), getHeight());
             super.paintComponent(g);
         }
-    ;
     };
 
     private int lastCardCount = -1;
@@ -84,10 +84,37 @@ public class GameScreen extends UIScreen {
         blueZone = new PlayerPanel(0, 0, setWidth / 2, setHeight);
         redZone = new PlayerPanel(setWidth / 2, 0, setWidth / 2, setHeight);
 
+        // --- ตั้งค่ากล่องข้อความตรงกลาง (centerZone) ใหม่ ---
         centerZone = new JLabel("CENTER", SwingConstants.CENTER);
-        centerZone.setBackground(Color.GREEN);
-        centerZone.setOpaque(true);
-        centerZone.setBounds((setWidth / 2) - 150, (setHeight / 2)-20, 300, 300);
+        
+        // ปิดทึบ: ไม่ให้มีพื้นหลังสี เพื่อให้เห็นแค่รูปไพ่
+        centerZone.setOpaque(false); 
+        centerZone.setBounds((setWidth / 2) - 150, (setHeight / 2) - 130, 300, 300);
+
+        // โหลดรูปหลังไพ่และตั้งเป็น Icon
+        try {
+            java.net.URL imgURL = getClass().getResource("/image/card_back.png"); // ชื่อไฟล์รูปไพ่ของคุณ
+            if (imgURL != null) {
+                ImageIcon originalIcon = new ImageIcon(imgURL);
+                // ปรับขนาดรูปไพ่ (กว้าง 180, สูง 260)
+                Image img = originalIcon.getImage().getScaledInstance(180, 260, Image.SCALE_SMOOTH);
+                deckIcon = new ImageIcon(img);
+                centerZone.setIcon(deckIcon);
+                
+                // จัดให้ข้อความ (P1 Turn / Cards: 8) วางซ้อนอยู่ตรงกลางรูปไพ่
+                centerZone.setHorizontalTextPosition(JLabel.CENTER);
+                centerZone.setVerticalTextPosition(JLabel.CENTER);
+                
+                // ตั้งค่าตัวอักษรให้ชัดเจนขึ้น (ตัวสีดำ ตัวหนา)
+                centerZone.setForeground(Color.BLACK); 
+                centerZone.setFont(new Font("Tahoma", Font.BOLD, 18));
+            } else {
+                System.out.println("แจ้งเตือน: ไม่พบไฟล์รูป /image/card_back.png");
+            }
+        } catch (Exception e) {
+            System.out.println("Error loading card image: " + e.getMessage());
+        }
+        // ---------------------------------------------
 
         labelItem.setBounds((setWidth / 2) - 200, (setHeight / 2) - 320, 400, 300);
         labelItem.setForeground(Color.YELLOW);
@@ -129,8 +156,6 @@ public class GameScreen extends UIScreen {
             public void mousePressed(java.awt.event.MouseEvent e) {
                 if (SwingUtilities.isLeftMouseButton(e)) {
                     ui.onTargetSelected(true);
-            
-
                 }
             }
         });
@@ -146,11 +171,9 @@ public class GameScreen extends UIScreen {
         centerZone.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent e) {
                 if (SwingUtilities.isLeftMouseButton(e)) {
-
                     ui.onDeckClicked();
                     bgPanel.playanim();
                     showBgblack();
-
                 }
             }
         });
@@ -192,7 +215,6 @@ public class GameScreen extends UIScreen {
         this.add(lp);
 
         this.setBounds(0, 0, setWidth, setHeight);
-
         this.revalidate(); 
         this.repaint();
         startGame();
@@ -217,14 +239,14 @@ public class GameScreen extends UIScreen {
 
         Player p1 = state.getPlayer();
         if (p1 != null) {
-            blueZone.refreshFromGame(p1.getHp(), p1.getName(),"l");
+            blueZone.refreshFromGame(p1.getHp(), p1.getName(), "l");
         }
 
         Player p2 = state.getOpposingP();
         if (p2 != null) {
-            redZone.refreshFromGame(p2.getHp(), p2.getName(),"r");
-
+            redZone.refreshFromGame(p2.getHp(), p2.getName(), "r");
         }
+        
         int baseY = (setHeight / 2) - 100;
         int leftX = (setWidth / 2) - 700;
         int rightX = (setWidth / 2) + 500;
@@ -235,24 +257,26 @@ public class GameScreen extends UIScreen {
             selfbutton.setBounds(leftX, baseY, 250, 400);
             enemyButton.setBounds(rightX, baseY, 250, 400);
             if (isTargetSelf) {
-                selfbutton.setIcon(selectleft);     
-                enemyButton.setIcon(pright);        
+                selfbutton.setIcon(selectleft);
+                enemyButton.setIcon(pright);
             } else {
-                selfbutton.setIcon(pleft);          
-                enemyButton.setIcon(selectright);   
+                selfbutton.setIcon(pleft);
+                enemyButton.setIcon(selectright);
             }
-            centerZone.setBackground(Color.CYAN);
+            // ปิดการเปลี่ยนสีพื้นหลังเป็น CYAN
+            // centerZone.setBackground(Color.CYAN); 
         } else {
             selfbutton.setBounds(rightX, baseY, 250, 400);
             enemyButton.setBounds(leftX, baseY, 250, 400);
             if (isTargetSelf) {
-                selfbutton.setIcon(selectright);    
-                enemyButton.setIcon(pleft);        
+                selfbutton.setIcon(selectright);
+                enemyButton.setIcon(pleft);
             } else {
-                selfbutton.setIcon(pright);         
-                enemyButton.setIcon(selectleft);    
+                selfbutton.setIcon(pright);
+                enemyButton.setIcon(selectleft);
             }
-            centerZone.setBackground(Color.PINK);
+            // ปิดการเปลี่ยนสีพื้นหลังเป็น PINK
+            // centerZone.setBackground(Color.PINK); 
         }
 
             if (state.getDeck() != null) {
@@ -262,19 +286,23 @@ public class GameScreen extends UIScreen {
                 ShowCardindeck(state.getDeck(),3);
             }
             lastCardCount = count;
-            
+
             String turnText = state.isP1Turn() ? "P1 Turn" : "P2 Turn";
             centerZone.setText("<html><center>" + turnText + "<br>Cards: " + count + "</center></html>");
             if (state.isP1Turn()) {
                 bgPanel.swapTurnColor("blue");
                 selfbutton.setBounds(leftX, baseY, 250, 400);
                 enemyButton.setBounds(rightX, baseY, 250, 400);
-                centerZone.setBackground(Color.CYAN);
+                enemyButton.setText("Enemy (P2)");
+                // ปิดการเปลี่ยนสีพื้นหลังเป็น CYAN
+                // centerZone.setBackground(Color.CYAN);
             } else {
                  bgPanel.swapTurnColor("red");
                 selfbutton.setBounds(rightX, baseY, 250, 400);
                 enemyButton.setBounds(leftX, baseY, 250, 400);
-                centerZone.setBackground(Color.pink);
+                enemyButton.setText("Enemy (P1)");
+                // ปิดการเปลี่ยนสีพื้นหลังเป็น PINK
+                // centerZone.setBackground(Color.pink);
             }
     
         }
@@ -296,10 +324,26 @@ public class GameScreen extends UIScreen {
         if (p != null) {
             Item item = p.getItem(index);
             if (item != null) {
-                btn.setText(item.getName());
+                String itemName = item.getName();
+                try {
+                    java.net.URL imgURL = getClass().getResource("/image/" + itemName + ".png");
+                    if (imgURL != null) {
+                        ImageIcon icon = new ImageIcon(imgURL);
+                        Image img = icon.getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH);
+                        btn.setIcon(new ImageIcon(img));
+                        btn.setText(""); 
+                    } else {
+                        btn.setIcon(null);
+                        btn.setText(itemName);
+                    }
+                } catch (Exception e) {
+                    btn.setIcon(null);
+                    btn.setText(itemName);
+                }
                 btn.setVisible(true);
             } else {
-                btn.setText("Empty");
+                btn.setIcon(null);
+                btn.setText("");
                 btn.setVisible(false);
             }
         }
@@ -341,8 +385,14 @@ public class GameScreen extends UIScreen {
                 setNewY = baseY + (60 * (index + 1) - 1);
             }
 
-            btn[index] = new JButton("Empty");
+            btn[index] = new JButton();
             btn[index].setBounds(setNewX, setNewY, 100, 100);
+            
+            btn[index].setContentAreaFilled(false);
+            btn[index].setBorderPainted(false);
+            btn[index].setFocusPainted(false);
+            btn[index].setOpaque(false);
+
             btn[index].addActionListener(e -> ui.onItemClicked(index));
 
             lp.add(btn[index], Integer.valueOf(2));
@@ -467,12 +517,7 @@ public class GameScreen extends UIScreen {
     }
 
     private void btnTransparent(JLabel btn, String defaultIconPath) {
-
         ImageIcon defaultIcon = new ImageIcon(getClass().getResource("/image/" + defaultIconPath + ".png"));
         btn.setIcon(defaultIcon);
-
     }
-
-
-
 }
