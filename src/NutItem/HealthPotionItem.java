@@ -3,7 +3,7 @@ import src.Nut1.*;
 
 public class HealthPotionItem extends Item {
     public HealthPotionItem(){
-        super("Health Potion");
+        super("HealthPotion");
     }
     public void use(Game game){
         Player play = game.getCurrentPlayer();

@@ -16,6 +16,7 @@ public class GameScreen extends UIScreen {
     private ImageIcon selectleft;
     private ImageIcon selectright;
     private JLabel centerZone;
+    private ImageIcon deckIcon; // เพิ่มตัวแปรสำหรับเก็บรูปกองไพ่
     private JLabel labelItem = new JLabel("", SwingConstants.CENTER);
     private JLabel selectCardtext = new JLabel("", SwingConstants.CENTER);
     private String msgItem = "";
@@ -70,10 +71,37 @@ public class GameScreen extends UIScreen {
         blueZone = new PlayerPanel(0, 0, setWidth / 2, setHeight);
         redZone = new PlayerPanel(setWidth / 2, 0, setWidth / 2, setHeight);
 
+        // --- ตั้งค่ากล่องข้อความตรงกลาง (centerZone) ใหม่ ---
         centerZone = new JLabel("CENTER", SwingConstants.CENTER);
-        centerZone.setBackground(Color.GREEN);
-        centerZone.setOpaque(true);
-        centerZone.setBounds((setWidth / 2) - 150, (setHeight / 2) - 70, 300, 300);
+        
+        // ปิดทึบ: ไม่ให้มีพื้นหลังสี เพื่อให้เห็นแค่รูปไพ่
+        centerZone.setOpaque(false); 
+        centerZone.setBounds((setWidth / 2) - 150, (setHeight / 2) - 130, 300, 300);
+
+        // โหลดรูปหลังไพ่และตั้งเป็น Icon
+        try {
+            java.net.URL imgURL = getClass().getResource("/image/card_back.png"); // ชื่อไฟล์รูปไพ่ของคุณ
+            if (imgURL != null) {
+                ImageIcon originalIcon = new ImageIcon(imgURL);
+                // ปรับขนาดรูปไพ่ (กว้าง 180, สูง 260)
+                Image img = originalIcon.getImage().getScaledInstance(180, 260, Image.SCALE_SMOOTH);
+                deckIcon = new ImageIcon(img);
+                centerZone.setIcon(deckIcon);
+                
+                // จัดให้ข้อความ (P1 Turn / Cards: 8) วางซ้อนอยู่ตรงกลางรูปไพ่
+                centerZone.setHorizontalTextPosition(JLabel.CENTER);
+                centerZone.setVerticalTextPosition(JLabel.CENTER);
+                
+                // ตั้งค่าตัวอักษรให้ชัดเจนขึ้น (ตัวสีดำ ตัวหนา)
+                centerZone.setForeground(Color.BLACK); 
+                centerZone.setFont(new Font("Tahoma", Font.BOLD, 18));
+            } else {
+                System.out.println("แจ้งเตือน: ไม่พบไฟล์รูป /image/card_back.png");
+            }
+        } catch (Exception e) {
+            System.out.println("Error loading card image: " + e.getMessage());
+        }
+        // ---------------------------------------------
 
         labelItem.setBounds((setWidth / 2) - 200, (setHeight / 2) - 450, 400, 300);
         labelItem.setForeground(Color.YELLOW);
@@ -177,7 +205,8 @@ public class GameScreen extends UIScreen {
                 selfbutton.setIcon(pleft);
                 enemyButton.setIcon(selectright);
             }
-            centerZone.setBackground(Color.CYAN);
+            // ปิดการเปลี่ยนสีพื้นหลังเป็น CYAN
+            // centerZone.setBackground(Color.CYAN); 
         } else {
             selfbutton.setBounds(rightX, baseY, 250, 400);
             enemyButton.setBounds(leftX, baseY, 250, 400);
@@ -188,7 +217,8 @@ public class GameScreen extends UIScreen {
                 selfbutton.setIcon(pright);
                 enemyButton.setIcon(selectleft);
             }
-            centerZone.setBackground(Color.PINK);
+            // ปิดการเปลี่ยนสีพื้นหลังเป็น PINK
+            // centerZone.setBackground(Color.PINK); 
         }
 
         if (state.getDeck() != null) {
@@ -207,14 +237,16 @@ public class GameScreen extends UIScreen {
 
                 enemyButton.setBounds(rightX, baseY, 250, 400);
                 enemyButton.setText("Enemy (P2)");
-                centerZone.setBackground(Color.CYAN);
+                // ปิดการเปลี่ยนสีพื้นหลังเป็น CYAN
+                // centerZone.setBackground(Color.CYAN);
             } else {
                 selfbutton.setBounds(rightX, baseY, 250, 400);
                 selfbutton.setText("Self (P2)");
 
                 enemyButton.setBounds(leftX, baseY, 250, 400);
                 enemyButton.setText("Enemy (P1)");
-                centerZone.setBackground(Color.pink);
+                // ปิดการเปลี่ยนสีพื้นหลังเป็น PINK
+                // centerZone.setBackground(Color.pink);
             }
         }
 
@@ -231,22 +263,19 @@ public class GameScreen extends UIScreen {
         this.repaint();
     }
 
-    // --- ส่วนที่แก้ไขให้แสดงรูปไอเทมแบบไดนามิก ---
     private void updateItemButton(JButton btn, Player p, int index) {
         if (p != null) {
             Item item = p.getItem(index);
             if (item != null) {
                 String itemName = item.getName();
                 try {
-                    // ดึงรูปภาพตามชื่อของไอเทม
                     java.net.URL imgURL = getClass().getResource("/image/" + itemName + ".png");
                     if (imgURL != null) {
                         ImageIcon icon = new ImageIcon(imgURL);
                         Image img = icon.getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH);
                         btn.setIcon(new ImageIcon(img));
-                        btn.setText(""); // ลบตัวหนังสือออก
+                        btn.setText(""); 
                     } else {
-                        // ถ้าหาไฟล์รูปไม่เจอ ให้แสดงชื่อเป็นตัวหนังสือแทน
                         btn.setIcon(null);
                         btn.setText(itemName);
                     }
@@ -256,7 +285,6 @@ public class GameScreen extends UIScreen {
                 }
                 btn.setVisible(true);
             } else {
-                // ถ้าสล็อตว่าง
                 btn.setIcon(null);
                 btn.setText("");
                 btn.setVisible(false);
@@ -264,7 +292,6 @@ public class GameScreen extends UIScreen {
         }
     }
 
-    // --- ส่วนที่แก้ไขให้ปุ่มไอเทมไม่มีกรอบและพื้นหลัง ---
     private void setUpPlayerItem(JButton[] btn, int pos) {
         int baseY = 220;
         for (int j = 0; j < btn.length; j++) {
@@ -280,7 +307,6 @@ public class GameScreen extends UIScreen {
             btn[index] = new JButton();
             btn[index].setBounds(setNewX, setNewY, 100, 100);
             
-            // ทำให้ปุ่มโปร่งใส โชว์แค่รูป
             btn[index].setContentAreaFilled(false);
             btn[index].setBorderPainted(false);
             btn[index].setFocusPainted(false);
