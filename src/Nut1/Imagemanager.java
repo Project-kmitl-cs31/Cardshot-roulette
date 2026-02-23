@@ -83,6 +83,7 @@ public class Imagemanager extends JPanel implements ActionListener{
         timer1 = new Timer(40,this);
         timer1.start();
     }
+
      public void stopanim(){
         timer1.stop();
         x = 0;
@@ -91,6 +92,8 @@ public class Imagemanager extends JPanel implements ActionListener{
         this.repaint();
     }
     public void swapTurnColor(String swap){
+        Timer time = new Timer(1200,e->{
+    
         if(swap.equals("blue")){
             this.isBlue =true;
             this.isRed =false;  
@@ -99,7 +102,9 @@ public class Imagemanager extends JPanel implements ActionListener{
             this.isRed =true; 
             this.isBlue =false;
         }
-        
+        });
+        time.setRepeats(false);
+        time.start();
         repaint();
 
     }
@@ -116,6 +121,7 @@ public class Imagemanager extends JPanel implements ActionListener{
 
         if(isBlue){
             g2d.drawImage(turnBlueImg, -100, 0, this);
+           
         }
         if(isRed){
             g2d.drawImage(turnRedImg, tableX+450, 0, this);

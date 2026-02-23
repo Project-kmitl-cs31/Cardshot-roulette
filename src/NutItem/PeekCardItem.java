@@ -13,8 +13,8 @@ public class PeekCardItem extends Item {
     public void use(Game game){
         if(game.getDeck() != null && !game.getDeck().isEmpty()) {
             Card1 c = game.getDeck().peekTop();
-            game.getUIManager().getGameScreen().setMsgItem("Top Card :"+c.getClass().getSimpleName(),2);
-            // System.out.println(c.getClass().getSimpleName());
+            // game.getUIManager().getGameScreen().setMsgItem("Top Card :"+c.getClass().getSimpleName(),2);
+             game.getUIManager().getGameScreen().animtext("Top Card :"+c.getClass().getSimpleName(),c.getsourceImg());
         }
         }
     }

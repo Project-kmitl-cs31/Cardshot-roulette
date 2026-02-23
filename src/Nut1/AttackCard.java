@@ -12,8 +12,7 @@ public class AttackCard extends Card1 {
     @Override
     public void resolveKept(Player player) {
         int totalDamage = baseDamage * player.getDamageMultiplier();
-        
-        System.out.println("DEBUG: Self shot with damage: " + totalDamage);
+        // System.out.println("DEBUG: Self shot with damage: " + totalDamage);
         player.takeDamage(totalDamage);
         player.resetDamageMultiplier(); 
     }

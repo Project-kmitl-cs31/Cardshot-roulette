@@ -13,9 +13,6 @@ public class CentralDeck {
     BlankCard blankCard = new BlankCard("M-1");
 
     public void generate(){
-        
-   
-        int basecase = 2;
 
         int n = rng.nextInt(6)+1;
     
@@ -43,10 +40,10 @@ public class CentralDeck {
         // System.out.println("Current "+currentCard);
     }
 
-    public void peekCurrent(){
-        currentCard = cards.peek();
-        System.out.println(currentCard);
-    }
+    // public void peekCurrent(){
+    //     currentCard = cards.peek();
+    //     System.out.println(currentCard);
+    // }
 
     public void swapCard(){
         Card1 card = peekTop();
@@ -96,9 +93,15 @@ public class CentralDeck {
         return newarr;
     }
     public Card1 peekTop() {
-        if (cards.isEmpty()) return null;
-        return cards.get(cards.size() - 1);
+        if(cards.isEmpty()){
+            return null;
+        }else{
+            currentCard = cards.peek();
+        }
+        return currentCard;
+        // return cards.get(cards.size() - 1);
     }
+
     public String categoryDeck(){
         Map<?,Long> countDeck = cards.stream().collect(Collectors.groupingBy(c -> c.getClass().getSimpleName(),Collectors.counting()));
         return countDeck.entrySet().stream()

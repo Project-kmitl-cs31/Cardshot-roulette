@@ -5,7 +5,6 @@ import javax.swing.*;
 
 public class PlayerPanel extends JPanel {
 
-    private JLabel hpLabel;
     private JLabel[] hpLabelarr = new JLabel[6];
     private ImageIcon heartIcon;
 
@@ -31,8 +30,9 @@ public class PlayerPanel extends JPanel {
             this.add(hpLabelarr[i]);
             xOffset += 70;
         }
-        // System.out.println("name form: "+name);
         this.revalidate();
         this.repaint();
     }
+
+   
 }

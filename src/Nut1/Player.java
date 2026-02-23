@@ -36,7 +36,7 @@ public class Player {
     public void beginTurn() {
         if (lockedTurns > 0) {
             lockedTurns--;
-            System.out.println(name + " is locked! Turns remaining: " + lockedTurns);
+            // System.out.println(name + " is locked! Turns remaining: " + lockedTurns);
         }
       
     }
@@ -50,53 +50,31 @@ public class Player {
     public void endTurn() {
         System.out.println(name + " ends turn.");
     }
-
-    // public void addMana(int amount) {
-    //     this.mana += amount;
-    // }
-
     public void takeDamage(int amount) {
         if (amount < 0) return;
         this.hp -= amount;
         if (this.hp < 0) this.hp = 0;
-        // System.out.println(name + " took " + amount + " damage. HP: " + hp);
     }
 
     protected void heal(int amount,int manaCost) {
         if (amount <= 0) return;
         if(this.mana < manaCost) return;
         this.hp += amount;
-        this.mana -= manaCost;
-        // System.out.println(name + " healed " + amount + " HP. Current HP: " + hp);
     }
 
     public void grantItems(List<Item> newItems) {
         for (Item item : newItems) {
             if (this.items.size() < MAX_ITEMS) {
                 this.items.add(item);
-                // System.out.println(name + " got item: " + item.getName());
-            } else {
-                // System.out.println("Inventory Full! Cannot add: " + item.getName());
             }
         }
     }
-
-    // public boolean useMana(int cost) {
-    //     if (this.mana >= cost) {
-    //         this.mana -= cost;
-    //         return true;
-    //     }
-    //     System.out.println("Not enough mana!");
-    //     return false;
-    // }
 
     public void addDamageMultiplier(int mult, boolean forNextCard) {
         this.damageMultiplier *= mult;
         System.out.println(name + " damage multiplier is now x" + this.damageMultiplier);
     }
 
-    
-    // public int getMana() { return mana; }
 
     public int getLockedTurns() {
          return lockedTurns; 
@@ -110,10 +88,7 @@ public class Player {
 
     public void addItem(Item item) {
         if (inventory.size() < 7 ) {
-            inventory.add(item);
-            // System.out.println("My Items1 : "+inventory);            
-        }else{
-            // System.out.println("Cant add Item");
+            inventory.add(item);     
         }
     }
 
@@ -131,7 +106,7 @@ public class Player {
     public void removeItem(int index){
         if(index >= 0 && index < inventory.size()){
             inventory.remove(index);
-            System.out.println("My Items2 : "+inventory);
+            // System.out.println("My Items2 : "+inventory);
         }
      
     }
@@ -157,7 +132,7 @@ public class Player {
     }
     public void resetDamageMultiplier() {
         this.damageMultiplier = 1;
-        System.out.println(name + " damage multiplier reset to 1");
+        // System.out.println(name + " damage multiplier reset to 1");
     }
     public void setDamageMultiplier(int newDamage)   {
         this.damageMultiplier = newDamage;
