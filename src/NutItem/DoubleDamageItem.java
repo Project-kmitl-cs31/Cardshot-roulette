@@ -4,7 +4,7 @@ import src.Nut1.Player;
 
 public class DoubleDamageItem extends Item {
     public DoubleDamageItem(){
-        super("Double Damage");
+        super("DoubleDamage");
     }
     @Override
     public void use(Game game){

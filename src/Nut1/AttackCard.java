@@ -7,7 +7,7 @@ public class AttackCard extends Card1 {
 
 
     public AttackCard(String id) {
-        super(id, "Attack Card!!!!", CardType.ATTACK,"/image/ALK.png"); 
+        super(id, "Attack Card!!!!", CardType.ATTACK,"/image/ATKcard.png"); 
     }
     @Override
     public void resolveKept(Player player) {

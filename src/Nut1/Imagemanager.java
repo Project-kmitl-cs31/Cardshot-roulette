@@ -8,6 +8,7 @@ import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.ImageIcon;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
@@ -28,11 +29,20 @@ public class Imagemanager extends JPanel implements ActionListener{
     
     Timer timer1;
 
+    JLabel textturn = new JLabel("");
+
 
     Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 
     int setWidth = screenSize.width;
     int setHeight = screenSize.height;
+    Image ImgP1 = new ImageIcon(getClass().getResource("/image/turnp1.png")).getImage();
+    Image ImgP2 = new ImageIcon(getClass().getResource("/image/turnp2.png")).getImage();
+
+    
+    ImageIcon p1 = new ImageIcon();
+    ImageIcon p2 = new ImageIcon();
+
     public Imagemanager() {
     
         this.setLayout(null); 
@@ -46,9 +56,27 @@ public class Imagemanager extends JPanel implements ActionListener{
         tableImage = table.getScaledInstance(setWidth - 550, setHeight - 300, Image.SCALE_SMOOTH);
 
         
+
+        Image resizedImg1 = ImgP1.getScaledInstance(300, 120, Image.SCALE_SMOOTH); 
+        Image resizedImg2 = ImgP2.getScaledInstance(300, 120, Image.SCALE_SMOOTH);
+
+        p1.setImage(resizedImg1);
+        p2.setImage(resizedImg2);
+     
+        this.add(textturn);
         this.revalidate(); 
         this.repaint();
       
+    }
+    public void TurnText(Game stateText){
+        if(stateText.isP1Turn()){
+            textturn.setIcon(p1);
+            textturn.setBounds(10,80,500,500);
+        }else{
+            textturn.setIcon(p2);
+            textturn.setBounds(setWidth-300,80,500,500);
+        }
+        repaint();
     }
 
     public void playanim(){
@@ -87,10 +115,10 @@ public class Imagemanager extends JPanel implements ActionListener{
         g2d.drawImage(tableImage, tableX, tableY, null);
 
         if(isBlue){
-            g2d.drawImage(turnBlueImg, -50, 0, this);
+            g2d.drawImage(turnBlueImg, -100, 0, this);
         }
         if(isRed){
-            g2d.drawImage(turnRedImg, tableX+370, 0, this);
+            g2d.drawImage(turnRedImg, tableX+450, 0, this);
     
         }
 

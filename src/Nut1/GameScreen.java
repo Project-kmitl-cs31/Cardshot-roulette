@@ -16,6 +16,14 @@ public class GameScreen extends UIScreen {
     private ImageIcon selectleft;
     private ImageIcon selectright;
     private JLabel centerZone;
+
+    Image ImgCircleP1 = new ImageIcon(getClass().getResource("/image/circleblue.png")).getImage();
+    Image ImgCircleP2 = new ImageIcon(getClass().getResource("/image/circlered.png")).getImage();
+    
+    Image resizedImg1 = ImgCircleP1.getScaledInstance(300, 300, Image.SCALE_SMOOTH); 
+    Image resizedImg2 = ImgCircleP2.getScaledInstance(300, 300, Image.SCALE_SMOOTH);
+
+
     private JLabel labelItem = new JLabel("", SwingConstants.CENTER);
     private JLabel selectCardtext = new JLabel("", SwingConstants.CENTER);
 
@@ -84,9 +92,8 @@ public class GameScreen extends UIScreen {
         blueZone = new PlayerPanel(0, 0, setWidth / 2, setHeight);
         redZone = new PlayerPanel(setWidth / 2, 0, setWidth / 2, setHeight);
 
-        centerZone = new JLabel("CENTER", SwingConstants.CENTER);
-        centerZone.setBackground(Color.GREEN);
-        centerZone.setOpaque(true);
+        centerZone = new JLabel("", SwingConstants.CENTER);
+        centerZone.setOpaque(false); 
         centerZone.setBounds((setWidth / 2) - 150, (setHeight / 2)-20, 300, 300);
 
         labelItem.setBounds((setWidth / 2) - 200, (setHeight / 2) - 320, 400, 300);
@@ -100,11 +107,8 @@ public class GameScreen extends UIScreen {
 
         msgPanel.setLayout(null); 
         msgPanel.setOpaque(false); 
-        msgPanel.setBounds((setWidth / 2) - 200, (setHeight / 2) - 400, setWidth, setHeight);
+        msgPanel.setBounds((setWidth / 2) - 200, (setHeight / 2) - 400, setWidth, setHeight+100);
 
-        // labelCard.setBounds((setWidth / 2) - 200, (setHeight / 2) - 400, 400, 400);
-        // labelCard.setForeground(Color.YELLOW);
-        // labelCard.setFont(new Font("Tahoma", Font.BOLD, 25));
 
 
 
@@ -175,7 +179,7 @@ public class GameScreen extends UIScreen {
             super.paintComponent(g);
             Graphics2D g2d = (Graphics2D) g;
             g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, alpha));
-            g2d.setColor(Color.BLACK);
+    
             g2d.fillRect(0, 0, getWidth(), getHeight());
         }
     };
@@ -241,7 +245,7 @@ public class GameScreen extends UIScreen {
                 selfbutton.setIcon(pleft);          
                 enemyButton.setIcon(selectright);   
             }
-            centerZone.setBackground(Color.CYAN);
+            centerZone.setIcon(new ImageIcon(resizedImg1));
         } else {
             selfbutton.setBounds(rightX, baseY, 250, 400);
             enemyButton.setBounds(leftX, baseY, 250, 400);
@@ -252,9 +256,14 @@ public class GameScreen extends UIScreen {
                 selfbutton.setIcon(pright);         
                 enemyButton.setIcon(selectleft);    
             }
-            centerZone.setBackground(Color.PINK);
-        }
+            centerZone.setIcon(new ImageIcon(resizedImg2));
+            // centerZone.setBackground(Color.RED);
 
+        }
+    
+        // centerZone.revalidate(); 
+        // centerZone.repaint();
+        repaint();
             if (state.getDeck() != null) {
             int count = state.getDeck().getCardCount();
 
@@ -263,19 +272,23 @@ public class GameScreen extends UIScreen {
             }
             lastCardCount = count;
             
-            String turnText = state.isP1Turn() ? "P1 Turn" : "P2 Turn";
-            centerZone.setText("<html><center>" + turnText + "<br>Cards: " + count + "</center></html>");
+            // String turnText = state.isP1Turn() ? "P1 Turn" : "P2 Turn";
+            bgPanel.TurnText(state);
+            // centerZone.setText("<html><center>" + turnText + "<br>Cards: " + count + "</center></html>");
             if (state.isP1Turn()) {
                 bgPanel.swapTurnColor("blue");
                 selfbutton.setBounds(leftX, baseY, 250, 400);
                 enemyButton.setBounds(rightX, baseY, 250, 400);
-                centerZone.setBackground(Color.CYAN);
+                // centerZone.setBackground(Color.BLUE);
+                // centerZone.setIcon(Cp1);
             } else {
                  bgPanel.swapTurnColor("red");
                 selfbutton.setBounds(rightX, baseY, 250, 400);
                 enemyButton.setBounds(leftX, baseY, 250, 400);
-                centerZone.setBackground(Color.pink);
+                // centerZone.setBackground(Color.RED);
+                // centerZone.setIcon(Cp2);
             }
+            repaint();
     
         }
       
@@ -292,14 +305,30 @@ public class GameScreen extends UIScreen {
         this.repaint();
     }
 
-    private void updateItemButton(JButton btn, Player p, int index) {
+ private void updateItemButton(JButton btn, Player p, int index) {
         if (p != null) {
             Item item = p.getItem(index);
             if (item != null) {
-                btn.setText(item.getName());
+                String itemName = item.getName();
+                try {
+                    java.net.URL imgURL = getClass().getResource("/image/" + itemName + ".png");
+                    if (imgURL != null) {
+                        ImageIcon icon = new ImageIcon(imgURL);
+                        Image img = icon.getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH);
+                        btn.setIcon(new ImageIcon(img));
+                        btn.setText(""); 
+                    } else {
+                        btn.setIcon(null);
+                        btn.setText(itemName);
+                    }
+                } catch (Exception e) {
+                    btn.setIcon(null);
+                    btn.setText(itemName);
+                }
                 btn.setVisible(true);
             } else {
-                btn.setText("Empty");
+                btn.setIcon(null);
+                btn.setText("");
                 btn.setVisible(false);
             }
         }
@@ -341,8 +370,14 @@ public class GameScreen extends UIScreen {
                 setNewY = baseY + (60 * (index + 1) - 1);
             }
 
-            btn[index] = new JButton("Empty");
-            btn[index].setBounds(setNewX, setNewY, 100, 100);
+            btn[index] = new JButton();
+            btn[index].setBounds(setNewX, setNewY, 110, 120);
+            
+            btn[index].setContentAreaFilled(false);
+            btn[index].setBorderPainted(false);
+            btn[index].setFocusPainted(false);
+            btn[index].setOpaque(false);
+
             btn[index].addActionListener(e -> ui.onItemClicked(index));
 
             lp.add(btn[index], Integer.valueOf(2));
@@ -363,15 +398,16 @@ public class GameScreen extends UIScreen {
     }
 
     public void setMsgCard(CentralDeck deck, String text, int duration) {
+        System.out.println(text);
         this.revalidate();
         this.repaint();
 
         String[] cardImg = deck.getAllSource();
-        Image atkcard1 = new ImageIcon(getClass().getResource(cardImg[0])).getImage();
-        atkcard = atkcard1.getScaledInstance(setWidth , setHeight, Image.SCALE_SMOOTH);
+        Image atkcard1 = new ImageIcon(getClass().getResource(cardImg[1])).getImage();
+        atkcard = atkcard1.getScaledInstance(120 , 160, Image.SCALE_SMOOTH);
 
-        Image blkcard1 = new ImageIcon(getClass().getResource(cardImg[1])).getImage();
-        blkcard = blkcard1.getScaledInstance(setWidth, setHeight, Image.SCALE_SMOOTH);
+        Image blkcard1 = new ImageIcon(getClass().getResource(cardImg[0])).getImage();
+        blkcard = blkcard1.getScaledInstance(120, 160, Image.SCALE_SMOOTH);
 
         ImageIcon finalBLKIcon = new ImageIcon(blkcard);
         ImageIcon finalATKIcon = new ImageIcon(atkcard);

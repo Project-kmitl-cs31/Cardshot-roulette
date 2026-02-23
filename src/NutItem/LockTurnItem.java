@@ -4,7 +4,7 @@ import src.Nut1.Player;
 
 public class LockTurnItem extends Item { 
     public LockTurnItem() {
-        super("Lock Turn Item");
+        super("LockTurnItem");
     }
 
     @Override

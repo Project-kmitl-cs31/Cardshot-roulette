@@ -21,7 +21,6 @@ public abstract class Card1 {
             Player defender
     );
 
-    // getter เผื่อใช้
     public CardType getType() {
         return type;
     }

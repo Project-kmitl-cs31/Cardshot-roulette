@@ -5,7 +5,7 @@ import src.Nut1.*;
  
 public class SwapCardItem extends Item {
     public SwapCardItem(){
-        super("Swap Card");
+        super("SwapCard");
     }
     public void use(Game game){
         if(game.getDeck() != null && !game.getDeck().isEmpty())
