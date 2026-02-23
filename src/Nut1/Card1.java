@@ -5,11 +5,13 @@ public abstract class Card1 {
     protected String id;
     protected String name;
     protected CardType type;
+    protected String sourceImg;
 
-    public Card1(String id, String name, CardType type) {
+    public Card1(String id, String name, CardType type,String source) {
         this.id = id;
         this.name = name;
         this.type = type;
+        this.sourceImg = source;
     }
 
     public abstract void resolveKept(Player player);
@@ -29,6 +31,12 @@ public abstract class Card1 {
     }
     public String getName(){
         return name;
+    }
+
+
+    
+    public String getsourceImg(){
+       return this.sourceImg;
     }
     @Override
     public String toString() {

@@ -1,12 +1,11 @@
 package src.Nut1;
-import java.util.Random;
 
 
 public class BlankCard extends Card1{
-    // private int amount;       
+ 
 
     public BlankCard(String id) {
-        super(id, "BLANK Card!!!", CardType.BLANK);
+        super(id, "BLANK Card!!!", CardType.BLANK,"/image/BLK.png");
         // this.amount = rollMana();
     }
     public void skip(){

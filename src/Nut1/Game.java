@@ -1,5 +1,6 @@
 package src.Nut1;
 
+import javax.swing.Timer;
 import src.NutItem.*; 
 
 public class Game {
@@ -19,6 +20,7 @@ public class Game {
         this.deck.generate();
         refillItem(this.p);
         refillItem(this.enemy);
+        
     }
 
     
@@ -35,7 +37,7 @@ public class Game {
         
         Card1 card = deck.drawTop();
         ui.getGameScreen().animtext("This card is... "+card.getName());
-    
+
         if (card == null) return;
 
         if(card instanceof AttackCard){
@@ -56,7 +58,12 @@ public class Game {
             if(!targetSelf){
                 switchTurn();
             } else{
-                ui.getGameScreen().setMsgItem(targetPlayer.getName()+" turn continues.", 3);
+                Timer cooldown = new Timer(2500, e -> {
+                    ui.getGameScreen().setMsgItem(targetPlayer.getName()+" turn continues.", 2);
+            });
+            cooldown.setRepeats(false);
+            cooldown.start();
+                
             }
         }
         if(deck.isEmpty()){
