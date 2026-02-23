@@ -309,14 +309,30 @@ public class GameScreen extends UIScreen {
         this.repaint();
     }
 
-    private void updateItemButton(JButton btn, Player p, int index) {
+        private void updateItemButton(JButton btn, Player p, int index) {
         if (p != null) {
             Item item = p.getItem(index);
             if (item != null) {
-                btn.setText(item.getName());
+                String itemName = item.getName();
+                try {
+                    java.net.URL imgURL = getClass().getResource("/image/" + itemName + ".png");
+                    if (imgURL != null) {
+                        ImageIcon icon = new ImageIcon(imgURL);
+                        Image img = icon.getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH);
+                        btn.setIcon(new ImageIcon(img));
+                        btn.setText(""); 
+                    } else {
+                        btn.setIcon(null);
+                        btn.setText(itemName);
+                    }
+                } catch (Exception e) {
+                    btn.setIcon(null);
+                    btn.setText(itemName);
+                }
                 btn.setVisible(true);
             } else {
-                btn.setText("Empty");
+                btn.setIcon(null);
+                btn.setText("");
                 btn.setVisible(false);
             }
         }
@@ -344,7 +360,7 @@ public class GameScreen extends UIScreen {
     delayTimer.start(); 
 }
 
-    private void setUpPlayerItem(JButton[] btn, int pos) {
+ private void setUpPlayerItem(JButton[] btn, int pos) {
 
         int baseY = 350;
         
@@ -358,8 +374,14 @@ public class GameScreen extends UIScreen {
                 setNewY = baseY + (60 * (index + 1) - 1);
             }
 
-            btn[index] = new JButton("Empty");
+            btn[index] = new JButton();
             btn[index].setBounds(setNewX, setNewY, 100, 100);
+            
+            btn[index].setContentAreaFilled(false);
+            btn[index].setBorderPainted(false);
+            btn[index].setFocusPainted(false);
+            btn[index].setOpaque(false);
+
             btn[index].addActionListener(e -> ui.onItemClicked(index));
 
             lp.add(btn[index], Integer.valueOf(2));
