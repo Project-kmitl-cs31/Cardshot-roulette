@@ -3,20 +3,28 @@ package src.Nut1;
 import java.awt.*;
 import javax.swing.*;
 
-public class MessageOverlay {
+public class MessageOverlay extends JPanel{
 
     private JLabel labelItem;
     private JLabel selectCardtext;
     private JPanel msgPanel;
     private Timer msgTimer;
+    private boolean showBG;
 
     private JLayeredPane lp;
     private int width, height;
+
+    Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+
+    int setWidth = screenSize.width;
+    int setHeight = screenSize.height;
 
     public MessageOverlay(JLayeredPane lp, int width, int height) {
         this.lp = lp;
         this.width = width;
         this.height = height;
+        this.setBounds(0, 0, width, height); 
+        this.setOpaque(false);
 
         labelItem = new JLabel("", SwingConstants.CENTER);
         labelItem.setBounds((width / 2) - 200, (height / 2) - 300, 400, 300);
@@ -36,6 +44,7 @@ public class MessageOverlay {
         lp.add(labelItem, Integer.valueOf(3));
         lp.add(selectCardtext, Integer.valueOf(3));
         lp.add(msgPanel, Integer.valueOf(3));
+        lp.add(this, Integer.valueOf(2));
     }
 
     public void setMsgItem(String text, int duration) {
@@ -44,17 +53,16 @@ public class MessageOverlay {
         if (msgTimer != null && msgTimer.isRunning()) {
             msgTimer.stop();
         }
-
         msgTimer = new Timer(1000 * duration, e -> {
             labelItem.setText("");
         });
-
         msgTimer.setRepeats(false);
         msgTimer.start();
     }
 
     public void setMsgCard(CentralDeck deck, String text, int duration, Runnable onFinish) {
         msgPanel.removeAll();
+        showBG = true;
 
         String[] cardImg = deck.getAllSource();
         Image atkImg = new ImageIcon(getClass().getResource(cardImg[1])).getImage().getScaledInstance(120, 160, Image.SCALE_SMOOTH);
@@ -91,6 +99,7 @@ public class MessageOverlay {
         }
 
         msgTimer = new Timer(1000 * duration, e -> {
+            showBG = false;
             msgPanel.removeAll();
             msgPanel.revalidate();
             msgPanel.repaint();
@@ -100,5 +109,20 @@ public class MessageOverlay {
         });
         msgTimer.setRepeats(false);
         msgTimer.start();
+    }
+    public void clearMsgPanel(){
+             msgPanel.removeAll();
+            msgPanel.revalidate();
+            msgPanel.repaint();
+    }
+    @Override
+    protected void paintComponent(Graphics g) {
+        super.paintComponent(g);
+        if(showBG){
+            Graphics2D g2d = (Graphics2D) g;
+            g2d.setColor(new Color(0, 0, 0, 75));
+            g2d.fillRoundRect((setWidth/2)-200, 45, 400, 190, 50, 50);
+        }
+       
     }
 }

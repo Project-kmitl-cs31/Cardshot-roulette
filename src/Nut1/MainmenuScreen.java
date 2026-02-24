@@ -10,6 +10,7 @@ public class MainmenuScreen extends UIScreen{
     private JButton btnExit;
     private JLabel bgImage;
     private JLabel titleImage;
+    private JLabel idk;
 
     public MainmenuScreen(UIManager ui){
         super(ui);
@@ -70,15 +71,24 @@ public class MainmenuScreen extends UIScreen{
 
         ImageIcon icon = new ImageIcon("image/War.png");
         Image img = icon.getImage().getScaledInstance(w, h, Image.SCALE_SMOOTH);
-        icon = new ImageIcon(img);
-        bgImage = new JLabel(icon);
+        bgImage = new JLabel(new ImageIcon(img));
         bgImage.setBounds(0,0,w,h);
 
-      
+
+        ImageIcon iconidk = new ImageIcon(getClass().getResource("/image/idk.png"));
+        Image imgidk = iconidk.getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH);
+
+        idk = new JLabel(new ImageIcon(imgidk));
+        idk.setBounds(w-180, h - 160, 200, 200);
+
+
         lp.add(bgImage, Integer.valueOf(0));     
         lp.add(titleImage, Integer.valueOf(1));  
         lp.add(btnStart, Integer.valueOf(1));   
-        lp.add(btnExit, Integer.valueOf(1));     
+        lp.add(btnExit, Integer.valueOf(1));    
+        lp.add(idk ,Integer.valueOf(2));
+        lp.revalidate();
+        lp.repaint();
         
         this.add(lp);
         this.setBounds(0,0,w,h);

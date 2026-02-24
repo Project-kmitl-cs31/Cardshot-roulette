@@ -42,7 +42,6 @@ public class GameScreen extends UIScreen {
     private JPanel fadeScreen;
     private Timer fadeTimer;
 
-    JPanel msgPanel = new JPanel();
     Image atkcard;
     Image blkcard;
 
@@ -121,9 +120,9 @@ public class GameScreen extends UIScreen {
         selectCardtext.setForeground(Color.YELLOW);
         selectCardtext.setFont(new Font("Tahoma", Font.BOLD, 25));
 
-        msgPanel.setLayout(null);
-        msgPanel.setOpaque(false);
-        msgPanel.setBounds((setWidth / 2) - 200, (setHeight / 2) - 450, setWidth + 100, setHeight + 200);
+        // msgPanel.setLayout(null);
+        // msgPanel.setOpaque(false);
+        // msgPanel.setBounds((setWidth / 2) - 200, (setHeight / 2) - 450, setWidth + 100, setHeight + 200);
 
         Carddraw.setBounds((setWidth / 2) - 80, (setHeight / 2) - 170, 500, 500);
 
@@ -259,11 +258,14 @@ public class GameScreen extends UIScreen {
         }
 
         Player p1 = state.getPlayer();
+        System.out.println("Hello  P1 "+p1.getItemCount());
+
         if (p1 != null) {
             blueZone.refreshFromGame(p1.getHp(), p1.getName(), "l");
         }
 
         Player p2 = state.getOpposingP();
+        System.out.println("Hello  P2 "+p2.getItemCount());
         if (p2 != null) {
             redZone.refreshFromGame(p2.getHp(), p2.getName(), "r");
 
@@ -439,6 +441,7 @@ public class GameScreen extends UIScreen {
 
             lp.add(btn[index], Integer.valueOf(2));
         }
+        this.repaint();
     }
 
     public void setMsgItem(String text, int duration) {
@@ -449,6 +452,9 @@ public class GameScreen extends UIScreen {
         messageOverlay.setMsgCard(deck, text, duration, () -> {
             this.isCenterZone = true;
         });
+    }
+    public MessageOverlay getOverlay(){
+        return this.messageOverlay;
     }
 
     public void animtext(String text, String img) {
@@ -559,5 +565,9 @@ public class GameScreen extends UIScreen {
         delaydamage.start();
         this.repaint();
     }
-
+    public void update(){
+        
+        this.revalidate();
+        this.repaint();
+    }
 }

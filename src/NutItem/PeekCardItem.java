@@ -14,6 +14,7 @@ public class PeekCardItem extends Item {
         if (game.getDeck() != null && !game.getDeck().isEmpty()) {
             Card1 c = game.getDeck().peekTop();
             game.getUIManager().getGameScreen().animtext("Top Card :" + c.getClass().getSimpleName(), c.getsourceImg());
+            game.getUIManager().getGameScreen().showBgblack(3);
         }
     }
 }

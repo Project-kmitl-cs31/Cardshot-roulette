@@ -46,9 +46,9 @@ public class Game {
         if (card instanceof AttackCard) {
             ((AttackCard) card).resolveTargeted(currentPlayer, targetPlayer);
             sound.playsound("src/Nut1/sound/atksound.wav", 1.2);
-            Timer time = new Timer(1100, e -> {
+            Timer time = new Timer(1100, e -> {ui.getGameScreen()
 
-                ui.getGameScreen().damageSelf(targetPlayer);
+                .damageSelf(targetPlayer);
             });
             time.setRepeats(false);
             time.start();
@@ -138,13 +138,13 @@ public class Game {
         return isP1Turn ? p : enemy;
     }
 
-    private Item getRandomItem() {
-        int rand = (int) (Math.random() * 7);
+    public Item getRandomItem() {
+        int rand = (int) (Math.random() * 3);
         switch (rand) {
             case 0:
                 return new DoubleDamageItem();
             case 1:
-                return new HealthPotionItem();
+                return new HealthPotionItem(); 
             case 2:
                 return new PeekCardItem();
             case 3:
@@ -155,10 +155,36 @@ public class Game {
                 return new SwapCardItem();
             case 6:
                 return new StealItemRng();
+            case 7:
+                return new ResetItem();
             default:
                 return new HealthPotionItem();
 
         }
+    }
+    public Item getRandomItemNoOld(Item oldItem) {
+        Item newitem = null;
+        boolean isSame = true;
+
+        while (isSame) {
+        int rand = (int) (Math.random() * 8);
+        newitem = switch (rand) {
+                case 0 -> new DoubleDamageItem();
+                case 1 -> new HealthPotionItem();
+                case 2 -> new PeekCardItem();
+                case 3-> new CutCardItem();
+                case 4 -> new LockTurnItem();
+                case 5 -> new SwapCardItem();
+                case 6 -> new StealItemRng();
+                case 7 -> new ResetItem();
+                default -> new HealthPotionItem();
+            };
+            if(!newitem.getClass().equals(oldItem.getClass())){
+                isSame = false;
+            }
+        
+        }
+        return newitem;
     }
 
     public void refillItem(Player targetPlayer) {
@@ -170,14 +196,16 @@ public class Game {
     }
 
     public void PlayItem(int index) {
+        ui.getGameScreen().getOverlay().clearMsgPanel();
         Player currentPlayer = getCurrentPlayer();
         Item item = currentPlayer.getItem(index);
 
         if (item != null) {
             sound.playsound(item.getSource(), 0.2);
             // System.out.println(currentPlayer.getName() + " uses " + item.getName());
-            item.use(this);
             currentPlayer.removeItem(index);
+            item.use(this);
+            
         }
     }
 

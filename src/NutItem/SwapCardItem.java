@@ -11,7 +11,7 @@ public class SwapCardItem extends Item {
     public void use(Game game) {
         if (game.getDeck() != null && !game.getDeck().isEmpty()) {
             game.getDeck().swapCard();
-            game.getUIManager().getGameScreen().animtext("Swap card", null);
+            game.getUIManager().getGameScreen().animtext(" Swap card", null);
         }
 
     }

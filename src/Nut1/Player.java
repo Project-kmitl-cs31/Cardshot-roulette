@@ -1,28 +1,23 @@
 package src.Nut1;
 import java.util.ArrayList;
-import java.util.List;
 import src.NutItem.*;
 
 public class Player {
     private String name;
     int hp;
-    private int mana;
-    private List<Item> items;
+ 
     private int lockedTurns;
     private int damageMultiplier = 1;
     private ArrayList<Item> inventory = new ArrayList<>();
     private boolean isLockedNextTurn = false;
 
-    private static final int MAX_ITEMS = 8;
-
     public Player(int maxhp){
         this.hp = maxhp;
     }
-    public Player(String name, int maxHp, int initialMana) {
+    public Player(String name, int maxHp) {
         this.name = name;
         this.hp = maxHp;
-        this.mana = initialMana;
-        this.items = new ArrayList<>();
+  
         this.lockedTurns = 0;
         this.damageMultiplier = 1;
     }
@@ -36,20 +31,12 @@ public class Player {
     public void beginTurn() {
         if (lockedTurns > 0) {
             lockedTurns--;
-            // System.out.println(name + " is locked! Turns remaining: " + lockedTurns);
+            // System.out.println("locked turn");
         }
       
     }
 
 
-    public Item firstItem(){
-        return items.get(0);
-    }
-
-
-    public void endTurn() {
-        System.out.println(name + " ends turn.");
-    }
     public void takeDamage(int amount) {
         if (amount < 0) return;
         this.hp -= amount;
@@ -58,21 +45,15 @@ public class Player {
 
     protected void heal(int amount,int manaCost) {
         if (amount <= 0) return;
-        if(this.mana < manaCost) return;
+
         this.hp += amount;
     }
 
-    public void grantItems(List<Item> newItems) {
-        for (Item item : newItems) {
-            if (this.items.size() < MAX_ITEMS) {
-                this.items.add(item);
-            }
-        }
-    }
+
 
     public void addDamageMultiplier(int mult, boolean forNextCard) {
         this.damageMultiplier *= mult;
-        System.out.println(name + " damage multiplier is now x" + this.damageMultiplier);
+        // System.out.println(name + " damage multiplier " + this.damageMultiplier);
     }
 
 
@@ -88,8 +69,11 @@ public class Player {
 
     public void addItem(Item item) {
         if (inventory.size() < 7 ) {
-            inventory.add(item);     
+            inventory.add(item);    
+    
         }
+        System.out.println("My inv "+inventory);
+        System.out.println("My inv count "+getItemCount());
     }
 
     public int getItemCount() {
@@ -106,10 +90,10 @@ public class Player {
     public void removeItem(int index){
         if(index >= 0 && index < inventory.size()){
             inventory.remove(index);
-            // System.out.println("My Items2 : "+inventory);
         }
-     
     }
+
+
 
     public void setName(String name){
         this.name = name;
@@ -125,6 +109,10 @@ public class Player {
 
     public void setHp(int hp){
         this.hp += hp;
+    }
+
+    public void getAllItem(){
+        inventory.forEach(e->System.out.println(e));
     }
 
     public int getDamageMultiplier(){

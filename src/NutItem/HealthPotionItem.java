@@ -9,10 +9,10 @@ public class HealthPotionItem extends Item {
     }
 
     public void use(Game game) {
-        Player play = game.getCurrentPlayer();
-        if (play.getHp() < 6) {
-            game.getUIManager().getGameScreen().animtext("" + play.getName() + " has been healed for 1 HP.", null);
-            play.setHp(1);
+        Player player = game.getCurrentPlayer();
+        if (player.getHp() < 6) {
+            game.getUIManager().getGameScreen().animtext("" + player.getName() + " has been healed for 1 HP.", null);
+            player.setHp(1);
         } else {
             game.getCurrentPlayer().addItem(new HealthPotionItem());
         }
