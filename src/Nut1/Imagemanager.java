@@ -28,7 +28,7 @@ public class Imagemanager extends JPanel implements ActionListener{
     int yVelocity = 10;
     int y= 0;
     
-    Timer timer1;
+    private Timer timer1;
 
     JLabel textturn = new JLabel("");
 
@@ -45,28 +45,21 @@ public class Imagemanager extends JPanel implements ActionListener{
     ImageIcon p2 = new ImageIcon();
 
     public Imagemanager() {
-
-
-    
         this.setLayout(null); 
 
         this.setPreferredSize(new Dimension(setWidth, setHeight));
         this.setBounds(0, 0, setWidth, setHeight);
 
         backgroundImage = new ImageIcon(getClass().getResource("/image/bg.jpg")).getImage();
-
         Image table = new ImageIcon(getClass().getResource("/image/table.png")).getImage();
         tableImage = table.getScaledInstance(setWidth - 550, setHeight - 300, Image.SCALE_SMOOTH);
 
-        
-
+    
         Image resizedImg1 = ImgP1.getScaledInstance(300, 120, Image.SCALE_SMOOTH); 
         Image resizedImg2 = ImgP2.getScaledInstance(300, 120, Image.SCALE_SMOOTH);
 
         p1.setImage(resizedImg1);
         p2.setImage(resizedImg2);
-
-
 
         this.add(textturn);
         this.revalidate(); 
@@ -85,12 +78,17 @@ public class Imagemanager extends JPanel implements ActionListener{
     }
 
     public void playanim(){
-        timer1 = new Timer(40,this);
+        if (timer1 != null && timer1.isRunning()) {
+            timer1.stop();
+        }
+        timer1 = new Timer(20,this);
         timer1.start();
     }
 
      public void stopanim(){
-        timer1.stop();
+        if (timer1 != null) {
+            timer1.stop();
+        }
         x = 0;
         y = 0;
         this.revalidate();
@@ -116,7 +114,7 @@ public class Imagemanager extends JPanel implements ActionListener{
 
 
     @Override
-     public void paintComponent(Graphics g){
+    protected void paintComponent(Graphics g){
     super.paintComponent(g);
         Graphics2D g2d = (Graphics2D) g;
         g2d.drawImage(backgroundImage, x, y, setWidth, setHeight,null);
@@ -135,16 +133,13 @@ public class Imagemanager extends JPanel implements ActionListener{
         if(isRed){
             g2d.drawImage(turnRedImg, tableX+450, 0, this);
             g2d.setColor(new Color(255, 0, 0));
-            g2d.fillRect(setWidth-30, -10, 50, setHeight);
+            g2d.fillRect(setWidth-25, -10, 50, setHeight);
         }
 
         repaint();
    }
 
     public void actionPerformed(ActionEvent e) {
-        
-        repaint();
-
         if(y>=yVelocity || y<0  ){
             yVelocity = yVelocity * -1;
         }

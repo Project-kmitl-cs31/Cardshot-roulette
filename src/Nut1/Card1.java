@@ -7,7 +7,7 @@ public abstract class Card1 {
     protected CardType type;
     protected String sourceImg;
 
-    public Card1(String id, String name, CardType type,String source) {
+    public Card1(String id, String name, CardType type, String source) {
         this.id = id;
         this.name = name;
         this.type = type;
@@ -24,22 +24,22 @@ public abstract class Card1 {
     public CardType getType() {
         return type;
     }
-    
-    public String getId(){
+
+    public String getId() {
         return id;
     }
-    public String getName(){
+
+    public String getName() {
         return name;
     }
 
-
-    
-    public String getsourceImg(){
-       return this.sourceImg;
+    public String getsourceImg() {
+        return this.sourceImg;
     }
+
     @Override
     public String toString() {
         return "[" + id + "] " + name + " (" + type + ")";
-     }
+    }
 
 }

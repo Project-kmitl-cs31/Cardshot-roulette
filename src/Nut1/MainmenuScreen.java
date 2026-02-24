@@ -9,7 +9,7 @@ public class MainmenuScreen extends UIScreen{
     private JButton btnStart;
     private JButton btnExit;
     private JLabel bgImage;
-    private JLabel titleImage; // เพิ่มตัวแปรสำหรับเก็บรูปชื่อเกม
+    private JLabel titleImage;
 
     public MainmenuScreen(UIManager ui){
         super(ui);
