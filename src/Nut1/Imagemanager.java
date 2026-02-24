@@ -1,5 +1,6 @@
 package src.Nut1;
 
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -44,6 +45,8 @@ public class Imagemanager extends JPanel implements ActionListener{
     ImageIcon p2 = new ImageIcon();
 
     public Imagemanager() {
+
+
     
         this.setLayout(null); 
 
@@ -62,7 +65,9 @@ public class Imagemanager extends JPanel implements ActionListener{
 
         p1.setImage(resizedImg1);
         p2.setImage(resizedImg2);
-     
+
+
+
         this.add(textturn);
         this.revalidate(); 
         this.repaint();
@@ -71,10 +76,10 @@ public class Imagemanager extends JPanel implements ActionListener{
     public void TurnText(Game stateText){
         if(stateText.isP1Turn()){
             textturn.setIcon(p1);
-            textturn.setBounds(10,80,500,500);
+            textturn.setBounds(10,70,500,500);
         }else{
             textturn.setIcon(p2);
-            textturn.setBounds(setWidth-300,80,500,500);
+            textturn.setBounds(setWidth-300,70,500,500);
         }
         repaint();
     }
@@ -108,6 +113,8 @@ public class Imagemanager extends JPanel implements ActionListener{
         repaint();
 
     }
+
+
     @Override
      public void paintComponent(Graphics g){
     super.paintComponent(g);
@@ -121,14 +128,17 @@ public class Imagemanager extends JPanel implements ActionListener{
 
         if(isBlue){
             g2d.drawImage(turnBlueImg, -100, 0, this);
+            g2d.setColor(new Color(0, 200, 255));
+            g2d.fillRect(-30, -10, 50, setHeight);
            
         }
         if(isRed){
             g2d.drawImage(turnRedImg, tableX+450, 0, this);
-    
+            g2d.setColor(new Color(255, 0, 0));
+            g2d.fillRect(setWidth-30, -10, 50, setHeight);
         }
 
-
+        repaint();
    }
 
     public void actionPerformed(ActionEvent e) {

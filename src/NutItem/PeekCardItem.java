@@ -7,7 +7,7 @@ import src.Nut1.Game;
 
 public class PeekCardItem extends Item {
     public PeekCardItem(){
-        super("PeekCard");
+        super("PeekCard","src/Nut1/sound/health.wav");
     }
     @Override
     public void use(Game game){

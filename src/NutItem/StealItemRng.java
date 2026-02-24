@@ -6,7 +6,7 @@ import src.Nut1.Player;
 public class StealItemRng extends Item {
     Random rng = new Random(); 
     public StealItemRng(){
-        super("StealItemRng");
+        super("StealItemRng","src/Nut1/sound/health.wav");
     }
     @Override
     public void use(Game game){

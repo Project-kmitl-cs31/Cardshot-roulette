@@ -23,6 +23,11 @@ public class Game {
         refillItem(this.enemy);
 
         this.sound = new useSound();
+        Timer time = new Timer(1200,e->{
+            sound.loopSound("src/Nut1/sound/musicbg.wav");
+        });
+        time.setRepeats(false);
+        time.start();
         
     }
 
@@ -166,6 +171,7 @@ public class Game {
         Item item = currentPlayer.getItem(index);
 
         if(item != null){
+            sound.playsound(item.getSource(), 0.5);
             System.out.println(currentPlayer.getName() + " uses " + item.getName());
             item.use(this);
             currentPlayer.removeItem(index);

@@ -4,7 +4,7 @@ import src.Nut1.Player;
 
 public class LockTurnItem extends Item { 
     public LockTurnItem() {
-        super("LockTurnItem");
+        super("LockTurnItem","src/Nut1/sound/health.wav");
     }
 
     @Override

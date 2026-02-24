@@ -4,7 +4,7 @@ import src.Nut1.Player;
 
 public class DoubleDamageItem extends Item {
     public DoubleDamageItem(){
-        super("DoubleDamage");
+        super("DoubleDamage","src/Nut1/sound/health.wav");
     }
     @Override
     public void use(Game game){

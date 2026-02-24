@@ -6,7 +6,7 @@ import src.Nut1.Game;
 
 public class CutCardItem extends Item {
     public CutCardItem(){
-        super("CutCard");
+        super("CutCard","src/Nut1/sound/cutcard.wav");
     }
     @Override
     public void use(Game game){

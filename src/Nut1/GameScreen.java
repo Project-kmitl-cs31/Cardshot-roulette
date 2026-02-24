@@ -97,8 +97,8 @@ public class GameScreen extends UIScreen {
    
 
         lp.setBounds(0, 0, setWidth, setHeight);
-        blueZone = new PlayerPanel(0, 0, setWidth / 2, setHeight);
-        redZone = new PlayerPanel(setWidth / 2, 0, setWidth / 2, setHeight);
+        blueZone = new PlayerPanel(0, 0, setWidth / 2, setHeight,"l");
+        redZone = new PlayerPanel(setWidth / 2, 0, setWidth / 2, setHeight,"r");
 
         centerZone = new JLabel("", SwingConstants.CENTER);
         centerZone.setOpaque(false); 
@@ -276,7 +276,7 @@ public class GameScreen extends UIScreen {
             int count = state.getDeck().getCardCount();
 
              if ( count > lastCardCount) {
-                ShowCardindeck(state.getDeck(),3);
+                ShowCardindeck(state.getDeck(),4);
             }
 
             lastCardCount = count;
@@ -419,7 +419,7 @@ public void chageIcondelay(Image img){
     }
 
     public void setMsgCard(CentralDeck deck, String text, int duration) {
-        // System.out.println(text);
+   
         msgPanel.removeAll();
 
         String[] cardImg = deck.getAllSource();
@@ -478,10 +478,11 @@ public void chageIcondelay(Image img){
 
         msgTimer.stop(); 
     }
-        
+    centerZone.setEnabled(false);
     msgTimer = new Timer(1000 * duration, e -> {
         Container p = msgPanel.getParent();
         if (p != null) {
+            centerZone.setEnabled(true);
             p.remove(msgPanel);
             p.revalidate();
             p.repaint();
@@ -554,7 +555,8 @@ public void chageIcondelay(Image img){
 
 
     public void ShowCardindeck(CentralDeck deck,int duration) {
-        Timer delay = new Timer(2500,e->{
+       
+        Timer delay = new Timer(2300,e->{
             setMsgCard(deck,deck.categoryDeck(), duration);
         });
         delay.setRepeats(false);

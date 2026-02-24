@@ -3,7 +3,7 @@ import src.Nut1.*;
 
 public class HealthPotionItem extends Item {
     public HealthPotionItem(){
-        super("HealthPotion");
+        super("HealthPotion","src/Nut1/sound/health.wav");
     }
     public void use(Game game){
         Player play = game.getCurrentPlayer();
