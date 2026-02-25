@@ -42,9 +42,6 @@ public class UIManager {
         return null;
     }
 
-    public void showRoundTransition(int roundNo) {
-
-    }
 
     public void onTargetSelected(boolean isSelf) {
         if (game != null) {

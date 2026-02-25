@@ -5,7 +5,7 @@ public class AttackCard extends Card1 {
     private int baseDamage = 1;
 
     public AttackCard(String id) {
-        super(id, "Attack Card!!!!", CardType.ATTACK, "/image/ATKcard.png");
+        super(id, "Attack Card!", CardType.ATTACK, "/image/ATKcard.png");
     }
 
     @Override
@@ -19,7 +19,6 @@ public class AttackCard extends Card1 {
     @Override
     public void resolveTargeted(Player attacker, Player defender) {
         int totalDamage = baseDamage * attacker.getDamageMultiplier();
-
         // System.out.println("Attacking with damage: " + totalDamage);
         defender.takeDamage(totalDamage);
         attacker.resetDamageMultiplier();

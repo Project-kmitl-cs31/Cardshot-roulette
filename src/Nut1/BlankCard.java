@@ -3,7 +3,7 @@ package src.Nut1;
 public class BlankCard extends Card1 {
 
     public BlankCard(String id) {
-        super(id, "BLANK Card!!!", CardType.BLANK, "/image/BLKcard.png");
+        super(id, "BLANK Card", CardType.BLANK, "/image/BLKcard.png");
 
     }
 

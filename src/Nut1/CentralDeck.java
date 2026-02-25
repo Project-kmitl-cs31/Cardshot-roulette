@@ -27,8 +27,8 @@ public class CentralDeck {
                 AttackCard atkcard1 = new AttackCard("A-" + (i + 1));
                 cards.push(atkcard1);
             } else {
-                BlankCard manacard1 = new BlankCard("M-" + (i + 1));
-                cards.push(manacard1);
+                BlankCard blankcard = new BlankCard("M-" + (i + 1));
+                cards.push(blankcard);
             }
 
         }
@@ -36,6 +36,7 @@ public class CentralDeck {
         Collections.shuffle(cards);
         currentCard = cards.peek();
     }
+
 
     public void swapCard() {
         Card1 card = peekTop();

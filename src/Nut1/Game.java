@@ -30,7 +30,6 @@ public class Game {
         if (deck.isEmpty()) {
             deck.generate();
         }
-
         // check player target and player use
         Player currentPlayer = isP1Turn ? p : enemy;
         Player opponentPlayer = isP1Turn ? enemy : p;
@@ -38,48 +37,50 @@ public class Game {
 
         Card1 card = deck.drawTop();
         ui.getGameScreen().animtext("This card is...  " + card.getName(), card.getsourceImg());
-
         if (card == null) {
             return;
         }
-
-        if (card instanceof AttackCard) {
-            ((AttackCard) card).resolveTargeted(currentPlayer, targetPlayer);
-            sound.playsound("src/Nut1/sound/atksound.wav", 1.2);
-            Timer time = new Timer(1100, e -> {
-                if (ui != null && ui.getGameScreen() != null) {
-                    ui.getGameScreen().damageSelf(targetPlayer);
-                }
-            });
-            time.setRepeats(false);
-            time.start();
-
-            if (targetPlayer.getHp() <= 0) {
-                time.stop();
-                String winner = (targetPlayer == p) ? enemy.getName() : p.getName();
-                if (ui != null) {
-                    ui.openGameOverSceen(winner);
-                }
-                return;
-            }
-            switchTurn();
-        } else if (card instanceof BlankCard) {
-
-            if (!targetSelf) {
-
-                sound.playsound("src/Nut1/sound/blanktarget.wav", 1.2);
-                switchTurn();
-            } else {
-                sound.playsound("src/Nut1/sound/blanksound.wav", 2.1);
-                Timer cooldown = new Timer(2500, e -> {
-
-                    ui.getGameScreen().setMsgItem(targetPlayer.getName() + " turn continues.", 1.8);
+        switch (card.getType()) {
+            case ATTACK:
+                ((AttackCard) card).resolveTargeted(currentPlayer, targetPlayer);
+                sound.playsound("src/Nut1/sound/atksound.wav", 1.2);
+                Timer time = new Timer(1100, e -> {
+                    if (ui != null && ui.getGameScreen() != null) {
+                        ui.getGameScreen().damageSelf(targetPlayer);
+                    }
                 });
-                cooldown.setRepeats(false);
-                cooldown.start();
+                time.setRepeats(false);
+                time.start();
 
-            }
+                if (targetPlayer.getHp() <= 0) {
+                    time.stop();
+                    String winner = (targetPlayer == p) ? enemy.getName() : p.getName();
+                    if (ui != null) {
+                        ui.openGameOverSceen(winner);
+                    }
+                    return;
+                }
+                switchTurn();
+                break;
+            case BLANK:
+                if (!targetSelf) {
+
+                    sound.playsound("src/Nut1/sound/blanktarget.wav", 1.2);
+                    switchTurn();
+                } else {
+                    sound.playsound("src/Nut1/sound/blanksound.wav", 2.1);
+                    Timer cooldown = new Timer(2500, e -> {
+
+                        ui.getGameScreen().setMsgItem(targetPlayer.getName() + " turn continues.", 1.8);
+                    });
+                    cooldown.setRepeats(false);
+                    cooldown.start();
+
+                }
+                break;
+
         }
+
         if (deck.isEmpty()) {
             deck.generate();
             refillItem(p);
@@ -146,7 +147,7 @@ public class Game {
             case 0:
                 return new DoubleDamageItem();
             case 1:
-                return new HealthPotionItem(); 
+                return new HealthPotionItem();
             case 2:
                 return new PeekCardItem();
             case 3:
@@ -164,16 +165,17 @@ public class Game {
 
         }
     }
+
     public Item getRandomItemNoOld(Item oldItem) {
         Item newitem = null;
         boolean isSame = true;
 
         while (isSame) {
-        newitem = getRandomItem();
-            if(!newitem.getClass().equals(oldItem.getClass())){
+            newitem = getRandomItem();
+            if (!newitem.getClass().equals(oldItem.getClass())) {
                 isSame = false;
             }
-        
+
         }
         return newitem;
     }
@@ -193,10 +195,9 @@ public class Game {
 
         if (item != null) {
             sound.playsound(item.getSource(), 0.2);
-            // System.out.println(currentPlayer.getName() + " uses " + item.getName());
             currentPlayer.removeItem(index);
             item.use(this);
-            
+
         }
     }
 

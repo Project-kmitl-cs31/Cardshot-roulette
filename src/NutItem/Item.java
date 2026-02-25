@@ -8,8 +8,7 @@ public abstract class Item {
     protected String name;
     protected String source;
 
-    public void use(Game game) {
-    }
+    public abstract void use(Game game);
 
     public Item() {
     }

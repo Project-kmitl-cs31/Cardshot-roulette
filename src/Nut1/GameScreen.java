@@ -14,7 +14,7 @@ public class GameScreen extends UIScreen {
     private PlayerPanel redZone;
     private ImageIcon pleft = new ImageIcon(getClass().getResource("/image/pLeft.png"));
     private ImageIcon pright = new ImageIcon(getClass().getResource("/image/pRight.png"));
-    ;
+
     private ImageIcon selectleft = new ImageIcon(getClass().getResource("/image/selectpLeft.png"));
     private ImageIcon selectright = new ImageIcon(getClass().getResource("/image/selectpRight.png"));
     private JLabel centerZone;
@@ -85,6 +85,9 @@ public class GameScreen extends UIScreen {
     private int lastCardCount = -1;
 
     JLayeredPane lp = new JLayeredPane();
+
+
+
 
     public GameScreen(UIManager ui) {
         super(ui);
