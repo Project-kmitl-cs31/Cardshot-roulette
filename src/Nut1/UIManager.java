@@ -18,6 +18,7 @@ public class UIManager {
         window.setLayout(null);
         window.setVisible(true);
         window.setLocationRelativeTo(null);
+        
     }
 
     public void bindGame(Game game) {

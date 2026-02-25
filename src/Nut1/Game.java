@@ -46,14 +46,16 @@ public class Game {
         if (card instanceof AttackCard) {
             ((AttackCard) card).resolveTargeted(currentPlayer, targetPlayer);
             sound.playsound("src/Nut1/sound/atksound.wav", 1.2);
-            Timer time = new Timer(1100, e -> {ui.getGameScreen()
-
-                .damageSelf(targetPlayer);
+            Timer time = new Timer(1100, e -> {
+                if (ui != null && ui.getGameScreen() != null) {
+                    ui.getGameScreen().damageSelf(targetPlayer);
+                }
             });
             time.setRepeats(false);
             time.start();
 
             if (targetPlayer.getHp() <= 0) {
+                time.stop();
                 String winner = (targetPlayer == p) ? enemy.getName() : p.getName();
                 if (ui != null) {
                     ui.openGameOverSceen(winner);
@@ -71,7 +73,7 @@ public class Game {
                 sound.playsound("src/Nut1/sound/blanksound.wav", 2.1);
                 Timer cooldown = new Timer(2500, e -> {
 
-                    ui.getGameScreen().setMsgItem(targetPlayer.getName() + " turn continues.", 2);
+                    ui.getGameScreen().setMsgItem(targetPlayer.getName() + " turn continues.", 1.8);
                 });
                 cooldown.setRepeats(false);
                 cooldown.start();
@@ -139,7 +141,7 @@ public class Game {
     }
 
     public Item getRandomItem() {
-        int rand = (int) (Math.random() * 3);
+        int rand = (int) (Math.random() * 8);
         switch (rand) {
             case 0:
                 return new DoubleDamageItem();
@@ -167,18 +169,7 @@ public class Game {
         boolean isSame = true;
 
         while (isSame) {
-        int rand = (int) (Math.random() * 8);
-        newitem = switch (rand) {
-                case 0 -> new DoubleDamageItem();
-                case 1 -> new HealthPotionItem();
-                case 2 -> new PeekCardItem();
-                case 3-> new CutCardItem();
-                case 4 -> new LockTurnItem();
-                case 5 -> new SwapCardItem();
-                case 6 -> new StealItemRng();
-                case 7 -> new ResetItem();
-                default -> new HealthPotionItem();
-            };
+        newitem = getRandomItem();
             if(!newitem.getClass().equals(oldItem.getClass())){
                 isSame = false;
             }

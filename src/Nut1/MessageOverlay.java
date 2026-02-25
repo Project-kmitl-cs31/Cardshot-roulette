@@ -12,7 +12,8 @@ public class MessageOverlay extends JPanel{
     private boolean showBG;
 
     private JLayeredPane lp;
-    private int width, height;
+    private int width;
+    private int height;
 
     Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 
@@ -47,13 +48,13 @@ public class MessageOverlay extends JPanel{
         lp.add(this, Integer.valueOf(2));
     }
 
-    public void setMsgItem(String text, int duration) {
+    public void setMsgItem(String text, double duration) {
         labelItem.setText(text);
 
         if (msgTimer != null && msgTimer.isRunning()) {
             msgTimer.stop();
         }
-        msgTimer = new Timer(1000 * duration, e -> {
+        msgTimer = new Timer( (int) (1000 * duration), e -> {
             labelItem.setText("");
         });
         msgTimer.setRepeats(false);

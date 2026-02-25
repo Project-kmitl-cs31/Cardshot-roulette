@@ -64,6 +64,7 @@ public class GameScreen extends UIScreen {
     Image resizedSound = togglesoundIcon.getScaledInstance(100, 100, Image.SCALE_SMOOTH);
 
     private MessageOverlay messageOverlay;
+    private TurnColorOverlay turnColorOverlay;
 
     private Imagemanager bgPanel = new Imagemanager();
 
@@ -86,7 +87,7 @@ public class GameScreen extends UIScreen {
         this.setLayout(null);
         this.setBackground(Color.BLACK);
         this.setPreferredSize(new Dimension(setWidth, setHeight));
-
+        turnColorOverlay = new TurnColorOverlay(setWidth, setHeight);
         this.sound = new useSound();
         Timer time = new Timer(800, e -> {
             sound.loopSound("src/Nut1/sound/musicbg.wav", "start");
@@ -212,6 +213,7 @@ public class GameScreen extends UIScreen {
         lp.add(labelItem, Integer.valueOf(3));
         lp.add(selectCardtext, Integer.valueOf(3));
         lp.add(togglesound, Integer.valueOf(4));
+        lp.add(turnColorOverlay, Integer.valueOf(5));
 
         fadeScreen = new JPanel() {
             @Override
@@ -318,12 +320,14 @@ public class GameScreen extends UIScreen {
             time.start();
 
             if (state.isP1Turn()) {
-                bgPanel.swapTurnColor("blue");
+                turnColorOverlay.swapTurnColor("blue");
+                // bgPanel.swapTurnColor("blue");
                 selfbutton.setBounds(leftX, baseY, 250, 400);
                 enemyButton.setBounds(rightX, baseY, 250, 400);
                 chageIcondelay(resizedImg1);
             } else {
-                bgPanel.swapTurnColor("red");
+                turnColorOverlay.swapTurnColor("red");
+                // bgPanel.swapTurnColor("red");
                 selfbutton.setBounds(rightX, baseY, 250, 400);
                 enemyButton.setBounds(leftX, baseY, 250, 400);
                 chageIcondelay(resizedImg2);
@@ -444,7 +448,7 @@ public class GameScreen extends UIScreen {
         this.repaint();
     }
 
-    public void setMsgItem(String text, int duration) {
+    public void setMsgItem(String text, double duration) {
         messageOverlay.setMsgItem(text, duration);
     }
 
