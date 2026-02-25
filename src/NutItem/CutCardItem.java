@@ -13,7 +13,8 @@ public class CutCardItem extends Item {
     public void use(Game game) {
         if (game.getDeck() != null && !game.getDeck().isEmpty()) {
             Card1 c = game.getDeck().cutTop();
-            game.getUIManager().getGameScreen().animtext("use cut Card", null);
+
+            game.getUIManager().getGameScreen().animtext("cut Card : "+c.getName(), c.getsourceImg());
         }
     }
 }

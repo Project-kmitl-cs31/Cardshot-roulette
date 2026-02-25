@@ -5,6 +5,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import javax.swing.*;
+import javax.swing.border.Border;
 import src.NutItem.Item;
 
 public class GameScreen extends UIScreen {
@@ -18,6 +19,8 @@ public class GameScreen extends UIScreen {
     private ImageIcon selectright = new ImageIcon(getClass().getResource("/image/selectpRight.png"));
     private JLabel centerZone;
     private volatile Boolean isCenterZone = false;
+    Border defaultBorder = BorderFactory.createEmptyBorder(10, 10, 10, 10);
+    Border hoverBorder = BorderFactory.createLineBorder(Color.BLUE, 2);
 
     Image ImgCircleP1 = new ImageIcon(getClass().getResource("/image/circleblue.png")).getImage();
     Image ImgCircleP2 = new ImageIcon(getClass().getResource("/image/circlered.png")).getImage();
@@ -38,6 +41,7 @@ public class GameScreen extends UIScreen {
     private Timer animTimer;
     private Timer msgTimer;
     private Timer cooldown;
+    private boolean isAciveAnim = false;
 
     private JPanel fadeScreen;
     private Timer fadeTimer;
@@ -121,9 +125,6 @@ public class GameScreen extends UIScreen {
         selectCardtext.setForeground(Color.YELLOW);
         selectCardtext.setFont(new Font("Tahoma", Font.BOLD, 25));
 
-        // msgPanel.setLayout(null);
-        // msgPanel.setOpaque(false);
-        // msgPanel.setBounds((setWidth / 2) - 200, (setHeight / 2) - 450, setWidth + 100, setHeight + 200);
 
         Carddraw.setBounds((setWidth / 2) - 80, (setHeight / 2) - 170, 500, 500);
 
@@ -183,6 +184,7 @@ public class GameScreen extends UIScreen {
 
         centerZone.setEnabled(true);
         centerZone.addMouseListener(new java.awt.event.MouseAdapter() {
+            @Override
             public void mousePressed(java.awt.event.MouseEvent e) {
                 if (isCenterZone && SwingUtilities.isLeftMouseButton(e)) {
                     ui.onDeckClicked();
@@ -193,13 +195,15 @@ public class GameScreen extends UIScreen {
 
             @Override
             public void mouseEntered(java.awt.event.MouseEvent e) {
-                centerZone.setCursor(new Cursor(Cursor.HAND_CURSOR));
+                centerZone.setBorder(hoverBorder); 
             }
 
             @Override
             public void mouseExited(java.awt.event.MouseEvent e) {
-                centerZone.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+                centerZone.setBorder(defaultBorder); 
             }
+
+          
         });
 
         lp.add(bgPanel, Integer.valueOf(-1));
@@ -277,6 +281,7 @@ public class GameScreen extends UIScreen {
         boolean isTargetSelf = state.isTargetSelf();
 
         if (isP1Turn) {
+            changeHoverColor(Color.BLUE);
             selfbutton.setBounds(leftX, baseY, 250, 400);
             enemyButton.setBounds(rightX, baseY, 250, 400);
             if (isTargetSelf) {
@@ -290,6 +295,7 @@ public class GameScreen extends UIScreen {
             chageIcondelay(resizedImg1);
 
         } else {
+            changeHoverColor(Color.RED);
             selfbutton.setBounds(rightX, baseY, 250, 400);
             enemyButton.setBounds(leftX, baseY, 250, 400);
             if (isTargetSelf) {
@@ -321,13 +327,11 @@ public class GameScreen extends UIScreen {
 
             if (state.isP1Turn()) {
                 turnColorOverlay.swapTurnColor("blue");
-                // bgPanel.swapTurnColor("blue");
                 selfbutton.setBounds(leftX, baseY, 250, 400);
                 enemyButton.setBounds(rightX, baseY, 250, 400);
                 chageIcondelay(resizedImg1);
             } else {
                 turnColorOverlay.swapTurnColor("red");
-                // bgPanel.swapTurnColor("red");
                 selfbutton.setBounds(rightX, baseY, 250, 400);
                 enemyButton.setBounds(leftX, baseY, 250, 400);
                 chageIcondelay(resizedImg2);
@@ -409,6 +413,9 @@ public class GameScreen extends UIScreen {
         time.start();
         this.repaint();
     }
+    public void changeHoverColor(Color color){
+        hoverBorder = BorderFactory.createLineBorder(color, 2);
+    }
 
     private void setUpPlayerItem(JButton[] btn, int pos) {
         int baseY = 330;
@@ -441,7 +448,11 @@ public class GameScreen extends UIScreen {
                 }
             });
 
-            btn[index].addActionListener(e -> ui.onItemClicked(index));
+            btn[index].addActionListener(e -> {
+                if(!isAciveAnim){
+                    ui.onItemClicked(index);
+                }
+            });
 
             lp.add(btn[index], Integer.valueOf(2));
         }
@@ -471,6 +482,8 @@ public class GameScreen extends UIScreen {
         if (img == null) {
             img = "";
         }
+        this.isAciveAnim = true;
+
         ImageIcon icon = new ImageIcon(getClass().getResource(img));
         Image sizeIcon = icon.getImage().getScaledInstance(180, 250, Image.SCALE_SMOOTH);
         Carddraw.setVisible(true);
@@ -501,6 +514,7 @@ public class GameScreen extends UIScreen {
                 } else {
                     clearTextCooldown(selectCardtext);
                     selectCardtext.repaint();
+                    isAciveAnim = false;
                     bgPanel.stopanim();
                     ((Timer) e.getSource()).stop();
                 }
@@ -516,6 +530,7 @@ public class GameScreen extends UIScreen {
     public void clearTextCooldown(JLabel text) {
         cooldown = new Timer(1300, e -> {
             text.setText("");
+            isAciveAnim = false;
         });
         cooldown.setRepeats(false);
         cooldown.start();

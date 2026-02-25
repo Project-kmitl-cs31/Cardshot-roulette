@@ -14,14 +14,9 @@ public class ResetItem extends Item {
         
         Player player = game.getCurrentPlayer();
         int count = player.getItemCount();
-        System.out.println(count);
-    if(count >= 1){
-        // if(player.getItem(count-2) instanceof ResetItem){
-        //     player.removeItem(count-1);
-        // }else{
-            player.removeItem(count-1);
-       
-        
+      
+    if(count >= 1 ){
+        player.removeItem(count-1);
         Item newItem = game.getRandomItemNoOld(new ResetItem());
         player.addItem(newItem);
         game.getUIManager().getGameScreen().animtext("" + player.getName() + " Reset Card. ", null);

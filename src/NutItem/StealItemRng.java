@@ -16,6 +16,7 @@ public class StealItemRng extends Item {
     public void use(Game game) {
 
         Player opponent = game.isP1Turn() ? game.getOpposingP() : game.getPlayer();
+        
         if (opponent.getItemCount() != 0) {
             int indexItem = rng.nextInt(opponent.getItemCount());
             Item newItem = opponent.getItem(indexItem);

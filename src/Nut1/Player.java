@@ -31,7 +31,6 @@ public class Player {
     public void beginTurn() {
         if (lockedTurns > 0) {
             lockedTurns--;
-            // System.out.println("locked turn");
         }
       
     }
@@ -53,7 +52,6 @@ public class Player {
 
     public void addDamageMultiplier(int mult, boolean forNextCard) {
         this.damageMultiplier *= mult;
-        // System.out.println(name + " damage multiplier " + this.damageMultiplier);
     }
 
 
