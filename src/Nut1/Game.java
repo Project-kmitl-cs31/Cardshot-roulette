@@ -30,6 +30,7 @@ public class Game {
         if (deck.isEmpty()) {
             deck.generate();
         }
+        
         // check player target and player use
         Player currentPlayer = isP1Turn ? p : enemy;
         Player opponentPlayer = isP1Turn ? enemy : p;
